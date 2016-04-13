@@ -8,6 +8,6 @@
 package eduze.vms.facilitator.logic.mpi.facilitatormanager;
 
 public interface FacilitatorManager extends java.rmi.Remote {
-    public java.lang.String pair(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException, eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
-    public void unPair(java.lang.String arg0) throws java.rmi.RemoteException;
+    public void unPair(java.lang.String pairKey) throws java.rmi.RemoteException;
+    public java.lang.String pair(java.lang.String name, java.lang.String password) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException, eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
 }

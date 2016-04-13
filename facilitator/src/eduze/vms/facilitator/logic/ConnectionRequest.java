@@ -11,6 +11,8 @@ public class ConnectionRequest {
     private ConnectionRequestState connectionRequestState;
     private FacilitatorImpl facilitator;
 
+
+
     public ConnectionRequest( ConnectionRequestState connectionRequestState, FacilitatorImpl facilitator)
     {
 
@@ -22,13 +24,15 @@ public class ConnectionRequest {
         return connectionRequestState.getConnectionRequestId();
     }
 
+
     public String getPresenterName() {
         return connectionRequestState.getPresenterName();
     }
-    public void accept()
-    {
+    public void accept() throws RequestAlreadyProcessedException {
         facilitator.acceptConnectionRequest(connectionRequestState.getConnectionRequestId());
     }
 
-    public void reject(){facilitator.rejectConnectionRequest(connectionRequestState.getConnectionRequestId());}
+    public void reject() throws RequestAlreadyProcessedException {facilitator.rejectConnectionRequest(connectionRequestState.getConnectionRequestId());}
+
+
 }

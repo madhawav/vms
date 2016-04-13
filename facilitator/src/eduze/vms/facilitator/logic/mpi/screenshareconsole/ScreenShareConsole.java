@@ -10,6 +10,6 @@ package eduze.vms.facilitator.logic.mpi.screenshareconsole;
 public interface ScreenShareConsole extends java.rmi.Remote {
     public boolean isEnabled() throws java.rmi.RemoteException;
     public java.lang.String getConsoleId() throws java.rmi.RemoteException;
-    public int getUpdateInterval() throws java.rmi.RemoteException;
     public void setUpdateInterval(int arg0) throws java.rmi.RemoteException;
+    public int getUpdateInterval() throws java.rmi.RemoteException;
 }

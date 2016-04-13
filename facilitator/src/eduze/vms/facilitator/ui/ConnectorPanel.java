@@ -1,26 +1,20 @@
 package eduze.vms.facilitator.ui;
 
-import com.sun.deploy.panel.ControlPanel;
-import eduze.vms.facilitator.logic.ConnectionListener;
-import eduze.vms.facilitator.logic.ConnectionRequest;
-import eduze.vms.facilitator.logic.FacilitatorController;
-import eduze.vms.facilitator.logic.PasswordUtil;
+import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManager;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManager;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManagerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.OpenType;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -34,6 +28,14 @@ public class ConnectorPanel {
     private JPasswordField txtPassKey;
     private JTextField txtPort;
     private JButton startButton1;
+    private JPanel facilitatorServicePanel;
+    private JPanel serverConnectionPanel;
+    private JTextField txtServerHost;
+    private JPasswordField txtServerPassword;
+    private JButton pairButton;
+    private JComboBox cmbPairedDevices;
+    private JButton unpairButton;
+    private JButton connectButton;
     private JButton btnStartListener;
     private JFrame mainFrame;
     FacilitatorController facilitatorController = null;
@@ -53,6 +55,115 @@ public class ConnectorPanel {
                 onStartListener();
             }
         });
+        pairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onPairClicked();
+            }
+        });
+        connectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onConnectClicked();
+            }
+        });
+
+        unpairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onUnPairClicked();
+            }
+        });
+    }
+
+    private void onUnPairClicked() {
+        String name = (String)cmbPairedDevices.getSelectedItem();
+        try {
+            ServerManager.PairedServer server= facilitatorController.getServerManager().getPairedServerFromName(name);
+            facilitatorController.getServerManager().unPair(server);
+            JOptionPane.showMessageDialog(mainFrame,"Successfully Unpaired");
+        }
+        catch (ServiceNotStartedException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Server Connection Error");
+            e.printStackTrace();
+        }
+    }
+
+    private void onConnectClicked() {
+        String name = (String)cmbPairedDevices.getSelectedItem();
+        try {
+            ServerManager.PairedServer server= facilitatorController.getServerManager().getPairedServerFromName(name);
+            facilitatorController.getServerManager().connect(server);
+            JOptionPane.showMessageDialog(mainFrame,"Successfully Connected");
+        }
+        catch (FacilitatorAlreadyConnectedException e)
+        {
+            JOptionPane.showMessageDialog(mainFrame,"Already Connected");
+            e.printStackTrace();
+        }
+        catch (MeetingAlreadyStartedException e)
+        {
+            JOptionPane.showMessageDialog(mainFrame,"Meeting Already Started");
+            e.printStackTrace();;
+        }
+        catch (UnknownFacilitatorException e)
+        {
+            JOptionPane.showMessageDialog(mainFrame,"Facilitator is not known. Please pair before connecting.");
+            e.printStackTrace();;
+        }
+        catch (ServerNotReadyException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Server busy.");
+            e.printStackTrace();
+        }
+        catch (ServiceNotStartedException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Server Connection Error");
+            e.printStackTrace();
+        }
+    }
+
+    private void updatePairedList()
+    {
+        cmbPairedDevices.removeAllItems();
+        if(facilitatorController.isRunning())
+        {
+            try {
+                for(ServerManager.PairedServer p : facilitatorController.getServerManager().getPairedServers())
+                {
+                    cmbPairedDevices.addItem(p.getServerName());
+                }
+            } catch (ServiceNotStartedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void onPairClicked() {
+        try {
+            ServerManager serverManager = facilitatorController.getServerManager();
+            ServerManager.PairedServer pairedServer = serverManager.pair(txtServerHost.getText(),PasswordUtil.hashServerPassword(txtServerPassword.getPassword()));
+            JOptionPane.showMessageDialog(mainFrame,"Successfully Paired");
+
+        } catch (ServiceNotStartedException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (InvalidServerPasswordException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame,"Invalid Server Password");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (AlreadyPairedException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame,"Already Paired");
+        }
+        updatePairedList();
     }
 
     private void onStartListener() {
@@ -61,20 +172,35 @@ public class ConnectorPanel {
        configuration.setPassword(PasswordUtil.hashPasskey(txtPassKey.getPassword()));
        configuration.setListenerPort(Integer.valueOf(txtPort.getText()));
        facilitatorController = FacilitatorController.start(configuration);
-        facilitatorController.addConnectionListener(new ConnectionListener() {
+        facilitatorController.addConnectionListener(new PresenterConnectionListener() {
             @Override
             public void onConnectionRequested(ConnectionRequest connectionRequest) {
                 int result = JOptionPane.showConfirmDialog(mainFrame,"Connection Request from " + connectionRequest.getPresenterName() + ". Accept?","Connection Request", JOptionPane.YES_NO_OPTION);
                 if(result == JOptionPane.YES_OPTION)
                 {
-                    connectionRequest.accept();
+                    try {
+                        connectionRequest.accept();
+                    } catch (RequestAlreadyProcessedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else if(result == JOptionPane.NO_OPTION)
                 {
-                    connectionRequest.reject();
+                    try {
+                        connectionRequest.reject();
+                    } catch (RequestAlreadyProcessedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
+            @Override
+            public void onConnected(String connectionRequestId, String consoleId) {
+
+            }
         });
+
+        updatePairedList();
     }
 
     public void run()
@@ -88,6 +214,7 @@ public class ConnectorPanel {
 
     public static void main(String[] args) {
         ConnectorPanel con = new ConnectorPanel();
+        //con.testSequence();
         con.run();
 
     }

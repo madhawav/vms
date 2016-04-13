@@ -17,4 +17,9 @@ public class PasswordUtil {
     {
         return String.valueOf(password);
     }
+
+    public static String hashServerPassword(char[] password)
+    {
+        return String.valueOf(password);
+    }
 }

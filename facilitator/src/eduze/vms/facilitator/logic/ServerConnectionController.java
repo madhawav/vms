@@ -1,5 +1,6 @@
 package eduze.vms.facilitator.logic;
 
+import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManager;
@@ -8,6 +9,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordE
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplPortBindingStub;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManager;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManagerImplServiceLocator;
@@ -30,6 +32,8 @@ public class ServerConnectionController {
     private String virtualMeetingConsoleId = null;
     private String facilitatorConsoleId = null;
 
+
+
     private boolean isConnected = false;
 
     ServerConnectionController(FacilitatorController facilitatorController, String serverURL, ConnectionResult connectionResult) throws MalformedURLException, ServiceException {
@@ -45,7 +49,10 @@ public class ServerConnectionController {
 
         virtualMeetingConsoleId = connectionResult.getVirtualMeetingConsoleId();
         facilitatorConsoleId = connectionResult.getFacilitatorConsoleId();
+
         isConnected = connectionResult.isSuccessful();
+
+
     }
 
     public String getServerName() throws ServerConnectionException {
@@ -54,6 +61,13 @@ public class ServerConnectionController {
         } catch (RemoteException e) {
             throw new ServerConnectionException(e);
         }
+    }
+
+
+
+    public void disconnect()
+    {
+        //TODO: Setup server disconnection logic here
     }
 
     public String getServerURL()
@@ -81,5 +95,14 @@ public class ServerConnectionController {
 
     public boolean isConnected() {
         return isConnected;
+    }
+
+
+    public String getVirtualMeetingConsoleId() {
+        return virtualMeetingConsoleId;
+    }
+
+    public String getFacilitatorConsoleId() {
+        return facilitatorConsoleId;
     }
 }

@@ -40,4 +40,14 @@ public class UrlGenerator {
     {
         return serverURL + "/vm-session-manager";
     }
+
+    public static String generateVMAccessUrl(String serverUrl, String vmId)
+    {
+        return serverUrl + "/vm/"+vmId;
+    }
+
+    public static String generateFacilitatorConsoleAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/facilitator/"+consoleId;
+    }
 }

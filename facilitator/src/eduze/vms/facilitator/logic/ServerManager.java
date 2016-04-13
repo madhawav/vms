@@ -6,9 +6,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImpl
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManager;
-import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManagerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
@@ -45,7 +43,12 @@ public class ServerManager {
         return pairedServers.values();
     }
 
-    public String getServerName(String serverURL) throws MalformedURLException, ServerConnectionException {
+    public PairedServer getPairedServerFromName(String name)
+    {
+        return pairedServers.get(name);
+    }
+
+    public String getServerName(String serverURL) throws MalformedURLException, ServerConnectionException{
         String url = UrlGenerator.extractURL(serverURL);
         ServerImplServiceLocator locator = new ServerImplServiceLocator();
 
@@ -56,6 +59,7 @@ public class ServerManager {
             return  server.getServerName();
 
         }
+
         catch (ServiceException e)
         {
             throw new ServerConnectionException(e);
@@ -75,6 +79,7 @@ public class ServerManager {
             FacilitatorManager facilitatorManager = facilitatorManagerImplServiceLocator.getFacilitatorManagerImplPort(new URL(UrlGenerator.generateFacilitatorManagerAccessURL(url)));
             String pairKey = facilitatorManager.pair(getFacilitatorController().getConfiguration().getName(),serverPassword);
             PairedServer pairedServer = new PairedServer(server.getServerName(), url, pairKey);
+            pairedServers.put(pairedServer.getServerName(),pairedServer);
             return  pairedServer;
         }
         catch (AlreadyPairedException e)
@@ -100,7 +105,7 @@ public class ServerManager {
         {
             FacilitatorManager facilitatorManager = facilitatorManagerImplServiceLocator.getFacilitatorManagerImplPort(new URL(UrlGenerator.generateFacilitatorManagerAccessURL(url)));
             facilitatorManager.unPair(server.getServerPairKey());
-            pairedServers.remove(server);
+            pairedServers.remove(server.getServerName());
         }
 
         catch (ServiceException e)
@@ -114,7 +119,7 @@ public class ServerManager {
     }
 
 
-    public ServerConnectionController connect(PairedServer server) throws MalformedURLException, ServerConnectionException {
+    public ServerConnectionController connect(PairedServer server) throws MalformedURLException, ServerConnectionException, ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException {
         String url = server.getServerURL();
         VMSessionManagerImplServiceLocator vmSessionManagerImplServiceLocator = new VMSessionManagerImplServiceLocator();
         try
@@ -123,8 +128,8 @@ public class ServerManager {
             ConnectionResult result= sessionManager.connect(getFacilitatorController().getConfiguration().getName(),server.getServerPairKey());
             if(result.isSuccessful())
             {
-                ServerConnectionController connectionController = new ServerConnectionController(getFacilitatorController(),url,result);
-                return connectionController;
+                facilitatorController.notifyServerConnected(url,result);
+                return getFacilitatorController().getServerConnectionController();
             }
             else
             {
@@ -133,7 +138,22 @@ public class ServerManager {
 
 
         }
-
+        catch (ServerNotReadyException e)
+        {
+            throw e;
+        }
+        catch (MeetingAlreadyStartedException e)
+        {
+            throw e;
+        }
+        catch(UnknownFacilitatorException e)
+        {
+            throw e;
+        }
+        catch(FacilitatorAlreadyConnectedException e)
+        {
+            throw e;
+        }
         catch (ServiceException e)
         {
             throw new ServerConnectionException(e);

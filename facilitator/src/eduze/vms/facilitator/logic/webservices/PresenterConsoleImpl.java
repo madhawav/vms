@@ -1,5 +1,6 @@
 package eduze.vms.facilitator.logic.webservices;
 
+import eduze.vms.facilitator.logic.ConnectionRequest;
 import eduze.vms.facilitator.logic.PasswordUtil;
 import eduze.vms.facilitator.logic.UrlGenerator;
 
@@ -16,6 +17,8 @@ public class PresenterConsoleImpl implements PresenterConsole {
     private String consoleId = null;
     private boolean connectionAcknowledged = false;
     private Endpoint endpoint = null;
+    private String connectionRequestId;
+
     public PresenterConsoleImpl()
     {
 
@@ -50,9 +53,23 @@ public class PresenterConsoleImpl implements PresenterConsole {
         return connectionAcknowledged;
     }
 
+    //TODO: Improve logic here
+    private boolean isConnected()
+    {
+        return connectionAcknowledged;
+    }
+
     @Override
     public void acknowledgeConnection() {
-        connectionAcknowledged = true;
+
+        if(!connectionAcknowledged)
+        {
+            connectionAcknowledged = true;
+            //find connection request id
+            if(getFacilitator().getPresenterConnectionListener() != null)
+                getFacilitator().getPresenterConnectionListener().onConnected(connectionRequestId,consoleId);
+        }
+
     }
 
     @Override
@@ -63,5 +80,29 @@ public class PresenterConsoleImpl implements PresenterConsole {
     @Override
     public String getConsoleId() {
         return consoleId;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String newName) {
+        if(!name.equals(newName))
+        {
+            name = newName;
+            if(getFacilitator().getPresenterModifiedListener() != null)
+                getFacilitator().getPresenterModifiedListener().presenterNameChanged(consoleId,newName);
+        }
+
+    }
+
+    void setConnectionRequestId(String connectionRequestId) {
+        this.connectionRequestId = connectionRequestId;
+    }
+
+    String getConnectionRequestId() {
+        return connectionRequestId;
     }
 }

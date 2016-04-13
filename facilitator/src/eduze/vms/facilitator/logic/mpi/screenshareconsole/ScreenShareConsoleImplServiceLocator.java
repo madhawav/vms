@@ -22,7 +22,7 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
     }
 
     // Use to get a proxy class for ScreenShareConsoleImplPort
-    private java.lang.String ScreenShareConsoleImplPort_address = "http://0.0.0.0:8000/screen-share/884702291";
+    private java.lang.String ScreenShareConsoleImplPort_address = "http://0.0.0.0:8000/screen-share/-607608222";
 
     public java.lang.String getScreenShareConsoleImplPortAddress() {
         return ScreenShareConsoleImplPort_address;
