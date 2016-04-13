@@ -1,5 +1,6 @@
 package eduze.vms.server.logic.webservices;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
@@ -7,6 +8,6 @@ import javax.jws.WebService;
  */
 @WebService
 public interface FacilitatorManager {
-    public void unPair(String pairKey);
-    public String pair(String name, String password) throws AlreadyPairedException, InvalidServerPasswordException;
+    public void unPair(@WebParam(name = "PairKey") String pairKey);
+    public String pair(@WebParam(name="Name") String name, @WebParam(name="Password") String password) throws AlreadyPairedException, InvalidServerPasswordException;
 }
