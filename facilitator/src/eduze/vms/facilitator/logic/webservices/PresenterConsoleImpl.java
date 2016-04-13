@@ -2,7 +2,9 @@ package eduze.vms.facilitator.logic.webservices;
 
 import eduze.vms.facilitator.logic.ConnectionRequest;
 import eduze.vms.facilitator.logic.PasswordUtil;
+import eduze.vms.facilitator.logic.ServerConnectionException;
 import eduze.vms.facilitator.logic.UrlGenerator;
+import javafx.stage.Screen;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
@@ -19,6 +21,8 @@ public class PresenterConsoleImpl implements PresenterConsole {
     private Endpoint endpoint = null;
     private String connectionRequestId;
 
+    private ScreenShareConsoleImpl screenShareConsole = null;
+
     public PresenterConsoleImpl()
     {
 
@@ -29,10 +33,12 @@ public class PresenterConsoleImpl implements PresenterConsole {
         this.facilitator = facilitator;
         this.name = name;
         consoleId = PasswordUtil.generatePresenterConsoleId();
+        screenShareConsole = new ScreenShareConsoleImpl(getFacilitator().getConfiguration().getListenerPort(),getFacilitator().getConfiguration().getScreenShareBufferSize());
     }
 
     public void start()
     {
+        screenShareConsole.start();
         endpoint = Endpoint.publish(UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId),this);
         System.out.println("Presenter Console Started " + UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId));
     }
@@ -96,6 +102,22 @@ public class PresenterConsoleImpl implements PresenterConsole {
                 getFacilitator().getPresenterModifiedListener().presenterNameChanged(consoleId,newName);
         }
 
+    }
+
+    @Override
+    public VirtualMeetingSnapshot getVMSnapshot() throws ServerConnectionException {
+        VirtualMeetingSnapshot snap = VirtualMeetingSnapshot.fromVirtualMeeting(getFacilitator().getVirtualMeeting());
+        return snap;
+    }
+
+    @Override
+    public String getOutScreenShareConsoleId() {
+        return screenShareConsole.getConsoleId();
+    }
+
+    public ScreenShareConsoleImpl getScreenShareConsole()
+    {
+        return screenShareConsole;
     }
 
     void setConnectionRequestId(String connectionRequestId) {

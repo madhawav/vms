@@ -22,4 +22,10 @@ public class PasswordUtil {
     {
         return String.valueOf(password);
     }
+
+    public static String generateScreenShareConsoleId()
+    {
+        return String.valueOf(ran.nextInt());
+    }
+
 }

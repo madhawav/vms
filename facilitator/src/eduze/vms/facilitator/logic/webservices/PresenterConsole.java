@@ -1,5 +1,7 @@
 package eduze.vms.facilitator.logic.webservices;
 
+import eduze.vms.facilitator.logic.ServerConnectionException;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -41,5 +43,15 @@ public interface PresenterConsole {
      */
     @WebMethod
     public void setName(@WebParam(name = "NewName") String newName);
+
+    /**
+     * Return snapshot of current status of virtual meeting
+     * @return Snapshot of Virtual Meeting
+     */
+    @WebMethod
+    public VirtualMeetingSnapshot getVMSnapshot() throws ServerConnectionException;
+
+    @WebMethod
+    public String getOutScreenShareConsoleId();
 
 }

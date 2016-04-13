@@ -1,16 +1,16 @@
-package eduze.vms.server.logic.webservices;
+package eduze.vms.facilitator.logic.webservices;
 
 import eduze.livestream.exchange.server.FrameBufferImpl;
-import eduze.vms.PasswordUtil;
-import eduze.vms.server.logic.URLGenerator;
+import eduze.vms.facilitator.logic.PasswordUtil;
+import eduze.vms.facilitator.logic.UrlGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
 /**
- * Created by Madhawa on 12/04/2016.
+ * Created by Madhawa on 13/04/2016.
  */
-@WebService(endpointInterface = "eduze.vms.server.logic.webservices.ScreenShareConsole")
+@WebService(endpointInterface = "eduze.vms.facilitator.logic.webservices.ScreenShareConsole")
 public class ScreenShareConsoleImpl implements ScreenShareConsole {
     private boolean enabled = false;
     private int updateInterval = 1000;
@@ -32,10 +32,10 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
 
     public void start()
     {
-        System.out.println("Screen Share Console Started " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
-        System.out.println("Screen Share Frame Buffer Started " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
-        Endpoint.publish(URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId),frameBuffer);
-        Endpoint.publish(URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId),this);
+        System.out.println("Screen Share Console Started " + UrlGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
+        System.out.println("Screen Share Frame Buffer Started " + UrlGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
+        Endpoint.publish(UrlGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId),frameBuffer);
+        Endpoint.publish(UrlGenerator.generateScreenShareConsolePublishUrl(port,consoleId),this);
     }
 
     @Override

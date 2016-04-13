@@ -95,6 +95,11 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         return status;
     }
 
+    @Override
+    public VirtualMeetingSnapshot getSnapshot() {
+        return VirtualMeetingSnapshot.fromVirtualMeeting(this);
+    }
+
 
     FacilitatorConsoleImpl getFacilitatorConsole(String consoleId)
     {

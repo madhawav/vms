@@ -32,7 +32,7 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     public FacilitatorConsoleImpl(VirtualMeetingImpl vm, Facilitator facilitator)
     {
         this.virtualMeeting = vm;
-        consoleId = PasswordUtil.generateConsoleId();
+        consoleId = PasswordUtil.generateFacilitatorConsoleId();
         this.facilitator = facilitator;
 
     }

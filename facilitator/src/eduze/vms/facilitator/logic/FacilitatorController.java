@@ -1,10 +1,14 @@
 package eduze.vms.facilitator.logic;
 
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
+import eduze.vms.facilitator.logic.webservices.PresenterConsole;
+import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +22,9 @@ public class FacilitatorController {
     private FacilitatorImpl facilitatorService = null; //WebService to Presenter
     private FacilitatorController.Configuration configuration = null; //Startup Configuration of Facilitator
     private boolean running = false; //has it started?
+    private VirtualMeetingSnapshot vmStatus = null;
+
+    private ControlLoop controlLoop = null;
 
     /**
      * Construct by calling FacilitatorController.start()
@@ -38,6 +45,8 @@ public class FacilitatorController {
 
     private ArrayList<PresenterModifiedListener> presenterModifiedListeners = new ArrayList<>();
 
+    private ArrayList<ControlLoopListener> controlLoopListeners = new ArrayList<>();
+
     //Handles pairing and connection with server
     private ServerManager serverManager = null;
 
@@ -50,6 +59,10 @@ public class FacilitatorController {
         if(serverConnectionController == null)
             return false;
         return serverConnectionController.isConnected();
+    }
+
+    FacilitatorImpl getFacilitatorService() {
+        return facilitatorService;
     }
 
     /**
@@ -78,11 +91,39 @@ public class FacilitatorController {
                 notifyConnected(connectionRequestId,consoleId);
             }
         });
+        facilitatorService.setPresenterModifiedListener(new PresenterModifiedListener() {
+            @Override
+            public void presenterNameChanged(String consoleId, String newName) {
+                notifyPresenterNameChanged(consoleId,newName);
+            }
+        });
         facilitatorService.start();
 
         serverManager = new ServerManager(this);
 
         running = true;
+    }
+
+    public Presenter getPresenter(String consoleId)
+    {
+        PresenterConsoleImpl console =  getFacilitatorService().getPresenterConsole(consoleId);
+        return new Presenter(this,console);
+    }
+
+    public int getPresenterCount()
+    {
+        return getFacilitatorService().getPresenterConsoles().size();
+    }
+
+    public Presenter[] getPresenters()
+    {
+        Presenter[] presenters = new Presenter[getPresenterCount()];
+        PresenterConsoleImpl[] presenterConsoles = new PresenterConsoleImpl[presenters.length];
+        getFacilitatorService().getPresenterConsoles().toArray(presenterConsoles);
+        for(int i = 0; i < presenters.length; i++){
+            presenters[i] = new Presenter(this,presenterConsoles[i]);
+        }
+        return presenters;
     }
 
     private void notifyConnected(String connectionRequestId, String consoleId) {
@@ -131,6 +172,24 @@ public class FacilitatorController {
     }
 
     /**
+     * Add a new listener to listen to control loop events
+     * @param listener
+     */
+    public void addControlLoopListener(ControlLoopListener listener)
+    {
+        controlLoopListeners.add(listener);
+    }
+
+    /**
+     * Remove a control loop listener
+     * @param listener
+     */
+    public void removeControlLoopListener(ControlLoopListener listener)
+    {
+        controlLoopListeners.remove(listener);
+    }
+
+    /**
      * Notify user that a presenter is requesting to connect
      * @param cr ConnectionRequest with details on presenter
      */
@@ -138,6 +197,16 @@ public class FacilitatorController {
     {
         for(PresenterConnectionListener listener : presenterConnectionListeners)
             listener.onConnectionRequested(cr);
+    }
+
+    /**
+     * Notify user that a control loop update has been received
+     * @param vm VirtualMeetingSnapshot
+     */
+    private void notifyControlLoopUpdateReceived(VirtualMeetingSnapshot vm)
+    {
+        for(ControlLoopListener listener : controlLoopListeners)
+            listener.updateReceived(vm);
     }
 
     /**
@@ -190,12 +259,34 @@ public class FacilitatorController {
         ServerConnectionController connectionController = new ServerConnectionController(this,url,result);
         this.serverConnectionController =  connectionController;
         this.facilitatorService.establishServerConnection(url,result.getFacilitatorConsoleId(),result.getVirtualMeetingConsoleId());
+
+        controlLoop = new ControlLoop(this.facilitatorService,url,getConfiguration().getListenerPort());
+        controlLoop.setControlLoopListener(new ControlLoopListener() {
+            @Override
+            public void updateReceived(VirtualMeetingSnapshot vm) {
+                notifyControlLoopUpdateReceived(vm);
+                vmStatus = vm;
+            }
+        });
+        controlLoop.start();
     }
 
     void notifyPresenterNameChanged(String id, String name)
     {
         for(PresenterModifiedListener listener : presenterModifiedListeners)
             listener.presenterNameChanged(id,name);
+    }
+
+    public VirtualMeetingSnapshot getVmStatus() {
+        return vmStatus;
+    }
+
+    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException {
+        try {
+            getFacilitatorService().getFacilitatorConsole().requestScreenAccess(presenterConsoleId,includeAudio);
+        } catch (RemoteException e) {
+            throw new ServerConnectionException(e);
+        }
     }
 
     /**
@@ -205,6 +296,9 @@ public class FacilitatorController {
     {
         private String name = "Facilitator";
         private int listenerPort = 7000;
+
+        private int screenShareBufferSize = 2;
+        private int audioRelayBufferSize = 5;
 
         private String password = "password";
 
@@ -224,9 +318,27 @@ public class FacilitatorController {
             return password;
         }
 
+        public int getAudioRelayBufferSize() {
+            return audioRelayBufferSize;
+        }
+
+        public int getScreenShareBufferSize() {
+            return screenShareBufferSize;
+        }
+
+        public void setAudioRelayBufferSize(int audioRelayBufferSize) {
+            this.audioRelayBufferSize = audioRelayBufferSize;
+        }
+
+        public void setScreenShareBufferSize(int screenShareBufferSize) {
+            this.screenShareBufferSize = screenShareBufferSize;
+        }
+
         public void setListenerPort(int listenerPort) {
             this.listenerPort = listenerPort;
         }
+
+
 
         public void setName(String name) {
             this.name = name;

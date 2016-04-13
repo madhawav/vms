@@ -28,12 +28,12 @@ public class PasswordUtil {
         return "vm_" + String.valueOf(ran.nextInt());
     }
 
-    public static String generateConsoleId()
+    public static String generateFacilitatorConsoleId()
     {
         return "con_" + String.valueOf(ran.nextInt());
     }
 
-    public static String generateShareConsoleId()
+    public static String generateScreenShareConsoleId()
     {
         return String.valueOf(ran.nextInt());
     }

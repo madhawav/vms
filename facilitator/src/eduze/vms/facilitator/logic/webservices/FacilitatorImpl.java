@@ -6,12 +6,14 @@ import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImpl
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingImplServiceLocator;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
 import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -40,11 +42,11 @@ public class FacilitatorImpl implements Facilitator  {
         VirtualMeetingImplServiceLocator vmLocator = new VirtualMeetingImplServiceLocator();
         FacilitatorConsoleImplServiceLocator facilitatorLocator = new FacilitatorConsoleImplServiceLocator();
 
+        this.facilitatorConsoleId = facilitatorConsoleId;
+        this.virtualMeetingId = virtualMeetingId;
         try{
             virtualMeeting = vmLocator.getVirtualMeetingImplPort(new URL(UrlGenerator.generateVMAccessUrl(serverURL,virtualMeetingId)));
             facilitatorConsole = facilitatorLocator.getFacilitatorConsoleImplPort(new URL(UrlGenerator.generateFacilitatorConsoleAccessUrl(serverURL,facilitatorConsoleId)));
-
-            //TODO: Start Exchange Services
         }
         catch (ServiceException e)
         {
@@ -56,6 +58,16 @@ public class FacilitatorImpl implements Facilitator  {
     public FacilitatorImpl()
     {
 
+    }
+
+    public Collection<PresenterConsoleImpl> getPresenterConsoles()
+    {
+        return presenterConsoles.values();
+    }
+
+    @WebMethod(exclude = true)
+    public PresenterConsoleImpl getPresenterConsole(String consoleId) {
+        return presenterConsoles.get(consoleId);
     }
 
     @Override
@@ -176,4 +188,23 @@ public class FacilitatorImpl implements Facilitator  {
     public void setPresenterModifiedListener(PresenterModifiedListener presenterModifiedListener) {
         this.presenterModifiedListener = presenterModifiedListener;
     }
+
+    public VirtualMeeting getVirtualMeeting() {
+        return virtualMeeting;
+    }
+
+    public FacilitatorConsole getFacilitatorConsole() {
+        return facilitatorConsole;
+    }
+
+    public String getFacilitatorConsoleId() {
+        return facilitatorConsoleId;
+    }
+
+    public String getVirtualMeetingId() {
+        return virtualMeetingId;
+    }
+
+
+
 }

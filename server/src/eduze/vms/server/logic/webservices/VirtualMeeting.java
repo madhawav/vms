@@ -27,4 +27,7 @@ public interface VirtualMeeting {
 
     @WebMethod
     public SessionStatus getStatus();
+
+    @WebMethod
+    public VirtualMeetingSnapshot getSnapshot();
 }

@@ -50,4 +50,25 @@ public class UrlGenerator {
     {
         return serverUrl + "/facilitator/"+consoleId;
     }
+    public static String generateScreenShareConsoleAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId);
+    }
+    public static String generateScreenShareConsoleBufferAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId) + "/buffer";
+    }
+    public static String generateScreenShareFrameBufferPublishUrl(int port, String consoleId)
+    {
+        return "http://0.0.0.0:" + String.valueOf(port) + "/screen-share/"+ String.valueOf(consoleId) +"/buffer";
+    }
+    public static String generateScreenShareConsolePublishUrl(int port, String consoleId)
+    {
+        return "http://0.0.0.0:" + String.valueOf(port) + "/screen-share/"+ String.valueOf(consoleId);
+    }
+
+    public static String generateLocalURL(int port)
+    {
+        return "http://localhost:"+String.valueOf(port);
+    }
 }

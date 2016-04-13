@@ -9,6 +9,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImpl
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
 
 import javax.swing.*;
@@ -36,6 +37,10 @@ public class ConnectorPanel {
     private JComboBox cmbPairedDevices;
     private JButton unpairButton;
     private JButton connectButton;
+    private JLabel lblVMStatus;
+    private JLabel lblPresenters;
+    private JTextField txtActivePresenterConsoleId;
+    private JButton btnSetActivePresenter;
     private JButton btnStartListener;
     private JFrame mainFrame;
     FacilitatorController facilitatorController = null;
@@ -74,6 +79,20 @@ public class ConnectorPanel {
                 onUnPairClicked();
             }
         });
+        btnSetActivePresenter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onSetActiveClicked();
+            }
+        });
+    }
+
+    private void onSetActiveClicked() {
+        try {
+            facilitatorController.setScreenAccessPresenter(txtActivePresenterConsoleId.getText(),false);
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onUnPairClicked() {
@@ -82,6 +101,7 @@ public class ConnectorPanel {
             ServerManager.PairedServer server= facilitatorController.getServerManager().getPairedServerFromName(name);
             facilitatorController.getServerManager().unPair(server);
             JOptionPane.showMessageDialog(mainFrame,"Successfully Unpaired");
+            updatePairedList();
         }
         catch (ServiceNotStartedException e) {
             e.printStackTrace();
@@ -200,7 +220,31 @@ public class ConnectorPanel {
             }
         });
 
+        facilitatorController.addControlLoopListener(new ControlLoopListener() {
+            @Override
+            public void updateReceived(VirtualMeetingSnapshot vm) {
+                vmUpdateReceived(vm);
+            }
+        });
         updatePairedList();
+    }
+
+    private void vmUpdateReceived(VirtualMeetingSnapshot vm) {
+        lblVMStatus.setText(vm.getStatus().toString());
+        Presenter[] presenters = facilitatorController.getPresenters();
+        String presenterString = "";
+        for(Presenter p : presenters)
+        {
+            String info = p.getPresenterName();
+            info+= "<" + p.getPresenterConsoleId() + ">";
+            if(p.isScreenActive())
+            {
+                info = info + "(Active)";
+            }
+            info = info + ", ";
+            presenterString += info;
+        }
+        lblPresenters.setText(presenterString);
     }
 
     public void run()

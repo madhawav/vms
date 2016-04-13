@@ -1,7 +1,9 @@
-package eduze.vms.facilitator.logic.webservices;
+package eduze.vms.server.logic.webservices;
 
-import eduze.vms.facilitator.logic.ServerConnectionException;
-import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
+/**
+ * Created by Madhawa on 13/04/2016.
+ */
+
 
 import javax.jws.WebMethod;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,7 +16,7 @@ import java.rmi.RemoteException;
  * Created by Madhawa on 13/04/2016.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="ConnectionResult")
+@XmlType(name="VirtualMeetingSnapshot")
 public class VirtualMeetingSnapshot {
     @XmlElement(name="VMId")
     protected String vmId = null;
@@ -81,29 +83,17 @@ public class VirtualMeetingSnapshot {
         this.status = status;
     }
 
-    public static VirtualMeetingSnapshot fromVirtualMeeting(VirtualMeeting vms) throws ServerConnectionException {
-        try{
-            eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot vm = vms.getSnapshot();
+    public static VirtualMeetingSnapshot fromVirtualMeeting(VirtualMeeting vm) {
             VirtualMeetingSnapshot result = new VirtualMeetingSnapshot();
             result.setActiveScreenFacilitatorId(vm.getActiveScreenFacilitatorId());
             result.setActiveScreenPresenterId(vm.getActiveScreenPresenterId());
             result.setActiveSpeechFacilitatorId(vm.getActiveSpeechFacilitatorId());
             result.setActiveSpeechPresenterId(vm.getActiveSpeechFacilitatorId());
-            eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status = vm.getStatus();
-            if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.MeetingOnline)
-                result.status = SessionStatus.MeetingOnline;
-            if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.NotReady)
-                result.status = SessionStatus.NotReady;
-            if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.WaitingForFirstFacilitator)
-                result.status = SessionStatus.WaitingForFirstFacilitator;
-            if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.WaitingForSecondFacilitator)
-                result.status = SessionStatus.WaitingForSecondFacilitator;
+            result.setStatus(vm.getStatus());
+            result.setVmId(vm.getVMId());
             return result;
-        }
-        catch (RemoteException ex)
-        {
-            throw new ServerConnectionException(ex);
-        }
+
 
     }
 }
+
