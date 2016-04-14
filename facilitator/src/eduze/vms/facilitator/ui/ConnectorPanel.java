@@ -11,6 +11,7 @@ import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
+import javafx.stage.Screen;
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
@@ -44,7 +45,11 @@ public class ConnectorPanel {
     private JButton btnSetActivePresenter;
     private JButton btnStartListener;
     private JFrame mainFrame;
+
+
     FacilitatorController facilitatorController = null;
+
+    private ScreenShow screenShow = null;
     public ConnectorPanel()
     {
 
@@ -86,6 +91,8 @@ public class ConnectorPanel {
                 onSetActiveClicked();
             }
         });
+
+
     }
 
     private void onSetActiveClicked() {
@@ -93,6 +100,8 @@ public class ConnectorPanel {
             facilitatorController.setScreenAccessPresenter(txtActivePresenterConsoleId.getText(),false);
         } catch (ServerConnectionException e) {
             e.printStackTrace();
+        } catch (InvalidIdException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Invalid Presenter Console Id");
         }
     }
 
@@ -231,6 +240,7 @@ public class ConnectorPanel {
             @Override
             public void onScreenCaptureReceived(byte[] rawData, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId) {
                 System.out.println("Screen Capture Received " + String.valueOf(rawData) + " bytes");
+                screenShow.setImage(image);
             }
 
             @Override
@@ -239,20 +249,25 @@ public class ConnectorPanel {
             }
         });
         updatePairedList();
+
+        screenShow = new ScreenShow();
+        screenShow.run();
+
     }
 
     private void vmUpdateReceived(VirtualMeetingSnapshot vm) {
         lblVMStatus.setText(vm.getStatus().toString());
-        Presenter[] presenters = facilitatorController.getPresenters();
+        VirtualMeetingParticipantInfo[] presenters = facilitatorController.getVMParticipants();
         String presenterString = "";
-        for(Presenter p : presenters)
+        for(VirtualMeetingParticipantInfo p : presenters)
         {
-            String info = p.getPresenterName();
-            info+= "<" + p.getPresenterConsoleId() + ">";
-            if(p.isScreenActive())
+            String info = p.getName();
+            info+= "<" + p.getPresenterId() + ">";
+            if(p.getPresenterId().equals(vm.getActiveScreenPresenterId()))
             {
                 info = info + "(Active)";
             }
+
             info = info + ", ";
             presenterString += info;
         }

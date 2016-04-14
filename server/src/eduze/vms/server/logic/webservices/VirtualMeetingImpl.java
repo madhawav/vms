@@ -5,6 +5,7 @@ import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -98,6 +99,42 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     @Override
     public VirtualMeetingSnapshot getSnapshot() {
         return VirtualMeetingSnapshot.fromVirtualMeeting(this);
+    }
+
+    @Override
+    public Collection<VMParticipant> getParticipants() {
+        int count = 0;
+        for(FacilitatorConsole console  : getFacilitatorConsoles())
+        {
+            if(console == null)
+                continue;
+            count += console.getParticipants().size();
+        }
+        int i = 0;
+        VMParticipant[] results = new VMParticipant[count];
+        for(FacilitatorConsole console  : getFacilitatorConsoles())
+        {
+            if(console== null)
+                continue;
+            for(VMParticipant participant : console.getParticipants())
+            {
+                results[i++] = participant;
+            }
+        }
+        return Arrays.asList(results);
+    }
+
+    @Override
+    public VMParticipant getParticipant(String participantId) {
+        for(FacilitatorConsole console  : getFacilitatorConsoles())
+        {
+            if(console == null)
+                continue;
+            VMParticipant result = console.getParticipant(participantId);
+            if(result!= null)
+                return result;
+        }
+        return null;
     }
 
 

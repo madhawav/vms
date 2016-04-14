@@ -20,6 +20,8 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
 
     private eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status;
 
+    private eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants;
+
     public VirtualMeetingSnapshot() {
     }
 
@@ -29,13 +31,15 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
            java.lang.String activeScreenPresenterId,
            java.lang.String activeSpeechFacilitatorId,
            java.lang.String activeSpeechPresenterId,
-           eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status) {
+           eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status,
+           eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants) {
            this.VMId = VMId;
            this.activeScreenFacilitatorId = activeScreenFacilitatorId;
            this.activeScreenPresenterId = activeScreenPresenterId;
            this.activeSpeechFacilitatorId = activeSpeechFacilitatorId;
            this.activeSpeechPresenterId = activeSpeechPresenterId;
            this.status = status;
+           this.participants = participants;
     }
 
 
@@ -158,6 +162,34 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
         this.status = status;
     }
 
+
+    /**
+     * Gets the participants value for this VirtualMeetingSnapshot.
+     * 
+     * @return participants
+     */
+    public eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] getParticipants() {
+        return participants;
+    }
+
+
+    /**
+     * Sets the participants value for this VirtualMeetingSnapshot.
+     * 
+     * @param participants
+     */
+    public void setParticipants(eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants) {
+        this.participants = participants;
+    }
+
+    public eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant getParticipants(int i) {
+        return this.participants[i];
+    }
+
+    public void setParticipants(int i, eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant _value) {
+        this.participants[i] = _value;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof VirtualMeetingSnapshot)) return false;
@@ -187,7 +219,10 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
               this.activeSpeechPresenterId.equals(other.getActiveSpeechPresenterId()))) &&
             ((this.status==null && other.getStatus()==null) || 
              (this.status!=null &&
-              this.status.equals(other.getStatus())));
+              this.status.equals(other.getStatus()))) &&
+            ((this.participants==null && other.getParticipants()==null) || 
+             (this.participants!=null &&
+              java.util.Arrays.equals(this.participants, other.getParticipants())));
         __equalsCalc = null;
         return _equals;
     }
@@ -216,6 +251,17 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
         }
         if (getStatus() != null) {
             _hashCode += getStatus().hashCode();
+        }
+        if (getParticipants() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getParticipants());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getParticipants(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -268,6 +314,14 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "sessionStatus"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("participants");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "Participants"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "VMParticipant"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        elemField.setMaxOccursUnbounded(true);
         typeDesc.addFieldDesc(elemField);
     }
 

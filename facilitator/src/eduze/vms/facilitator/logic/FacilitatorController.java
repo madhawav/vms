@@ -1,5 +1,6 @@
 package eduze.vms.facilitator.logic;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
@@ -140,6 +141,39 @@ public class FacilitatorController {
             presenters[writeIndex++] = new Presenter(this,presenterConsoles[i]);
         }
         return presenters;
+    }
+
+    public VirtualMeetingParticipantInfo[] getVMParticipants()
+    {
+        if(vmStatus == null)
+            return new VirtualMeetingParticipantInfo[0];
+        if(vmStatus.getParticipants() == null)
+            return new VirtualMeetingParticipantInfo[0];
+        VirtualMeetingParticipantInfo[] results = new VirtualMeetingParticipantInfo[vmStatus.getParticipants().length];
+        for(int i = 0; i <results.length; i++)
+        {
+            results[i] = VirtualMeetingParticipantInfo.fromVMParticipant(vmStatus.getParticipants()[i]);
+        }
+        return results;
+    }
+
+
+    public VirtualMeetingParticipantInfo getVMParticipant(String presenterId)
+    {
+        if(vmStatus == null)
+            return null;
+        if(vmStatus.getParticipants() == null)
+            return null;
+        VirtualMeetingParticipantInfo[] results = new VirtualMeetingParticipantInfo[vmStatus.getParticipants().length];
+        for(int i = 0; i <results.length; i++)
+        {
+            if(presenterId.equals(results[i].getPresenterId()))
+            {
+                return VirtualMeetingParticipantInfo.fromVMParticipant(vmStatus.getParticipants()[i]);
+            }
+
+        }
+        return null;
     }
 
     private void notifyConnected(String connectionRequestId, String consoleId) {
@@ -344,9 +378,17 @@ public class FacilitatorController {
         return vmStatus;
     }
 
-    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException {
+    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException, InvalidIdException {
         try {
-            getFacilitatorService().getFacilitatorConsole().requestScreenAccess(presenterConsoleId,includeAudio);
+            if(getFacilitatorService().getPresenterConsole(presenterConsoleId) != null)
+            {
+                getFacilitatorService().getFacilitatorConsole().requestScreenAccess(presenterConsoleId,includeAudio);
+            }
+            else
+            {
+                throw new InvalidIdException("Invalid Presenter Id");
+            }
+
         } catch (RemoteException e) {
             throw new ServerConnectionException(e);
         }

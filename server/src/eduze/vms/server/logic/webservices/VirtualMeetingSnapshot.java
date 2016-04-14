@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.rmi.RemoteException;
+import java.util.Collection;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -34,6 +35,17 @@ public class VirtualMeetingSnapshot {
 
     @XmlElement(name="Status")
     protected SessionStatus status = null;
+
+    @XmlElement(name="Participants")
+    protected Collection<VMParticipant> participants = null;
+
+    public Collection<VMParticipant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Collection<VMParticipant> participants) {
+        this.participants = participants;
+    }
 
     public SessionStatus getStatus() {
         return status;
@@ -91,6 +103,7 @@ public class VirtualMeetingSnapshot {
             result.setActiveSpeechPresenterId(vm.getActiveSpeechFacilitatorId());
             result.setStatus(vm.getStatus());
             result.setVmId(vm.getVMId());
+            result.setParticipants(vm.getParticipants());
             return result;
 
 

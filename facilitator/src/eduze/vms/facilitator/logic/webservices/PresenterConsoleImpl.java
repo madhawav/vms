@@ -66,11 +66,12 @@ public class PresenterConsoleImpl implements PresenterConsole {
     }
 
     @Override
-    public void acknowledgeConnection() {
+    public void acknowledgeConnection() throws ServerConnectionException {
 
         if(!connectionAcknowledged)
         {
             connectionAcknowledged = true;
+            getFacilitator().updateVMParticipants();
             //find connection request id
             if(getFacilitator().getPresenterConnectionListener() != null)
                 getFacilitator().getPresenterConnectionListener().onConnected(connectionRequestId,consoleId);

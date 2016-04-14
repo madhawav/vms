@@ -15,7 +15,7 @@ public interface PresenterConsole {
      * Confirmation from presenter to facilitator
      */
     @WebMethod
-    public void acknowledgeConnection();
+    public void acknowledgeConnection() throws ServerConnectionException;
 
     /**
      * Disconnect from Facilitator

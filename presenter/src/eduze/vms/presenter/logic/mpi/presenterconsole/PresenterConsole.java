@@ -11,8 +11,8 @@ public interface PresenterConsole extends java.rmi.Remote {
     public java.lang.String getName() throws java.rmi.RemoteException;
     public void setName(java.lang.String newName) throws java.rmi.RemoteException;
     public void disconnect() throws java.rmi.RemoteException;
-    public eduze.vms.presenter.logic.mpi.presenterconsole.VirtualMeetingSnapshot getVMSnapshot() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
     public java.lang.String getConsoleId() throws java.rmi.RemoteException;
-    public void acknowledgeConnection() throws java.rmi.RemoteException;
+    public eduze.vms.presenter.logic.mpi.presenterconsole.VirtualMeetingSnapshot getVMSnapshot() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
+    public void acknowledgeConnection() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
     public java.lang.String getOutScreenShareConsoleId() throws java.rmi.RemoteException;
 }

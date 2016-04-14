@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.rmi.RemoteException;
+import java.util.Collection;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -33,6 +34,7 @@ public class VirtualMeetingSnapshot {
     @XmlElement(name="Status")
     protected SessionStatus status = null;
 
+
     public SessionStatus getStatus() {
         return status;
     }
@@ -56,6 +58,7 @@ public class VirtualMeetingSnapshot {
     public String getVmId() {
         return vmId;
     }
+
 
     public void setActiveScreenFacilitatorId(String activeScreenFacilitatorId) {
         this.activeScreenFacilitatorId = activeScreenFacilitatorId;
@@ -89,7 +92,9 @@ public class VirtualMeetingSnapshot {
             result.setActiveScreenPresenterId(vm.getActiveScreenPresenterId());
             result.setActiveSpeechFacilitatorId(vm.getActiveSpeechFacilitatorId());
             result.setActiveSpeechPresenterId(vm.getActiveSpeechFacilitatorId());
+
             eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status = vm.getStatus();
+
             if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.MeetingOnline)
                 result.status = SessionStatus.MeetingOnline;
             if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.NotReady)

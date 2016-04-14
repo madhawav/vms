@@ -2,7 +2,9 @@ package eduze.vms.facilitator.logic.webservices;
 
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
+import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplService;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.facilitatorconsole.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingImplServiceLocator;
 
@@ -13,6 +15,9 @@ import javax.xml.rpc.ServiceException;
 import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -44,15 +49,42 @@ public class FacilitatorImpl implements Facilitator  {
 
         this.facilitatorConsoleId = facilitatorConsoleId;
         this.virtualMeetingId = virtualMeetingId;
+
+
+
         try{
             virtualMeeting = vmLocator.getVirtualMeetingImplPort(new URL(UrlGenerator.generateVMAccessUrl(serverURL,virtualMeetingId)));
             facilitatorConsole = facilitatorLocator.getFacilitatorConsoleImplPort(new URL(UrlGenerator.generateFacilitatorConsoleAccessUrl(serverURL,facilitatorConsoleId)));
+
+            updateVMParticipants();
         }
         catch (ServiceException e)
         {
             throw new ServerConnectionException(e);
         }
 
+    }
+
+    void updateVMParticipants() throws ServerConnectionException {
+        ArrayList<VMParticipant> participants = new ArrayList<>();
+
+        for(PresenterConsoleImpl presenterConsole : getPresenterConsoles()) {
+            if (presenterConsole.isConnected()) {
+                VMParticipant participant = new VMParticipant();
+                participant.setPresenterId(presenterConsole.getConsoleId());
+                participant.setFacilitatorId(facilitatorConsoleId);
+                participant.setName(presenterConsole.getName());
+                participants.add(participant);
+
+            }
+        }
+        try {
+            VMParticipant[] participantsArray = new VMParticipant[participants.size()];
+            participants.toArray(participantsArray);
+            facilitatorConsole.setParticipants(participantsArray);
+        } catch (RemoteException e) {
+            throw new ServerConnectionException(e);
+        }
     }
 
     public FacilitatorImpl()

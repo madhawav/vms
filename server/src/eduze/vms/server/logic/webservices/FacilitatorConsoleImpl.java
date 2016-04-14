@@ -6,6 +6,8 @@ import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Madhawa on 12/04/2016.
@@ -16,6 +18,8 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     //Think from perspective of user (perspective of facilitator)
     private ScreenShareConsoleImpl inputScreenShareConsole = null; //input to facilitator
     private ScreenShareConsoleImpl outputScreenShareConsole = null; //output to facilitator
+
+    private HashMap<String,VMParticipant> participants = null;
 
     private Endpoint endPoint = null;
     private Facilitator facilitator = null;
@@ -34,7 +38,7 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         this.virtualMeeting = vm;
         consoleId = PasswordUtil.generateFacilitatorConsoleId();
         this.facilitator = facilitator;
-
+        this.participants = new HashMap<>();
     }
 
     //instalize should be called after facilitator console is added to array in virtual meeting
@@ -96,6 +100,25 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         virtualMeeting.setActiveScreenFacilitatorId(consoleId);
         virtualMeeting.setActiveScreenPresenterId(presenterId);
         return true;
+    }
+
+    @Override
+    public Collection<VMParticipant> getParticipants() {
+        return participants.values();
+    }
+
+    @Override
+    public VMParticipant getParticipant(String participantId) {
+        return participants.get(participantId);
+    }
+
+    @Override
+    public void setParticipants(Collection<VMParticipant> participants) {
+        this.participants.clear();
+        for(VMParticipant participant: participants)
+        {
+            this.participants.put(participant.getPresenterId(),participant);
+        }
     }
 
     Facilitator getFacilitator()
