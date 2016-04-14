@@ -1,5 +1,5 @@
 /**
- * ConnectionResult.java
+ * ConnectionRequestState.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
@@ -7,7 +7,7 @@
 
 package eduze.vms.presenter.logic.mpi.facilitator;
 
-public class ConnectionResult  implements java.io.Serializable {
+public class ConnectionRequestState  implements java.io.Serializable {
     private boolean successful;
 
     private boolean pending;
@@ -18,10 +18,10 @@ public class ConnectionResult  implements java.io.Serializable {
 
     private java.lang.String presenterName;
 
-    public ConnectionResult() {
+    public ConnectionRequestState() {
     }
 
-    public ConnectionResult(
+    public ConnectionRequestState(
            boolean successful,
            boolean pending,
            java.lang.String presenterConsoleId,
@@ -36,7 +36,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Gets the successful value for this ConnectionResult.
+     * Gets the successful value for this ConnectionRequestState.
      * 
      * @return successful
      */
@@ -46,7 +46,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Sets the successful value for this ConnectionResult.
+     * Sets the successful value for this ConnectionRequestState.
      * 
      * @param successful
      */
@@ -56,7 +56,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Gets the pending value for this ConnectionResult.
+     * Gets the pending value for this ConnectionRequestState.
      * 
      * @return pending
      */
@@ -66,7 +66,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Sets the pending value for this ConnectionResult.
+     * Sets the pending value for this ConnectionRequestState.
      * 
      * @param pending
      */
@@ -76,7 +76,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Gets the presenterConsoleId value for this ConnectionResult.
+     * Gets the presenterConsoleId value for this ConnectionRequestState.
      * 
      * @return presenterConsoleId
      */
@@ -86,7 +86,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Sets the presenterConsoleId value for this ConnectionResult.
+     * Sets the presenterConsoleId value for this ConnectionRequestState.
      * 
      * @param presenterConsoleId
      */
@@ -96,7 +96,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Gets the connectionRequestId value for this ConnectionResult.
+     * Gets the connectionRequestId value for this ConnectionRequestState.
      * 
      * @return connectionRequestId
      */
@@ -106,7 +106,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Sets the connectionRequestId value for this ConnectionResult.
+     * Sets the connectionRequestId value for this ConnectionRequestState.
      * 
      * @param connectionRequestId
      */
@@ -116,7 +116,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Gets the presenterName value for this ConnectionResult.
+     * Gets the presenterName value for this ConnectionRequestState.
      * 
      * @return presenterName
      */
@@ -126,7 +126,7 @@ public class ConnectionResult  implements java.io.Serializable {
 
 
     /**
-     * Sets the presenterName value for this ConnectionResult.
+     * Sets the presenterName value for this ConnectionRequestState.
      * 
      * @param presenterName
      */
@@ -136,8 +136,8 @@ public class ConnectionResult  implements java.io.Serializable {
 
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof ConnectionResult)) return false;
-        ConnectionResult other = (ConnectionResult) obj;
+        if (!(obj instanceof ConnectionRequestState)) return false;
+        ConnectionRequestState other = (ConnectionRequestState) obj;
         if (obj == null) return false;
         if (this == obj) return true;
         if (__equalsCalc != null) {
@@ -185,10 +185,10 @@ public class ConnectionResult  implements java.io.Serializable {
 
     // Type metadata
     private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(ConnectionResult.class, true);
+        new org.apache.axis.description.TypeDesc(ConnectionRequestState.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionResult"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionRequestState"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("successful");
         elemField.setXmlName(new javax.xml.namespace.QName("", "successful"));

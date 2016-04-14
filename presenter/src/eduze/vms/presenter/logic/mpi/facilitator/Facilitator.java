@@ -8,7 +8,7 @@
 package eduze.vms.presenter.logic.mpi.facilitator;
 
 public interface Facilitator extends java.rmi.Remote {
-    public ConnectionResult checkConnectionRequestState(java.lang.String connectionRequestId) throws java.rmi.RemoteException;
-    public java.lang.String requestConnection(java.lang.String presenterName, java.lang.String passKey) throws java.rmi.RemoteException, InvalidFacilitatorPasskeyException;
+    public eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState checkConnectionRequestState(java.lang.String connectionRequestId) throws java.rmi.RemoteException;
+    public java.lang.String requestConnection(java.lang.String presenterName, java.lang.String passKey) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException;
     public java.lang.String getFacilitatorName() throws java.rmi.RemoteException;
 }

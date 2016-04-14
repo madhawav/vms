@@ -7,7 +7,7 @@
 
 package eduze.vms.presenter.logic.mpi.facilitator;
 
-public class FacilitatorImplServiceLocator extends org.apache.axis.client.Service implements FacilitatorImplService {
+public class FacilitatorImplServiceLocator extends org.apache.axis.client.Service implements eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplService {
 
     public FacilitatorImplServiceLocator() {
     }
@@ -39,7 +39,7 @@ public class FacilitatorImplServiceLocator extends org.apache.axis.client.Servic
         FacilitatorImplPortWSDDServiceName = name;
     }
 
-    public Facilitator getFacilitatorImplPort() throws javax.xml.rpc.ServiceException {
+    public eduze.vms.presenter.logic.mpi.facilitator.Facilitator getFacilitatorImplPort() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(FacilitatorImplPort_address);
@@ -50,9 +50,9 @@ public class FacilitatorImplServiceLocator extends org.apache.axis.client.Servic
         return getFacilitatorImplPort(endpoint);
     }
 
-    public Facilitator getFacilitatorImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public eduze.vms.presenter.logic.mpi.facilitator.Facilitator getFacilitatorImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            FacilitatorImplPortBindingStub _stub = new FacilitatorImplPortBindingStub(portAddress, this);
+            eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplPortBindingStub _stub = new eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplPortBindingStub(portAddress, this);
             _stub.setPortName(getFacilitatorImplPortWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class FacilitatorImplServiceLocator extends org.apache.axis.client.Servic
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (Facilitator.class.isAssignableFrom(serviceEndpointInterface)) {
-                FacilitatorImplPortBindingStub _stub = new FacilitatorImplPortBindingStub(new java.net.URL(FacilitatorImplPort_address), this);
+            if (eduze.vms.presenter.logic.mpi.facilitator.Facilitator.class.isAssignableFrom(serviceEndpointInterface)) {
+                eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplPortBindingStub _stub = new eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplPortBindingStub(new java.net.URL(FacilitatorImplPort_address), this);
                 _stub.setPortName(getFacilitatorImplPortWSDDServiceName());
                 return _stub;
             }

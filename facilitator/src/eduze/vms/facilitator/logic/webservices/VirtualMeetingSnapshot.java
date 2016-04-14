@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
  * Created by Madhawa on 13/04/2016.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="ConnectionResult")
+@XmlType(name="VirtualMeetingSnapshot")
 public class VirtualMeetingSnapshot {
     @XmlElement(name="VMId")
     protected String vmId = null;

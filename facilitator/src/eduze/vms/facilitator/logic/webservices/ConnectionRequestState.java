@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
  * Created by Madhawa on 13/04/2016.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="ConnectionResult")
+@XmlType(name="ConnectionRequestState")
 public class ConnectionRequestState {
     @XmlElement(name="successful")
     protected boolean isSuccessful = false;

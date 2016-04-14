@@ -7,7 +7,7 @@
 
 package eduze.vms.presenter.logic.mpi.facilitator;
 
-public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub implements Facilitator {
+public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub implements eduze.vms.presenter.logic.mpi.facilitator.Facilitator {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();
@@ -28,8 +28,8 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "ConnectionRequestId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionResult"));
-        oper.setReturnClass(ConnectionResult.class);
+        oper.setReturnType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionRequestState"));
+        oper.setReturnClass(eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState.class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
@@ -50,7 +50,7 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         oper.addFault(new org.apache.axis.description.FaultDesc(
                       new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "InvalidFacilitatorPasskeyException"),
-                      "eduze.vms.presenter.logic.mpi.InvalidFacilitatorPasskeyException",
+                      "eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException",
                       new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "InvalidFacilitatorPasskeyException"), 
                       true
                      ));
@@ -96,16 +96,16 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
             java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
             java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
             java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
-            qName = new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionResult");
+            qName = new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ConnectionRequestState");
             cachedSerQNames.add(qName);
-            cls = ConnectionResult.class;
+            cls = eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
 
             qName = new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "InvalidFacilitatorPasskeyException");
             cachedSerQNames.add(qName);
-            cls = InvalidFacilitatorPasskeyException.class;
+            cls = eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -176,7 +176,7 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
         }
     }
 
-    public ConnectionResult checkConnectionRequestState(java.lang.String connectionRequestId) throws java.rmi.RemoteException {
+    public eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState checkConnectionRequestState(java.lang.String connectionRequestId) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -200,9 +200,9 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
         else {
             extractAttachments(_call);
             try {
-                return (ConnectionResult) _resp;
+                return (eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState) _resp;
             } catch (java.lang.Exception _exception) {
-                return (ConnectionResult) org.apache.axis.utils.JavaUtils.convert(_resp, ConnectionResult.class);
+                return (eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState) org.apache.axis.utils.JavaUtils.convert(_resp, eduze.vms.presenter.logic.mpi.facilitator.ConnectionRequestState.class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
@@ -210,7 +210,7 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
 }
     }
 
-    public java.lang.String requestConnection(java.lang.String presenterName, java.lang.String passKey) throws java.rmi.RemoteException, InvalidFacilitatorPasskeyException {
+    public java.lang.String requestConnection(java.lang.String presenterName, java.lang.String passKey) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -244,8 +244,8 @@ public class FacilitatorImplPortBindingStub extends org.apache.axis.client.Stub 
         if (axisFaultException.detail instanceof java.rmi.RemoteException) {
               throw (java.rmi.RemoteException) axisFaultException.detail;
          }
-        if (axisFaultException.detail instanceof InvalidFacilitatorPasskeyException) {
-              throw (InvalidFacilitatorPasskeyException) axisFaultException.detail;
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException) {
+              throw (eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException) axisFaultException.detail;
          }
    }
   throw axisFaultException;

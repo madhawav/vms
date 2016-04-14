@@ -10,7 +10,7 @@ package eduze.vms.presenter.logic.mpi.facilitator;
 public interface FacilitatorImplService extends javax.xml.rpc.Service {
     public java.lang.String getFacilitatorImplPortAddress();
 
-    public Facilitator getFacilitatorImplPort() throws javax.xml.rpc.ServiceException;
+    public eduze.vms.presenter.logic.mpi.facilitator.Facilitator getFacilitatorImplPort() throws javax.xml.rpc.ServiceException;
 
-    public Facilitator getFacilitatorImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public eduze.vms.presenter.logic.mpi.facilitator.Facilitator getFacilitatorImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 }
