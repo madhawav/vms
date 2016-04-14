@@ -28,4 +28,13 @@ public class URLGenerator {
     {
         return facilitatorURL + "/presenter/" + consoleId;
     }
+
+    public static String generateScreenShareConsoleAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId);
+    }
+    public static String generateScreenShareConsoleBufferAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId) + "/buffer";
+    }
 }

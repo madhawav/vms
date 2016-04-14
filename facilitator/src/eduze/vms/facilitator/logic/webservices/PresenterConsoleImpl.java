@@ -60,7 +60,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
     }
 
     //TODO: Improve logic here
-    private boolean isConnected()
+    public boolean isConnected()
     {
         return connectionAcknowledged;
     }

@@ -107,21 +107,34 @@ public class FacilitatorController {
     public Presenter getPresenter(String consoleId)
     {
         PresenterConsoleImpl console =  getFacilitatorService().getPresenterConsole(consoleId);
-        return new Presenter(this,console);
+        if(console.isConnectionAcknowledged())
+            return new Presenter(this,console);
+        else return null;
     }
 
     public int getPresenterCount()
     {
-        return getFacilitatorService().getPresenterConsoles().size();
+        int count = 0;
+        for(PresenterConsoleImpl console : getFacilitatorService().getPresenterConsoles())
+        {
+            if(console.isConnectionAcknowledged())
+                count++;
+
+        }
+        return count;
+
     }
 
     public Presenter[] getPresenters()
     {
         Presenter[] presenters = new Presenter[getPresenterCount()];
-        PresenterConsoleImpl[] presenterConsoles = new PresenterConsoleImpl[presenters.length];
+        PresenterConsoleImpl[] presenterConsoles = new PresenterConsoleImpl[getFacilitatorService().getPresenterConsoles().size()];
+
         getFacilitatorService().getPresenterConsoles().toArray(presenterConsoles);
-        for(int i = 0; i < presenters.length; i++){
-            presenters[i] = new Presenter(this,presenterConsoles[i]);
+
+        int writeIndex = 0;
+        for(int i = 0; i < presenterConsoles.length; i++){
+            presenters[writeIndex++] = new Presenter(this,presenterConsoles[i]);
         }
         return presenters;
     }
@@ -264,8 +277,9 @@ public class FacilitatorController {
         controlLoop.setControlLoopListener(new ControlLoopListener() {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
-                notifyControlLoopUpdateReceived(vm);
                 vmStatus = vm;
+                notifyControlLoopUpdateReceived(vm);
+
             }
         });
         controlLoop.start();

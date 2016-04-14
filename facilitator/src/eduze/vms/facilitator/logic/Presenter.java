@@ -37,4 +37,9 @@ public class Presenter {
     public void setScreenActive(boolean includeAudio) throws ServerConnectionException {
         this.facilitatorController.setScreenAccessPresenter(getPresenterConsoleId(),includeAudio);
     }
+
+    public boolean isConnected()
+    {
+        return presenterConsole.isConnected();
+    }
 }
