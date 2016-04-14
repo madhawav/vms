@@ -16,6 +16,7 @@ import javax.swing.*;
 import javax.xml.rpc.ServiceException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -224,6 +225,17 @@ public class ConnectorPanel {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
                 vmUpdateReceived(vm);
+            }
+        });
+        facilitatorController.addCaptureReceivedListener(new CaptureReceivedListener() {
+            @Override
+            public void onScreenCaptureReceived(byte[] rawData, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId) {
+                System.out.println("Screen Capture Received " + String.valueOf(rawData) + " bytes");
+            }
+
+            @Override
+            public void onException(Exception e) {
+
             }
         });
         updatePairedList();

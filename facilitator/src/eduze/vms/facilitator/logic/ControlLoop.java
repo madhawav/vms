@@ -1,15 +1,24 @@
 package eduze.vms.facilitator.logic;
 
 import eduze.livestream.Multiplexer;
+import eduze.livestream.ScreenReceiver;
+import eduze.livestream.exchange.client.FrameBuffer;
+import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 
 import eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
+import javafx.stage.Screen;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,18 +30,29 @@ import java.rmi.RemoteException;
 public class ControlLoop extends Thread {
     private volatile boolean keepRunning = false;
     private volatile int sleepDelay = 1000;
-    private Multiplexer switcher = null;
-    private String switcherInputURL = null;
+    private volatile int screenShareReceiveDelay = 1000;
+    private Multiplexer screenSwitcher = null;
+
+    private String screenSwitcherInputURL = null;
     private FacilitatorImpl facilitator = null;
 
+    private String facilitatorConsoleId  =  null;
     private FacilitatorConsole facilitatorConsole = null;
-    private eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole outputConsole = null;
+    private eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole outputScreenShareConsole = null;
     private String outScreenShareConsoleId = null;
+
+    private eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole inScreenShareConsole = null;
+    private String inScreenShareConsoleId = null;
+    private FrameBuffer inScreenShareBuffer = null;
+    private ScreenReceiver screenReceiver = null;
+
     private String serverURL = null;
 
     private String facilitatorURL = null;
     private ControlLoopListener controlLoopListener = null;
+    private VirtualMeetingSnapshot lastKnownVMSnapshot;
 
+    private CaptureReceivedListener captureReceivedListener = null;
 
     public ControlLoop(FacilitatorImpl facilitator, String serverUrl, int facilitatorPort) throws MalformedURLException, ServerConnectionException {
         this.facilitatorURL = UrlGenerator.generateLocalURL(facilitatorPort);
@@ -40,16 +60,74 @@ public class ControlLoop extends Thread {
         this.facilitator = facilitator;
         this.facilitatorConsole = facilitator.getFacilitatorConsole();
         try {
+            this.facilitatorConsoleId = facilitatorConsole.getConsoleId();
             outScreenShareConsoleId = facilitatorConsole.getOutScreenShareConsoleId();
-            switcher = new Multiplexer(new URL(UrlGenerator.generateScreenShareConsoleBufferAccessUrl(serverUrl,outScreenShareConsoleId)));
+            screenSwitcher = new Multiplexer(new URL(UrlGenerator.generateScreenShareConsoleBufferAccessUrl(serverUrl,outScreenShareConsoleId)));
             eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator screenShareConsoleImplServiceLocator = new ScreenShareConsoleImplServiceLocator();
-            outputConsole = screenShareConsoleImplServiceLocator.getScreenShareConsoleImplPort(new URL(UrlGenerator.generateScreenShareConsoleAccessUrl(serverUrl,outScreenShareConsoleId)));
+            outputScreenShareConsole = screenShareConsoleImplServiceLocator.getScreenShareConsoleImplPort(new URL(UrlGenerator.generateScreenShareConsoleAccessUrl(serverUrl,outScreenShareConsoleId)));
+
+            inScreenShareConsoleId = facilitatorConsole.getInScreenShareConsoleId();
+            inScreenShareConsole = screenShareConsoleImplServiceLocator.getScreenShareConsoleImplPort(new URL(UrlGenerator.generateScreenShareConsoleAccessUrl(serverUrl,inScreenShareConsoleId)));
+
+            FrameBufferImplServiceLocator frameBufferImplServiceLocator = new FrameBufferImplServiceLocator();
+            inScreenShareBuffer = frameBufferImplServiceLocator.getFrameBufferImplPort(new URL(UrlGenerator.generateScreenShareConsoleBufferAccessUrl(serverUrl,inScreenShareConsoleId)));
+
+            screenReceiver = new ScreenReceiver(inScreenShareBuffer,screenShareReceiveDelay);
+            screenReceiver.addScreenReceivedListener(new ScreenReceiver.ScreenReceivedListener() {
+                @Override
+                public void ScreenReceived(byte[] bytes, BufferedImage bufferedImage) {
+                    screenReceiverDataReceived(bytes, bufferedImage);
+                }
+            });
+
+            screenSwitcher.addDataReceivedListener(new Multiplexer.DataReceivedListener() {
+                @Override
+                public void DataReceived(byte[] bytes) {
+                    screenSwitcherDataReceived(bytes);
+                }
+            });
         } catch (RemoteException e) {
             e.printStackTrace();
             throw new ServerConnectionException(e);
         } catch (ServiceException e) {
             e.printStackTrace();
             throw new ServerConnectionException(e);
+        }
+    }
+
+    private void screenReceiverDataReceived(byte[] bytes, BufferedImage bufferedImage) {
+
+        VirtualMeetingSnapshot vm = getLastKnownVMSnapshot();
+        if(!facilitatorConsoleId.equals(vm.getActiveScreenFacilitatorId()))
+        {
+            //dispatch to ui
+            CaptureReceivedListener listener = getCaptureReceivedListener();
+            if(listener != null)
+            {
+                listener.onScreenCaptureReceived(bytes,bufferedImage,vm.getActiveScreenFacilitatorId(),vm.getActiveScreenPresenterId());
+            }
+        }
+
+    }
+
+    private void screenSwitcherDataReceived(byte[] bytes) {
+        VirtualMeetingSnapshot vm = getLastKnownVMSnapshot();
+        if(facilitatorConsoleId.equals(vm.getActiveScreenFacilitatorId()))
+        {
+            CaptureReceivedListener listener = getCaptureReceivedListener();
+            if(listener != null)
+            {
+                try {
+                    BufferedImage image = Util.generateBufferedImage(bytes);
+                    listener.onScreenCaptureReceived(bytes,image,vm.getActiveScreenFacilitatorId(),vm.getActiveScreenPresenterId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    listener.onException(e);
+                }
+            }
+
+
+            //dispatch to ui
         }
     }
 
@@ -85,50 +163,47 @@ public class ControlLoop extends Thread {
                         try {
                             VirtualMeetingSnapshot vm = facilitator.getVirtualMeeting().getSnapshot();
                             PresenterConsoleImpl selectedPresenterConsole = null;
-                            String facilitatorCode = facilitatorConsole.getConsoleId();
-                            if(facilitatorCode.equals(vm.getActiveScreenFacilitatorId()))
-                            {
-                                for(PresenterConsoleImpl presenterConsole : facilitator.getPresenterConsoles())
-                                {
-                                    if(presenterConsole.getConsoleId().equals(vm.getActiveScreenPresenterId()))
-                                    {
+                            String facilitatorCode = getFacilitatorConsoleId();
+                            if (facilitatorCode.equals(vm.getActiveScreenFacilitatorId())) {
+                                for (PresenterConsoleImpl presenterConsole : facilitator.getPresenterConsoles()) {
+                                    if (presenterConsole.getConsoleId().equals(vm.getActiveScreenPresenterId())) {
                                         selectedPresenterConsole = presenterConsole;
                                         presenterConsole.getScreenShareConsole().setEnabled(true);
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         presenterConsole.getScreenShareConsole().setEnabled(false);
                                     }
                                 }
                             }
 
-                            if(selectedPresenterConsole != null)
-                            {
-                                String targetURL = UrlGenerator.generateScreenShareConsoleBufferAccessUrl(facilitatorURL,selectedPresenterConsole.getOutScreenShareConsoleId());
-                                if(!targetURL.equals(switcherInputURL))
-                                {
-                                    switcherInputURL = targetURL;
-                                    switcher.setInputURL(new URL(switcherInputURL));
+                            if (selectedPresenterConsole != null) {
+                                String targetURL = UrlGenerator.generateScreenShareConsoleBufferAccessUrl(facilitatorURL, selectedPresenterConsole.getOutScreenShareConsoleId());
+                                if (!targetURL.equals(screenSwitcherInputURL)) {
+                                    screenSwitcherInputURL = targetURL;
+                                    screenSwitcher.setInputURL(new URL(screenSwitcherInputURL));
                                 }
-                            }
-                            else
-                            {
-                                if(switcherInputURL != null)
-                                {
-                                    switcherInputURL = null;
-                                    switcher.setInputURL(null);
+                            } else {
+                                if (screenSwitcherInputURL != null) {
+                                    screenSwitcherInputURL = null;
+                                    screenSwitcher.setInputURL(null);
                                 }
 
                             }
 
                             //TODO: put update interval logic here
-                            if(outputConsole.isEnabled() && !switcher.isRunning())
-                                switcher.Start();
-                            else if(!outputConsole.isEnabled() && switcher.isRunning())
-                                switcher.Stop();
+                            if (outputScreenShareConsole.isEnabled() && !screenSwitcher.isRunning())
+                                screenSwitcher.Start();
+                            else if (!outputScreenShareConsole.isEnabled() && screenSwitcher.isRunning())
+                                screenSwitcher.Stop();
 
-                            if(controlLoopListener != null)
-                            {
+                            boolean inScreenShareEnabled = inScreenShareConsole.isEnabled();
+                            if (inScreenShareEnabled && !screenReceiver.isReceiving()) {
+                                screenReceiver.startReceiving();
+                            } else if (!inScreenShareEnabled && screenReceiver.isReceiving()) {
+                                screenReceiver.stopReceiving();
+                            }
+
+                            setLastKnownVMSnapshot(vm);
+                            if (controlLoopListener != null) {
                                 controlLoopListener.updateReceived(vm);
                             }
 
@@ -165,5 +240,35 @@ public class ControlLoop extends Thread {
 
     public synchronized void setControlLoopListener(ControlLoopListener controlLoopListener) {
         this.controlLoopListener = controlLoopListener;
+    }
+
+    public synchronized int getScreenShareReceiveDelay() {
+        return screenShareReceiveDelay;
+    }
+
+    public synchronized void setScreenShareReceiveDelay(int screenShareReceiveDelay) {
+        this.screenShareReceiveDelay = screenShareReceiveDelay;
+        //TODO: screenReceiver.setInterval(value)
+    }
+
+    public synchronized void setLastKnownVMSnapshot(VirtualMeetingSnapshot lastKnownVMSnapshot) {
+        this.lastKnownVMSnapshot = lastKnownVMSnapshot;
+    }
+
+    public synchronized VirtualMeetingSnapshot getLastKnownVMSnapshot() {
+        return lastKnownVMSnapshot;
+    }
+
+    private synchronized String getFacilitatorConsoleId() {
+        return facilitatorConsoleId;
+    }
+
+
+    public synchronized CaptureReceivedListener getCaptureReceivedListener() {
+        return captureReceivedListener;
+    }
+
+    public synchronized void setCaptureReceivedListener(CaptureReceivedListener captureReceivedListener) {
+        this.captureReceivedListener = captureReceivedListener;
     }
 }

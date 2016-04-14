@@ -7,6 +7,7 @@ import eduze.vms.facilitator.logic.webservices.PresenterConsole;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 
 import javax.xml.rpc.ServiceException;
+import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class FacilitatorController {
     private ArrayList<PresenterModifiedListener> presenterModifiedListeners = new ArrayList<>();
 
     private ArrayList<ControlLoopListener> controlLoopListeners = new ArrayList<>();
+
+    private ArrayList<CaptureReceivedListener> captureReceivedListeners = new ArrayList<>();
 
     //Handles pairing and connection with server
     private ServerManager serverManager = null;
@@ -253,6 +256,40 @@ public class FacilitatorController {
     }
 
     /**
+     * Add a new listener to listen to capture frames received which are to be sent to user
+     * @param listener
+     */
+    public void addCaptureReceivedListener(CaptureReceivedListener listener)
+    {
+       captureReceivedListeners.add(listener);
+    }
+
+    /**
+     * Remove a presenterModifiedListener
+     * @param listener
+     */
+    public void removeCaptureReceivedListener(CaptureReceivedListener listener)
+    {
+        captureReceivedListeners.remove(listener);
+    }
+
+    private void notifyCaptureException(Exception e)
+    {
+        for(CaptureReceivedListener listener : captureReceivedListeners)
+        {
+            listener.onException(e);
+        }
+    }
+
+    private void notifyScreenShareCaptureReceived(byte[] data, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId)
+    {
+        for(CaptureReceivedListener listener : captureReceivedListeners)
+        {
+            listener.onScreenCaptureReceived(data,image,facilitatorConsoleId,presenterConsoleId);
+        }
+    }
+
+    /**
      *
      * @return True if WebServices for Presenters have started
      */
@@ -280,6 +317,18 @@ public class FacilitatorController {
                 vmStatus = vm;
                 notifyControlLoopUpdateReceived(vm);
 
+            }
+        });
+
+        controlLoop.setCaptureReceivedListener(new CaptureReceivedListener() {
+            @Override
+            public void onScreenCaptureReceived(byte[] rawData, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId) {
+                notifyScreenShareCaptureReceived(rawData,image,facilitatorConsoleId,presenterConsoleId);
+            }
+
+            @Override
+            public void onException(Exception e) {
+                notifyCaptureException(e);
             }
         });
         controlLoop.start();
