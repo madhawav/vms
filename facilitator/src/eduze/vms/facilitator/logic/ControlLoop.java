@@ -164,16 +164,17 @@ public class ControlLoop extends Thread {
                             VirtualMeetingSnapshot vm = facilitator.getVirtualMeeting().getSnapshot();
                             PresenterConsoleImpl selectedPresenterConsole = null;
                             String facilitatorCode = getFacilitatorConsoleId();
-                            if (facilitatorCode.equals(vm.getActiveScreenFacilitatorId())) {
+
                                 for (PresenterConsoleImpl presenterConsole : facilitator.getPresenterConsoles()) {
-                                    if (presenterConsole.getConsoleId().equals(vm.getActiveScreenPresenterId())) {
+                                    if (facilitatorCode.equals(vm.getActiveScreenFacilitatorId()) && presenterConsole.getConsoleId().equals(vm.getActiveScreenPresenterId())) {
                                         selectedPresenterConsole = presenterConsole;
                                         presenterConsole.getScreenShareConsole().setEnabled(true);
                                     } else {
                                         presenterConsole.getScreenShareConsole().setEnabled(false);
                                     }
                                 }
-                            }
+
+
 
                             if (selectedPresenterConsole != null) {
                                 String targetURL = UrlGenerator.generateScreenShareConsoleBufferAccessUrl(facilitatorURL, selectedPresenterConsole.getOutScreenShareConsoleId());
