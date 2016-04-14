@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="livestream">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../eduze/out/artifacts/livestream_jar/livestream.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
