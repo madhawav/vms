@@ -7,6 +7,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImpl
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -43,6 +44,8 @@ public class FacilitatorImpl implements Facilitator  {
     private FacilitatorConsole facilitatorConsole = null;
     private VirtualMeeting virtualMeeting = null;
 
+    private ShareRequestListener shareRequestListener = null;
+
     public void establishServerConnection(String serverURL, String facilitatorConsoleId, String virtualMeetingId) throws MalformedURLException, ServerConnectionException {
         VirtualMeetingImplServiceLocator vmLocator = new VirtualMeetingImplServiceLocator();
         FacilitatorConsoleImplServiceLocator facilitatorLocator = new FacilitatorConsoleImplServiceLocator();
@@ -66,6 +69,8 @@ public class FacilitatorImpl implements Facilitator  {
     }
 
     void updateVMParticipants() throws ServerConnectionException {
+        if(facilitatorConsole == null)
+            return;
         ArrayList<VMParticipant> participants = new ArrayList<>();
 
         for(PresenterConsoleImpl presenterConsole : getPresenterConsoles()) {
@@ -212,6 +217,30 @@ public class FacilitatorImpl implements Facilitator  {
 
     }
 
+    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
+        if(getFacilitatorConsole() == null)
+            throw new ServerNotReadyException("Not connected to a server");
+        try {
+            if(presenterConsoleId == null || presenterConsoleId.equals(""))
+            {
+                //indicator to stop sharing
+                getFacilitatorConsole().requestScreenAccess(null,includeAudio);
+            }
+            else if(getPresenterConsole(presenterConsoleId) != null)
+            {
+
+                getFacilitatorConsole().requestScreenAccess(presenterConsoleId,includeAudio);
+            }
+            else
+            {
+                throw new InvalidIdException("Invalid Presenter Id");
+            }
+
+        } catch (RemoteException e) {
+            throw new ServerConnectionException(e);
+        }
+    }
+
 
     public PresenterModifiedListener getPresenterModifiedListener() {
         return presenterModifiedListener;
@@ -238,5 +267,11 @@ public class FacilitatorImpl implements Facilitator  {
     }
 
 
+    public ShareRequestListener getShareRequestListener() {
+        return shareRequestListener;
+    }
 
+    public void setShareRequestListener(ShareRequestListener shareRequestListener) {
+        this.shareRequestListener = shareRequestListener;
+    }
 }

@@ -51,7 +51,14 @@ public interface PresenterConsole {
     @WebMethod
     public VirtualMeetingSnapshot getVMSnapshot() throws ServerConnectionException;
 
+    /**
+     * Retrieve ID for ScreenShareConsole
+     * @return
+     */
     @WebMethod
     public String getOutScreenShareConsoleId();
+
+    @WebMethod
+    public boolean requestScreenAccess(boolean includeAudio);
 
 }

@@ -23,6 +23,8 @@ public class PresenterPanel {
     private JPasswordField txtFacilitatorPasskey;
     private JTextField txtPresenterName;
     private JButton requestConnectionButton;
+    private JButton requestScreenShareButton;
+    private JCheckBox screenActiveCheckBox;
     private JFrame mainFrame;
 
     private PresenterController controller = null;
@@ -40,9 +42,23 @@ public class PresenterPanel {
                 onRequestConnectionClicked();
             }
         });
-
+        requestScreenShareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onScreenShareRequest();
+            }
+        });
 
     }
+
+    private void onScreenShareRequest() {
+        try {
+            controller.requestScreenShare(false);
+        } catch (FacilitatorConnectionException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void onRequestConnectionClicked() {
         FacilitatorConnector.Configuration configuration = new FacilitatorConnector.Configuration();
@@ -57,6 +73,14 @@ public class PresenterPanel {
                 public void onSuccess(FacilitatorConnector sender) {
                     try {
                         controller = sender.obtainController();
+
+                        controller.addStateChangeListener(new StateChangeListener() {
+                            @Override
+                            public void onScreenCaptureChanged(boolean newValue) {
+                                screenActiveCheckBox.setSelected(newValue);
+                            }
+                        });
+
                         JOptionPane.showMessageDialog(mainFrame,"Connection Successful");
                     } catch (FacilitatorConnectionNotReadyException e) {
                         e.printStackTrace();

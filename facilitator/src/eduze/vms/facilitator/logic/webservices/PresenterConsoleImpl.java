@@ -1,13 +1,11 @@
 package eduze.vms.facilitator.logic.webservices;
 
-import eduze.vms.facilitator.logic.ConnectionRequest;
-import eduze.vms.facilitator.logic.PasswordUtil;
-import eduze.vms.facilitator.logic.ServerConnectionException;
-import eduze.vms.facilitator.logic.UrlGenerator;
+import eduze.vms.facilitator.logic.*;
 import javafx.stage.Screen;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.rmi.RemoteException;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -116,6 +114,18 @@ public class PresenterConsoleImpl implements PresenterConsole {
         return screenShareConsole.getConsoleId();
     }
 
+    @Override
+    public boolean requestScreenAccess(boolean includeAudio) {
+        if(!includeAudio)
+        {
+            ScreenShareRequest shareRequest = new ScreenShareRequest(getConsoleId(),getFacilitator());
+            if(getFacilitator().getShareRequestListener() == null)
+                return false;
+            return getFacilitator().getShareRequestListener().onShareRequest(shareRequest);
+        }
+        return false;
+    }
+
     public ScreenShareConsoleImpl getScreenShareConsole()
     {
         return screenShareConsole;
@@ -128,4 +138,6 @@ public class PresenterConsoleImpl implements PresenterConsole {
     String getConnectionRequestId() {
         return connectionRequestId;
     }
+
+
 }

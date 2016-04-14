@@ -1,6 +1,7 @@
 package eduze.vms.facilitator.logic;
 
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
+import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 
@@ -34,7 +35,7 @@ public class Presenter {
         return false;
     }
 
-    public void setScreenActive(boolean includeAudio) throws ServerConnectionException, InvalidIdException {
+    public void setScreenActive(boolean includeAudio) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
         this.facilitatorController.setScreenAccessPresenter(getPresenterConsoleId(),includeAudio);
     }
 

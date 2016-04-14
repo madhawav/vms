@@ -102,6 +102,9 @@ public class ConnectorPanel {
             e.printStackTrace();
         } catch (InvalidIdException e) {
             JOptionPane.showMessageDialog(mainFrame,"Invalid Presenter Console Id");
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame,"Server not ready");
         }
     }
 
@@ -246,6 +249,45 @@ public class ConnectorPanel {
             @Override
             public void onException(Exception e) {
 
+            }
+        });
+
+        facilitatorController.setShareRequestListener(new ShareRequestListener() {
+            @Override
+            public boolean onShareRequest(final AbstractShareRequest shareRequest) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(shareRequest instanceof ScreenShareRequest)
+                        {
+                            if(JOptionPane.showConfirmDialog(mainFrame,shareRequest.getPresenterName() + " is requesting to share screen. Accept?","Request Screen",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                            {
+                                try {
+                                    shareRequest.honour();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                } catch (ServerConnectionException e) {
+                                    e.printStackTrace();
+                                } catch (InvalidIdException e) {
+                                    e.printStackTrace();
+                                } catch (ServerNotReadyException e) {
+                                    e.printStackTrace();
+                                    JOptionPane.showMessageDialog(mainFrame,"Server not connected yet");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            try {
+                                shareRequest.dismiss();
+                            } catch (RequestAlreadyProcessedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                });
+                return true;
             }
         });
         updatePairedList();

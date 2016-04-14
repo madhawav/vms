@@ -1,10 +1,9 @@
 package eduze.vms.facilitator.logic;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
+import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
-import eduze.vms.facilitator.logic.webservices.PresenterConsole;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 
 import javax.xml.rpc.ServiceException;
@@ -50,6 +49,8 @@ public class FacilitatorController {
     private ArrayList<ControlLoopListener> controlLoopListeners = new ArrayList<>();
 
     private ArrayList<CaptureReceivedListener> captureReceivedListeners = new ArrayList<>();
+
+    private ShareRequestListener shareRequestListener = null;
 
     //Handles pairing and connection with server
     private ServerManager serverManager = null;
@@ -99,6 +100,15 @@ public class FacilitatorController {
             @Override
             public void presenterNameChanged(String consoleId, String newName) {
                 notifyPresenterNameChanged(consoleId,newName);
+            }
+        });
+
+        facilitatorService.setShareRequestListener(new ShareRequestListener() {
+            @Override
+            public boolean onShareRequest(AbstractShareRequest shareRequest) {
+                if(shareRequestListener == null)
+                    return false;
+                return shareRequestListener.onShareRequest(shareRequest);
             }
         });
         facilitatorService.start();
@@ -289,6 +299,8 @@ public class FacilitatorController {
         presenterModifiedListeners.remove(listener);
     }
 
+
+
     /**
      * Add a new listener to listen to capture frames received which are to be sent to user
      * @param listener
@@ -378,20 +390,16 @@ public class FacilitatorController {
         return vmStatus;
     }
 
-    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException, InvalidIdException {
-        try {
-            if(getFacilitatorService().getPresenterConsole(presenterConsoleId) != null)
-            {
-                getFacilitatorService().getFacilitatorConsole().requestScreenAccess(presenterConsoleId,includeAudio);
-            }
-            else
-            {
-                throw new InvalidIdException("Invalid Presenter Id");
-            }
+    public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
+        getFacilitatorService().setScreenAccessPresenter(presenterConsoleId,includeAudio);
+    }
 
-        } catch (RemoteException e) {
-            throw new ServerConnectionException(e);
-        }
+    public ShareRequestListener getShareRequestListener() {
+        return shareRequestListener;
+    }
+
+    public void setShareRequestListener(ShareRequestListener shareRequestListener) {
+        this.shareRequestListener = shareRequestListener;
     }
 
     /**

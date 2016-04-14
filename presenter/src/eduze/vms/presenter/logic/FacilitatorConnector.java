@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by Madhawa on 14/04/2016.
@@ -24,6 +25,9 @@ public class FacilitatorConnector {
     private String presenterConsoleId = null;
 
     private PresenterController presenterController = null;
+
+
+
 
     private  FacilitatorConnector(Configuration configuration)
     {
@@ -245,6 +249,7 @@ public class FacilitatorConnector {
          * @return True if listener should continue.
          */
         public boolean onException(FacilitatorConnector sender, Exception e);
+
 
 
     }

@@ -28,6 +28,8 @@ public class ControlLoop extends Thread {
 
     private boolean running = false;
 
+    private StateChangeListener stateChangeListener = null;
+
     private String screenShareConsoleId = null;
     ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException {
         try {
@@ -77,14 +79,19 @@ public class ControlLoop extends Thread {
                         try {
                             if(screenShareConsole.isEnabled())
                             {
-                                if(!screenCapturer.isCapturing())
+                                if(!screenCapturer.isCapturing()) {
                                     screenCapturer.startCapture();
-
+                                    if(stateChangeListener != null)
+                                        stateChangeListener.onScreenCaptureChanged(true);
+                                }
                             }
                             else
                             {
-                                if(screenCapturer.isCapturing())
+                                if(screenCapturer.isCapturing()){
                                     screenCapturer.stopCapture();
+                                    if(stateChangeListener != null)
+                                        stateChangeListener.onScreenCaptureChanged(false);
+                                }
                             }
                         } catch (RemoteException e) {
                             e.printStackTrace();
@@ -132,5 +139,18 @@ public class ControlLoop extends Thread {
     public synchronized void setScreenCaptureInterval(int screenCaptureInterval) {
         this.screenCaptureInterval = screenCaptureInterval;
         this.screenCapturer.setCaptureInterval(screenCaptureInterval);
+    }
+
+    public synchronized boolean isScreenActive()
+    {
+        return screenCapturer.isCapturing();
+    }
+
+    public synchronized StateChangeListener getStateChangeListener() {
+        return stateChangeListener;
+    }
+
+    public synchronized void setStateChangeListener(StateChangeListener stateChangeListener) {
+        this.stateChangeListener = stateChangeListener;
     }
 }
