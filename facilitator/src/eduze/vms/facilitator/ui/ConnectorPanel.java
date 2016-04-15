@@ -42,6 +42,8 @@ public class ConnectorPanel {
     private JLabel lblPresenters;
     private JTextField txtActivePresenterConsoleId;
     private JButton btnSetActivePresenter;
+    private JButton btnSetActiveSpeechPresenter;
+    private JButton setActiveButton;
     private JButton btnStartListener;
     private JFrame mainFrame;
 
@@ -90,8 +92,45 @@ public class ConnectorPanel {
                 onSetActiveClicked();
             }
         });
+        setActiveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onSetAllActiveClicked();
+            }
+        });
+        btnSetActiveSpeechPresenter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onSetActiveSpeech();
+            }
+        });
 
+    }
 
+    private void onSetActiveSpeech() {
+        try {
+            facilitatorController.setAudioRelayAccessPresenter(txtActivePresenterConsoleId.getText());
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (InvalidIdException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Invalid Presenter Console Id");
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame,"Server not ready");
+        }
+    }
+
+    private void onSetAllActiveClicked() {
+        try {
+            facilitatorController.setScreenAccessPresenter(txtActivePresenterConsoleId.getText(),true);
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (InvalidIdException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Invalid Presenter Console Id");
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainFrame,"Server not ready");
+        }
     }
 
     private void onSetActiveClicked() {
@@ -314,6 +353,32 @@ public class ConnectorPanel {
                                 }
                             }
                         }
+                        else if(shareRequest instanceof ScreenAudioShareRequest)
+                        {
+                            if(JOptionPane.showConfirmDialog(mainFrame,shareRequest.getPresenterName() + " is requesting to share screen and audio. Accept?","Request Screen",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                            {
+                                try {
+                                    shareRequest.honour();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                } catch (ServerConnectionException e) {
+                                    e.printStackTrace();
+                                } catch (InvalidIdException e) {
+                                    e.printStackTrace();
+                                } catch (ServerNotReadyException e) {
+                                    e.printStackTrace();
+                                    JOptionPane.showMessageDialog(mainFrame,"Server not connected yet");
+                                }
+                            }
+                            else
+                            {
+                                try {
+                                    shareRequest.dismiss();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
 
 
                     }
@@ -338,7 +403,11 @@ public class ConnectorPanel {
             info+= "<" + p.getPresenterId() + ">";
             if(p.getPresenterId().equals(vm.getActiveScreenPresenterId()))
             {
-                info = info + "(Active)";
+                info = info + "(Screen Active)";
+            }
+            if(p.getPresenterId().equals(vm.getActiveSpeechPresenterId()))
+            {
+                info = info + "(Speech Active)";
             }
 
             info = info + ", ";

@@ -56,9 +56,5 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    public static void main(String[] args) {
-        AudioRelayConsoleImpl console = new AudioRelayConsoleImpl(9000,5);
-        console.start();
-    }
+    
 }

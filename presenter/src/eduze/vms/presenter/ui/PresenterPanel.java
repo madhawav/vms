@@ -27,6 +27,7 @@ public class PresenterPanel {
     private JCheckBox screenActiveCheckBox;
     private JCheckBox speechActiveCheckbox;
     private JButton requestSpeechShareButton;
+    private JButton btnAllShare;
     private JFrame mainFrame;
 
     private PresenterController controller = null;
@@ -56,6 +57,21 @@ public class PresenterPanel {
                 onSpeechShareRequest();
             }
         });
+
+        btnAllShare.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAllShareRequest();
+            }
+        });
+    }
+
+    private void onAllShareRequest() {
+        try {
+            controller.requestScreenShare(true);
+        } catch (FacilitatorConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onSpeechShareRequest() {
