@@ -22,7 +22,7 @@ public class FacilitatorConsoleImplServiceLocator extends org.apache.axis.client
     }
 
     // Use to get a proxy class for FacilitatorConsoleImplPort
-    private java.lang.String FacilitatorConsoleImplPort_address = "http://localhost:8000/facilitator/13";
+    private java.lang.String FacilitatorConsoleImplPort_address = "http://0.0.0.0:8000/facilitator/con_-1689986125";
 
     public java.lang.String getFacilitatorConsoleImplPortAddress() {
         return FacilitatorConsoleImplPort_address;

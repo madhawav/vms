@@ -2,7 +2,6 @@ package eduze.vms.facilitator.logic.webservices;
 
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
-import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplService;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
@@ -18,7 +17,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -225,6 +223,7 @@ public class FacilitatorImpl implements Facilitator  {
             {
                 //indicator to stop sharing
                 getFacilitatorConsole().requestScreenAccess(null,includeAudio);
+
             }
             else if(getPresenterConsole(presenterConsoleId) != null)
             {
@@ -240,6 +239,33 @@ public class FacilitatorImpl implements Facilitator  {
             throw new ServerConnectionException(e);
         }
     }
+
+
+    public void setAudioRelayAccessPresenter(String presenterConsoleId) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
+        if(getFacilitatorConsole() == null)
+            throw new ServerNotReadyException("Not connected to a server");
+        try {
+            if(presenterConsoleId == null || presenterConsoleId.equals(""))
+            {
+                //indicator to stop sharing
+                getFacilitatorConsole().requestAudioRelayAccess(null);
+
+            }
+            else if(getPresenterConsole(presenterConsoleId) != null)
+            {
+
+                getFacilitatorConsole().requestAudioRelayAccess(presenterConsoleId);
+            }
+            else
+            {
+                throw new InvalidIdException("Invalid Presenter Id");
+            }
+
+        } catch (RemoteException e) {
+            throw new ServerConnectionException(e);
+        }
+    }
+
 
 
     public PresenterModifiedListener getPresenterModifiedListener() {

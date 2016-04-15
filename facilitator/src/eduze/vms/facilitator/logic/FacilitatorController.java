@@ -9,7 +9,6 @@ import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 import javax.xml.rpc.ServiceException;
 import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -335,6 +334,13 @@ public class FacilitatorController {
         }
     }
 
+    private void notifyAudioDataReceived(byte[] bytes, String activeScreenFacilitatorId, String activeScreenPresenterId) {
+        for(CaptureReceivedListener listener : captureReceivedListeners)
+        {
+            listener.onAudioDataReceived(bytes,activeScreenFacilitatorId,activeScreenPresenterId);
+        }
+    }
+
     /**
      *
      * @return True if WebServices for Presenters have started
@@ -376,9 +382,16 @@ public class FacilitatorController {
             public void onException(Exception e) {
                 notifyCaptureException(e);
             }
+
+            @Override
+            public void onAudioDataReceived(byte[] bytes, String activeScreenFacilitatorId, String activeScreenPresenterId) {
+                notifyAudioDataReceived(bytes, activeScreenFacilitatorId, activeScreenPresenterId);
+            }
         });
         controlLoop.start();
     }
+
+
 
     void notifyPresenterNameChanged(String id, String name)
     {
@@ -392,6 +405,10 @@ public class FacilitatorController {
 
     public void setScreenAccessPresenter(String presenterConsoleId, boolean includeAudio) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
         getFacilitatorService().setScreenAccessPresenter(presenterConsoleId,includeAudio);
+    }
+
+    public void setAudioRelayAccessPresenter(String presenterConsoleId) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
+        getFacilitatorService().setAudioRelayAccessPresenter(presenterConsoleId);
     }
 
     public ShareRequestListener getShareRequestListener() {

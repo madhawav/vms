@@ -1,9 +1,11 @@
 package eduze.vms.facilitator.logic;
 
+import eduze.vms.foundation.logic.URLGenerator;
+
 /**
  * Created by Madhawa on 13/04/2016.
  */
-public class UrlGenerator {
+public class UrlGenerator extends URLGenerator {
     private UrlGenerator(){}
 
     public static String generateFacilitatorPublishUrl(int port)

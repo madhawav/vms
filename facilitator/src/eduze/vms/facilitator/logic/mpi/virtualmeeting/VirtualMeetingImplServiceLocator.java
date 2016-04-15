@@ -22,7 +22,7 @@ public class VirtualMeetingImplServiceLocator extends org.apache.axis.client.Ser
     }
 
     // Use to get a proxy class for VirtualMeetingImplPort
-    private java.lang.String VirtualMeetingImplPort_address = "http://0.0.0.0:8000/vm/vm_736160065";
+    private java.lang.String VirtualMeetingImplPort_address = "http://0.0.0.0:8000/vm/vm_-639785513";
 
     public java.lang.String getVirtualMeetingImplPortAddress() {
         return VirtualMeetingImplPort_address;

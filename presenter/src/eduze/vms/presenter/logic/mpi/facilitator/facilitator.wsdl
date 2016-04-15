@@ -4,6 +4,12 @@
 <xsd:import namespace="http://webservices.logic.facilitator.vms.eduze/" schemaLocation="http://0.0.0.0:7000/facilitator?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="getFacilitatorName">
+<part name="parameters" element="tns:getFacilitatorName"></part>
+</message>
+<message name="getFacilitatorNameResponse">
+<part name="parameters" element="tns:getFacilitatorNameResponse"></part>
+</message>
 <message name="checkConnectionRequestState">
 <part name="parameters" element="tns:checkConnectionRequestState"></part>
 </message>
@@ -19,13 +25,11 @@
 <message name="InvalidFacilitatorPasskeyException">
 <part name="fault" element="tns:InvalidFacilitatorPasskeyException"></part>
 </message>
-<message name="getFacilitatorName">
-<part name="parameters" element="tns:getFacilitatorName"></part>
-</message>
-<message name="getFacilitatorNameResponse">
-<part name="parameters" element="tns:getFacilitatorNameResponse"></part>
-</message>
 <portType name="Facilitator">
+<operation name="getFacilitatorName">
+<input wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/getFacilitatorNameRequest" message="tns:getFacilitatorName"></input>
+<output wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/getFacilitatorNameResponse" message="tns:getFacilitatorNameResponse"></output>
+</operation>
 <operation name="checkConnectionRequestState">
 <input wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/checkConnectionRequestStateRequest" message="tns:checkConnectionRequestState"></input>
 <output wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/checkConnectionRequestStateResponse" message="tns:checkConnectionRequestStateResponse"></output>
@@ -35,13 +39,18 @@
 <output wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/requestConnectionResponse" message="tns:requestConnectionResponse"></output>
 <fault message="tns:InvalidFacilitatorPasskeyException" name="InvalidFacilitatorPasskeyException" wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/requestConnection/Fault/InvalidFacilitatorPasskeyException"></fault>
 </operation>
-<operation name="getFacilitatorName">
-<input wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/getFacilitatorNameRequest" message="tns:getFacilitatorName"></input>
-<output wsam:Action="http://webservices.logic.facilitator.vms.eduze/Facilitator/getFacilitatorNameResponse" message="tns:getFacilitatorNameResponse"></output>
-</operation>
 </portType>
 <binding name="FacilitatorImplPortBinding" type="tns:Facilitator">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
+<operation name="getFacilitatorName">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
 <operation name="checkConnectionRequestState">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -62,15 +71,6 @@
 <fault name="InvalidFacilitatorPasskeyException">
 <soap:fault name="InvalidFacilitatorPasskeyException" use="literal"></soap:fault>
 </fault>
-</operation>
-<operation name="getFacilitatorName">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal"></soap:body>
-</input>
-<output>
-<soap:body use="literal"></soap:body>
-</output>
 </operation>
 </binding>
 <service name="FacilitatorImplService">

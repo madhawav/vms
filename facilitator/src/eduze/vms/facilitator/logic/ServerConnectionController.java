@@ -1,15 +1,9 @@
 package eduze.vms.facilitator.logic;
 
-import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
-import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
-import eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManager;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImplServiceLocator;
-import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
 import eduze.vms.facilitator.logic.mpi.server.Server;
-import eduze.vms.facilitator.logic.mpi.server.ServerImplPortBindingStub;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
-import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManager;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.VMSessionManagerImplServiceLocator;

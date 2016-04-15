@@ -1,8 +1,11 @@
 package eduze.vms.presenter.logic;
 
+import eduze.livestream.AudioCapturer;
 import eduze.livestream.ScreenCapturer;
 import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.livestream.exchange.server.FrameBuffer;
+import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
+import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsole;
 import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
@@ -21,8 +24,11 @@ public class ControlLoop extends Thread {
     private String facilitatorURL = null;
     private PresenterConsole presenterConsole = null;
     private ScreenShareConsole screenShareConsole = null;
+    private AudioRelayConsole audioRelayConsole = null;
     private eduze.livestream.exchange.client.FrameBuffer screenShareBuffer = null;
+    private eduze.livestream.exchange.client.FrameBuffer audioRelayBuffer = null;
     private ScreenCapturer screenCapturer = null;
+    private AudioCapturer audioCapturer = null;
     private volatile int updateInterval = 1000;
     private volatile int screenCaptureInterval = 1000;
 
@@ -31,20 +37,26 @@ public class ControlLoop extends Thread {
     private StateChangeListener stateChangeListener = null;
 
     private String screenShareConsoleId = null;
+    private String audioRelayConsoleId = null;
     ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException {
         try {
             this.facilitatorURL = facilitatorURL;
             this.presenterConsole = presenterConsole;
             this.screenShareConsoleId = presenterConsole.getOutScreenShareConsoleId();
+            this.audioRelayConsoleId = presenterConsole.getOutAudioRelayConsoleId();
 
             ScreenShareConsoleImplServiceLocator screenShareConsoleImplServiceLocator = new ScreenShareConsoleImplServiceLocator();
             screenShareConsole = screenShareConsoleImplServiceLocator.getScreenShareConsoleImplPort(new URL(URLGenerator.generateScreenShareConsoleAccessUrl(facilitatorURL,screenShareConsoleId)));
 
+            AudioRelayConsoleImplServiceLocator audioRelayConsoleImplServiceLocator = new AudioRelayConsoleImplServiceLocator();
+            audioRelayConsole = audioRelayConsoleImplServiceLocator.getAudioRelayConsoleImplPort(new URL(URLGenerator.generateAudioRelayConsoleAccessUrl(facilitatorURL,audioRelayConsoleId)));
+
             FrameBufferImplServiceLocator frameBufferImplServiceLocator = new FrameBufferImplServiceLocator();
             screenShareBuffer = frameBufferImplServiceLocator.getFrameBufferImplPort(new URL(URLGenerator.generateScreenShareConsoleBufferAccessUrl(facilitatorURL,screenShareConsoleId)));
+            audioRelayBuffer = frameBufferImplServiceLocator.getFrameBufferImplPort(new URL(URLGenerator.generateAudioRelayFrameBufferAccessUrl(getFacilitatorURL(),audioRelayConsoleId)));
 
             screenCapturer = new ScreenCapturer(screenShareBuffer,screenCaptureInterval);
-
+            audioCapturer = new AudioCapturer(audioRelayBuffer);
         } catch (RemoteException e) {
             e.printStackTrace();
             throw new FacilitatorConnectionException(e);
@@ -91,6 +103,23 @@ public class ControlLoop extends Thread {
                                     screenCapturer.stopCapture();
                                     if(stateChangeListener != null)
                                         stateChangeListener.onScreenCaptureChanged(false);
+                                }
+                            }
+
+                            if(audioRelayConsole.isEnabled())
+                            {
+                                if(!audioCapturer.isCapturing()) {
+                                    audioCapturer.startCapture();
+                                    if(stateChangeListener != null)
+                                        stateChangeListener.onAudioCaptureChanged(true);
+                                }
+                            }
+                            else
+                            {
+                                if(audioCapturer.isCapturing()){
+                                    audioCapturer.stopCapture();
+                                    if(stateChangeListener != null)
+                                        stateChangeListener.onAudioCaptureChanged(false);
                                 }
                             }
                         } catch (RemoteException e) {
@@ -141,9 +170,14 @@ public class ControlLoop extends Thread {
         this.screenCapturer.setCaptureInterval(screenCaptureInterval);
     }
 
-    public synchronized boolean isScreenActive()
+    public synchronized boolean isScreenShared()
     {
         return screenCapturer.isCapturing();
+    }
+
+    public synchronized boolean isAudioShared()
+    {
+        return audioCapturer.isCapturing();
     }
 
     public synchronized StateChangeListener getStateChangeListener() {

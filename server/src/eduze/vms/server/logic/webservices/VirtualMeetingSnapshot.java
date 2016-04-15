@@ -100,7 +100,7 @@ public class VirtualMeetingSnapshot {
             result.setActiveScreenFacilitatorId(vm.getActiveScreenFacilitatorId());
             result.setActiveScreenPresenterId(vm.getActiveScreenPresenterId());
             result.setActiveSpeechFacilitatorId(vm.getActiveSpeechFacilitatorId());
-            result.setActiveSpeechPresenterId(vm.getActiveSpeechFacilitatorId());
+            result.setActiveSpeechPresenterId(vm.getActiveSpeechPresenterId());
             result.setStatus(vm.getStatus());
             result.setVmId(vm.getVMId());
             result.setParticipants(vm.getParticipants());

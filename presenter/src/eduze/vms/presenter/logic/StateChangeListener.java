@@ -5,4 +5,6 @@ package eduze.vms.presenter.logic;
  */
 public interface StateChangeListener {
     public void onScreenCaptureChanged(boolean newValue);
+
+    public void onAudioCaptureChanged(boolean newValue);
 }

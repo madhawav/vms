@@ -48,7 +48,12 @@ public class PresenterController {
             this.controlLoop.setStateChangeListener(new StateChangeListener() {
                 @Override
                 public void onScreenCaptureChanged(boolean newValue) {
-                    notifyScreenActiveChanged(newValue);
+                    notifyScreenSharedChanged(newValue);
+                }
+
+                @Override
+                public void onAudioCaptureChanged(boolean newValue) {
+                    notifyAudioSharedChanged(newValue);
                 }
             });
             this.controlLoop.start();
@@ -81,9 +86,25 @@ public class PresenterController {
 
     }
 
-    public boolean isScreenActive()
+    public boolean requestAudioShare() throws FacilitatorConnectionException {
+        try{
+            return presenterConsole.requestAudioRelayAccess();
+        }
+        catch (RemoteException e)
+        {
+            throw new FacilitatorConnectionException(e);
+        }
+
+    }
+
+    public boolean isScreenShared()
     {
-        return controlLoop.isScreenActive();
+        return controlLoop.isScreenShared();
+    }
+
+    public boolean isAudioShared()
+    {
+        return controlLoop.isAudioShared();
     }
 
     public void addStateChangeListener(StateChangeListener listener)
@@ -96,11 +117,19 @@ public class PresenterController {
         stateChangeListeners.remove(listener);
     }
 
-    void notifyScreenActiveChanged(boolean newValue)
+    void notifyScreenSharedChanged(boolean newValue)
     {
-        for(StateChangeListener listner : stateChangeListeners)
+        for(StateChangeListener listener : stateChangeListeners)
         {
-            listner.onScreenCaptureChanged(newValue);
+            listener.onScreenCaptureChanged(newValue);
+        }
+    }
+
+    void notifyAudioSharedChanged(boolean newValue)
+    {
+        for(StateChangeListener listener : stateChangeListeners)
+        {
+            listener.onAudioCaptureChanged(newValue);
         }
     }
 }

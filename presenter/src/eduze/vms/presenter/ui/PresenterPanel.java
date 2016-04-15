@@ -25,6 +25,8 @@ public class PresenterPanel {
     private JButton requestConnectionButton;
     private JButton requestScreenShareButton;
     private JCheckBox screenActiveCheckBox;
+    private JCheckBox speechActiveCheckbox;
+    private JButton requestSpeechShareButton;
     private JFrame mainFrame;
 
     private PresenterController controller = null;
@@ -48,7 +50,20 @@ public class PresenterPanel {
                 onScreenShareRequest();
             }
         });
+        requestSpeechShareButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onSpeechShareRequest();
+            }
+        });
+    }
 
+    private void onSpeechShareRequest() {
+        try {
+            controller.requestAudioShare();
+        } catch (FacilitatorConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onScreenShareRequest() {
@@ -78,6 +93,11 @@ public class PresenterPanel {
                             @Override
                             public void onScreenCaptureChanged(boolean newValue) {
                                 screenActiveCheckBox.setSelected(newValue);
+                            }
+
+                            @Override
+                            public void onAudioCaptureChanged(boolean newValue) {
+                                speechActiveCheckbox.setSelected(newValue);
                             }
                         });
 

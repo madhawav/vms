@@ -1,6 +1,7 @@
 package eduze.vms.server.logic.webservices;
 
 import eduze.vms.PasswordUtil;
+import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
@@ -27,6 +28,9 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     private ScreenShareConsoleImpl ascendingScreenShareConsole = null;
     private ScreenShareConsoleImpl descendingScreenShareConsole = null;
 
+    private AudioRelayConsoleImpl ascendingAudioRelayConsole = null;
+    private AudioRelayConsoleImpl descendingAudioRelayConsole = null;
+
     private SessionStatus status = SessionStatus.NotReady;
 
     public VirtualMeetingImpl()
@@ -44,12 +48,31 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         this.activeScreenFacilitatorId = activeScreenFacilitatorId;
     }
 
+    public void setActiveSpeechPresenterId(String activeSpeechPresenterId) {
+        this.activeSpeechPresenterId = activeSpeechPresenterId;
+    }
+
+    public void setActiveSpeechFacilitatorId(String activeSpeechFacilitatorId) {
+        getFacilitatorConsole(activeSpeechFacilitatorId).getOutputAudioRelayConsole().setEnabled(true);
+        getFacilitatorConsole(activeSpeechFacilitatorId).getInputAudioRelayConsole().setEnabled(false);
+        this.activeSpeechFacilitatorId = activeSpeechFacilitatorId;
+    }
+
+
     public ScreenShareConsoleImpl getAscendingScreenShareConsole() {
         return ascendingScreenShareConsole;
     }
 
     public ScreenShareConsoleImpl getDescendingScreenShareConsole() {
         return descendingScreenShareConsole;
+    }
+
+    public AudioRelayConsoleImpl getAscendingAudioRelayConsole() {
+        return ascendingAudioRelayConsole;
+    }
+
+    public AudioRelayConsoleImpl getDescendingAudioRelayConsole() {
+        return descendingAudioRelayConsole;
     }
 
     public VirtualMeetingImpl(VMSessionManagerImpl sessionManager)
@@ -60,6 +83,8 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         ServerImpl.Configuration configuration = getSessionManager().getServer().getConfiguration();
         this.ascendingScreenShareConsole = new ScreenShareConsoleImpl(configuration.getPort(),configuration.getScreenShareBufferSize());
         this.descendingScreenShareConsole = new ScreenShareConsoleImpl(configuration.getPort(),configuration.getScreenShareBufferSize());
+        this.ascendingAudioRelayConsole = new AudioRelayConsoleImpl(configuration.getPort(),configuration.getAudioRelayBufferSize());
+        this.descendingAudioRelayConsole = new AudioRelayConsoleImpl(configuration.getPort(),configuration.getAudioRelayBufferSize());
     }
 
     public VMSessionManagerImpl getSessionManager() {
@@ -199,6 +224,9 @@ public class VirtualMeetingImpl implements VirtualMeeting {
 
         ascendingScreenShareConsole.start();
         descendingScreenShareConsole.start();
+        ascendingAudioRelayConsole.start();
+        descendingAudioRelayConsole.start();
+
         System.out.println("Virtual Meeting Started " + URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId) );
         Endpoint.publish(URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId),this);
     }

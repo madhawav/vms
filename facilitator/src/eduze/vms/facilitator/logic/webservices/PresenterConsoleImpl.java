@@ -1,6 +1,7 @@
 package eduze.vms.facilitator.logic.webservices;
 
 import eduze.vms.facilitator.logic.*;
+import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import javafx.stage.Screen;
 
 import javax.jws.WebService;
@@ -19,6 +20,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
     private Endpoint endpoint = null;
     private String connectionRequestId;
 
+    private AudioRelayConsoleImpl audioRelayConsole = null;
     private ScreenShareConsoleImpl screenShareConsole = null;
 
     public PresenterConsoleImpl()
@@ -32,17 +34,21 @@ public class PresenterConsoleImpl implements PresenterConsole {
         this.name = name;
         consoleId = PasswordUtil.generatePresenterConsoleId();
         screenShareConsole = new ScreenShareConsoleImpl(getFacilitator().getConfiguration().getListenerPort(),getFacilitator().getConfiguration().getScreenShareBufferSize());
+        audioRelayConsole = new AudioRelayConsoleImpl(getFacilitator().getConfiguration().getListenerPort(),getFacilitator().getConfiguration().getAudioRelayBufferSize());
+
     }
 
     public void start()
     {
         screenShareConsole.start();
+        audioRelayConsole.start();
         endpoint = Endpoint.publish(UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId),this);
         System.out.println("Presenter Console Started " + UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId));
     }
 
     void stop()
     {
+        //TODO: put stop logic here
         //endpoint.stop();
     }
 
@@ -79,6 +85,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
 
     @Override
     public void disconnect() {
+        this.stop();
         getFacilitator().disconnectPresenter(this);
     }
 
@@ -115,20 +122,45 @@ public class PresenterConsoleImpl implements PresenterConsole {
     }
 
     @Override
+    public String getOutAudioRelayConsoleId() {
+        return audioRelayConsole.getConsoleId();
+    }
+
+    @Override
     public boolean requestScreenAccess(boolean includeAudio) {
-        if(!includeAudio)
+        if(includeAudio)
+        {
+            ScreenAudioShareRequest shareRequest = new ScreenAudioShareRequest(getConsoleId(),getFacilitator());
+            if(getFacilitator().getShareRequestListener() == null)
+                return false;
+            return getFacilitator().getShareRequestListener().onShareRequest(shareRequest);
+        }
+        else
         {
             ScreenShareRequest shareRequest = new ScreenShareRequest(getConsoleId(),getFacilitator());
             if(getFacilitator().getShareRequestListener() == null)
                 return false;
             return getFacilitator().getShareRequestListener().onShareRequest(shareRequest);
         }
-        return false;
+
+    }
+
+    @Override
+    public boolean requestAudioRelayAccess() {
+        AudioRelayRequest shareRequest = new AudioRelayRequest(getConsoleId(),getFacilitator());
+        if(getFacilitator().getShareRequestListener() == null)
+            return false;
+        return getFacilitator().getShareRequestListener().onShareRequest(shareRequest);
     }
 
     public ScreenShareConsoleImpl getScreenShareConsole()
     {
         return screenShareConsole;
+    }
+
+    public AudioRelayConsoleImpl getAudioRelayConsole()
+    {
+        return audioRelayConsole;
     }
 
     void setConnectionRequestId(String connectionRequestId) {

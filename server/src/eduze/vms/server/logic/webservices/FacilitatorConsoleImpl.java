@@ -1,6 +1,8 @@
 package eduze.vms.server.logic.webservices;
 
 import eduze.vms.PasswordUtil;
+import eduze.vms.foundation.logic.webservices.AudioRelayConsole;
+import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.URLGenerator;
 
@@ -18,6 +20,9 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     //Think from perspective of user (perspective of facilitator)
     private ScreenShareConsoleImpl inputScreenShareConsole = null; //input to facilitator
     private ScreenShareConsoleImpl outputScreenShareConsole = null; //output to facilitator
+
+    private AudioRelayConsoleImpl inputAudioRelayConsole = null; //input to facilitator
+    private AudioRelayConsoleImpl outputAudioRelayConsole = null; //output to facilitator
 
     private HashMap<String,VMParticipant> participants = null;
 
@@ -41,21 +46,25 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         this.participants = new HashMap<>();
     }
 
-    //instalize should be called after facilitator console is added to array in virtual meeting
-    void instalize(int slotId)
+    //initialize should be called after facilitator console is added to array in virtual meeting
+    void initialize(int slotId)
     {
         this.slotId = slotId;
         if(slotId == 0)
         {
             //data should travel from 0 to 1
             inputScreenShareConsole = virtualMeeting.getDescendingScreenShareConsole();
+            inputAudioRelayConsole = virtualMeeting.getDescendingAudioRelayConsole();
             outputScreenShareConsole = virtualMeeting.getAscendingScreenShareConsole();
+            outputAudioRelayConsole =virtualMeeting.getAscendingAudioRelayConsole();
         }
         else if(slotId == 1)
         {
             //data should travel from 1 to 0
             inputScreenShareConsole = virtualMeeting.getAscendingScreenShareConsole();
+            inputAudioRelayConsole = virtualMeeting.getAscendingAudioRelayConsole();
             outputScreenShareConsole = virtualMeeting.getDescendingScreenShareConsole();
+            outputAudioRelayConsole = virtualMeeting.getDescendingAudioRelayConsole();
         }
 
     }
@@ -96,9 +105,32 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     }
 
     @Override
+    public String getInAudioRelayConsoleId() {
+        return inputAudioRelayConsole.getConsoleId();
+    }
+
+    @Override
+    public String getOutAudioRelayConsoleId() {
+        return outputAudioRelayConsole.getConsoleId();
+    }
+
+    @Override
     public boolean requestScreenAccess(String presenterId, boolean includeAudio) {
         virtualMeeting.setActiveScreenFacilitatorId(consoleId);
         virtualMeeting.setActiveScreenPresenterId(presenterId);
+
+        if(includeAudio)
+        {
+            virtualMeeting.setActiveSpeechFacilitatorId(consoleId);
+            virtualMeeting.setActiveSpeechPresenterId(presenterId);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean requestAudioRelayAccess(String presenterId) {
+        virtualMeeting.setActiveSpeechFacilitatorId(consoleId);
+        virtualMeeting.setActiveSpeechPresenterId(presenterId);
         return true;
     }
 
@@ -133,4 +165,13 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     public ScreenShareConsoleImpl getOutputScreenShareConsole() {
         return outputScreenShareConsole;
     }
+
+    public AudioRelayConsoleImpl getInputAudioRelayConsole() {
+        return inputAudioRelayConsole;
+    }
+
+    public AudioRelayConsoleImpl getOutputAudioRelayConsole() {
+        return outputAudioRelayConsole;
+    }
+
 }

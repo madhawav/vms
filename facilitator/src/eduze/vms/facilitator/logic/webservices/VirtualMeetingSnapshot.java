@@ -3,13 +3,11 @@ package eduze.vms.facilitator.logic.webservices;
 import eduze.vms.facilitator.logic.ServerConnectionException;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
 
-import javax.jws.WebMethod;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import java.rmi.RemoteException;
-import java.util.Collection;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -91,7 +89,7 @@ public class VirtualMeetingSnapshot {
             result.setActiveScreenFacilitatorId(vm.getActiveScreenFacilitatorId());
             result.setActiveScreenPresenterId(vm.getActiveScreenPresenterId());
             result.setActiveSpeechFacilitatorId(vm.getActiveSpeechFacilitatorId());
-            result.setActiveSpeechPresenterId(vm.getActiveSpeechFacilitatorId());
+            result.setActiveSpeechPresenterId(vm.getActiveSpeechPresenterId());
 
             eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status = vm.getStatus();
 

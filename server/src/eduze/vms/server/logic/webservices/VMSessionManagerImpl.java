@@ -4,7 +4,6 @@ import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
-import java.nio.channels.AlreadyConnectedException;
 
 /**
  * Created by Madhawa on 12/04/2016.
@@ -57,7 +56,7 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
             FacilitatorConsoleImpl facilitatorConsole = new FacilitatorConsoleImpl(virtualMeeting,facilitator);
             int slotId = virtualMeeting.addNewFacilitatorConsole(facilitatorConsole);
-            facilitatorConsole.instalize(slotId);
+            facilitatorConsole.initialize(slotId);
 
             facilitatorConsole.start();
             virtualMeeting.updateStatus();

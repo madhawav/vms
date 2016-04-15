@@ -58,7 +58,26 @@ public interface PresenterConsole {
     @WebMethod
     public String getOutScreenShareConsoleId();
 
+    /**
+     * Retrieve ID for AudioRelayConsole
+     * @return
+     */
     @WebMethod
-    public boolean requestScreenAccess(boolean includeAudio);
+    public String getOutAudioRelayConsoleId();
+
+    /**
+     * Request permission to share screen
+     * @param includeAudio True to request audio share as well
+     * @return true if request is considered. false if request is immediately rejected.
+     */
+    @WebMethod
+    public boolean requestScreenAccess(@WebParam(name = "IncludeAudio") boolean includeAudio);
+
+    /**
+     * Request permission to speak
+     * @return True if request is being considered. False if request is immediately rejected.
+     */
+    @WebMethod
+    public boolean requestAudioRelayAccess();
 
 }

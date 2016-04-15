@@ -35,6 +35,19 @@ public class Presenter {
         return false;
     }
 
+
+    public boolean isSpeechActive()
+    {
+        VirtualMeetingSnapshot vm = facilitatorController.getVmStatus();
+        if(presenterConsole.getConsoleId().equals(vm.getActiveSpeechPresenterId()) && facilitator.getFacilitatorConsoleId().equals(vm.getActiveSpeechFacilitatorId()))
+            return true;
+        return false;
+    }
+
+    public void setSpeechActive() throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
+        this.facilitatorController.setAudioRelayAccessPresenter(getPresenterConsoleId());
+    }
+
     public void setScreenActive(boolean includeAudio) throws ServerConnectionException, InvalidIdException, ServerNotReadyException {
         this.facilitatorController.setScreenAccessPresenter(getPresenterConsoleId(),includeAudio);
     }

@@ -25,7 +25,16 @@ public interface FacilitatorConsole {
     public String getOutScreenShareConsoleId();
 
     @WebMethod
+    public String getInAudioRelayConsoleId();
+
+    @WebMethod
+    public String getOutAudioRelayConsoleId();
+
+    @WebMethod
     public boolean requestScreenAccess(@WebParam(name = "PresenterId") String presenterId, @WebParam(name = "IncludeAudio") boolean includeAudio);
+
+    @WebMethod
+    public boolean requestAudioRelayAccess(@WebParam(name = "PresenterId") String presenterId);
 
     @WebMethod
     public Collection<VMParticipant> getParticipants();

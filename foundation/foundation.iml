@@ -16,6 +16,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="foundation" />
   </component>
 </module>

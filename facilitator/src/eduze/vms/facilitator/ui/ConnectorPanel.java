@@ -11,7 +11,6 @@ import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
-import javafx.stage.Screen;
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
@@ -242,13 +241,18 @@ public class ConnectorPanel {
         facilitatorController.addCaptureReceivedListener(new CaptureReceivedListener() {
             @Override
             public void onScreenCaptureReceived(byte[] rawData, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId) {
-                System.out.println("Screen Capture Received " + String.valueOf(rawData) + " bytes");
+                System.out.println("Screen Capture Received " + String.valueOf(rawData.length) + " bytes");
                 screenShow.setImage(image);
             }
 
             @Override
             public void onException(Exception e) {
 
+            }
+
+            @Override
+            public void onAudioDataReceived(byte[] bytes, String activeScreenFacilitatorId, String activeScreenPresenterId) {
+                System.out.println("Audio Data Received " + String.valueOf(bytes.length) + " bytes");
             }
         });
 
@@ -275,15 +279,42 @@ public class ConnectorPanel {
                                     JOptionPane.showMessageDialog(mainFrame,"Server not connected yet");
                                 }
                             }
-                        }
-                        else
-                        {
-                            try {
-                                shareRequest.dismiss();
-                            } catch (RequestAlreadyProcessedException e) {
-                                e.printStackTrace();
+                            else
+                            {
+                                try {
+                                    shareRequest.dismiss();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
+                        else if(shareRequest instanceof AudioRelayRequest)
+                        {
+                            if(JOptionPane.showConfirmDialog(mainFrame,shareRequest.getPresenterName() + " is requesting to share audio. Accept?","Request Screen",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+                            {
+                                try {
+                                    shareRequest.honour();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                } catch (ServerConnectionException e) {
+                                    e.printStackTrace();
+                                } catch (InvalidIdException e) {
+                                    e.printStackTrace();
+                                } catch (ServerNotReadyException e) {
+                                    e.printStackTrace();
+                                    JOptionPane.showMessageDialog(mainFrame,"Server not connected yet");
+                                }
+                            }
+                            else
+                            {
+                                try {
+                                    shareRequest.dismiss();
+                                } catch (RequestAlreadyProcessedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
 
                     }
                 });
