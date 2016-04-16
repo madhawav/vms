@@ -1,4 +1,4 @@
-package eduze.vms.server.logic.webservices;
+package eduze.vms.foundation.logic.webservices;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;

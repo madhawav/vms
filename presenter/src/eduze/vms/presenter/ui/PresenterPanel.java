@@ -28,6 +28,8 @@ public class PresenterPanel {
     private JCheckBox speechActiveCheckbox;
     private JButton requestSpeechShareButton;
     private JButton btnAllShare;
+    private JCheckBox allowedScreenShareCheckBox;
+    private JCheckBox allowedSpeechShareCheckbox;
     private JFrame mainFrame;
 
     private PresenterController controller = null;
@@ -62,6 +64,18 @@ public class PresenterPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onAllShareRequest();
+            }
+        });
+        allowedScreenShareCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setAllowedScreenShare(allowedScreenShareCheckBox.isSelected());
+            }
+        });
+        allowedSpeechShareCheckbox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.setAllowedAudioShare(allowedSpeechShareCheckbox.isSelected());
             }
         });
     }

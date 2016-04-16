@@ -1,4 +1,4 @@
-package eduze.vms.foundation.logic.webservices;
+package eduze.vms.server.logic.webservices;
 
 import eduze.vms.foundation.logic.PasswordUtil;
 

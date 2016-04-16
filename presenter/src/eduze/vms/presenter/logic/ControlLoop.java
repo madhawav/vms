@@ -5,10 +5,11 @@ import eduze.livestream.ScreenCapturer;
 import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
+import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole;
+import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
 import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
-import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsole;
-import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
+
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
@@ -40,6 +41,12 @@ public class ControlLoop extends Thread {
 
     private String screenShareConsoleId = null;
     private String audioRelayConsoleId = null;
+
+    private boolean allowedScreenShare = false;
+    private boolean allowedAudioShare = false;
+
+    private boolean serverAcceptsScreenShare = false;
+    private boolean serverAcceptsAudioShare = false;
     ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException {
         try {
             this.facilitatorURL = facilitatorURL;
@@ -93,7 +100,10 @@ public class ControlLoop extends Thread {
                         try {
                             assignedTasks = presenterConsole.getAssignedTasks();
 
-                            if(screenShareConsole.isEnabled())
+                            setServerAcceptsAudioShare(audioRelayConsole.isEnabled());
+                            setServerAcceptsScreenShare(screenShareConsole.isEnabled());
+
+                            if(isServerAcceptsScreenShare() && isAllowedScreenShare())
                             {
                                 if(!screenCapturer.isCapturing()) {
                                     screenCapturer.startCapture();
@@ -110,7 +120,7 @@ public class ControlLoop extends Thread {
                                 }
                             }
 
-                            if(audioRelayConsole.isEnabled())
+                            if(isServerAcceptsAudioShare() && isAllowedAudioShare())
                             {
                                 if(!audioCapturer.isCapturing()) {
                                     audioCapturer.startCapture();
@@ -202,6 +212,39 @@ public class ControlLoop extends Thread {
         return assignedTasks;
     }
 
+    public synchronized boolean isAllowedScreenShare() {
+        return allowedScreenShare;
+    }
+
+    public synchronized void setAllowedScreenShare(boolean allowedScreenShare) {
+        this.allowedScreenShare = allowedScreenShare;
+    }
+
+    public synchronized boolean isAllowedAudioShare() {
+        return allowedAudioShare;
+    }
+
+    public synchronized void setAllowedAudioShare(boolean allowedAudioShare) {
+        this.allowedAudioShare = allowedAudioShare;
+    }
+
+    public synchronized boolean isServerAcceptsAudioShare() {
+        return serverAcceptsAudioShare;
+    }
+
+    public synchronized boolean isServerAcceptsScreenShare() {
+        return serverAcceptsScreenShare;
+    }
+
+    synchronized void setServerAcceptsScreenShare(boolean value)
+    {
+        serverAcceptsScreenShare = value;
+    }
+
+    synchronized void setServerAcceptsAudioShare(boolean value)
+    {
+        serverAcceptsAudioShare = value;
+    }
 
     /**
      * Created by Madhawa on 14/04/2016.

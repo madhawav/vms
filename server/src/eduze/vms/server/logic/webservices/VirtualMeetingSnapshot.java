@@ -5,14 +5,10 @@ package eduze.vms.server.logic.webservices;
  */
 
 
-import eduze.vms.foundation.logic.webservices.SharedTask;
-
-import javax.jws.WebMethod;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import java.rmi.RemoteException;
 import java.util.Collection;
 
 /**

@@ -12,8 +12,14 @@ import java.util.ArrayList;
 /**
  * Created by Madhawa on 12/04/2016.
  */
-public class ServerController {
 
+/**
+ * The Controller used by Server UI. Exposes all functionality of server to external
+ */
+public class ServerController {
+    /**
+     * Listeners used to give feedback to UI
+     */
     private ArrayList<PairListener> pairListeners = new ArrayList<>();
     private ArrayList<FacilitatorSessionListener> facilitatorSessionListeners = new ArrayList<>();
 
@@ -64,8 +70,8 @@ public class ServerController {
 
         serverService.setFacilitatorSessionListener(new FacilitatorSessionListener() {
             @Override
-            public void onConnected(FacilitatorConsoleImpl console) {
-                notifyFacilitatorConnected(console);
+            public void onConnected(String consoleId, String facilitatorName) {
+                notifyFacilitatorConnected(consoleId,facilitatorName);
             }
 
             @Override
@@ -83,9 +89,9 @@ public class ServerController {
             p.onPairNameChanged(pairKey,oldName,newName);
     }
 
-    private void notifyFacilitatorConnected(FacilitatorConsoleImpl console) {
+    private void notifyFacilitatorConnected(String consoleId,String facilitatorName) {
         for(FacilitatorSessionListener fsp : facilitatorSessionListeners)
-            fsp.onConnected(console);
+            fsp.onConnected(consoleId,facilitatorName);
     }
 
     private void notifyFacilitatorDisconnected(Facilitator facilitator, String console_id) {

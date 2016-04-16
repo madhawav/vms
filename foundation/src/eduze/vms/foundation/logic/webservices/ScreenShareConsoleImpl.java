@@ -1,8 +1,8 @@
-package eduze.vms.server.logic.webservices;
+package eduze.vms.foundation.logic.webservices;
 
 import eduze.livestream.exchange.server.FrameBufferImpl;
-import eduze.vms.PasswordUtil;
-import eduze.vms.server.logic.URLGenerator;
+import eduze.vms.foundation.logic.URLGenerator;
+import eduze.vms.foundation.logic.PasswordUtil;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
@@ -10,7 +10,7 @@ import javax.xml.ws.Endpoint;
 /**
  * Created by Madhawa on 12/04/2016.
  */
-@WebService(endpointInterface = "eduze.vms.server.logic.webservices.ScreenShareConsole")
+@WebService(endpointInterface = "eduze.vms.foundation.logic.webservices.ScreenShareConsole")
 public class ScreenShareConsoleImpl implements ScreenShareConsole {
     private boolean enabled = false;
     private int updateInterval = 1000;
@@ -66,4 +66,6 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+
 }

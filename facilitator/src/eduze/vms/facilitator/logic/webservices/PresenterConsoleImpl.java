@@ -2,6 +2,7 @@ package eduze.vms.facilitator.logic.webservices;
 
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
+import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import javafx.stage.Screen;
 
 import javax.jws.WebService;

@@ -1,12 +1,10 @@
 package eduze.vms.server.logic.webservices;
 
-import eduze.vms.PasswordUtil;
+import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

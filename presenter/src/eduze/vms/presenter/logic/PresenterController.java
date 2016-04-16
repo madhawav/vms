@@ -25,6 +25,7 @@ public class PresenterController {
     private ArrayList<ControlLoop.StateChangeListener> stateChangeListeners = new ArrayList<>();
 
 
+
     private AssignedTasksManager assignedTasksManager = null;
 
     PresenterController(FacilitatorConnector facilitatorConnector, Facilitator facilitator, String presenterConsoleId) {
@@ -105,6 +106,8 @@ public class PresenterController {
 
     }
 
+
+
     public boolean isScreenShared()
     {
         return controlLoop.isScreenShared();
@@ -143,5 +146,31 @@ public class PresenterController {
 
     public AssignedTasksManager getAssignedTasksManager() {
         return assignedTasksManager;
+    }
+
+    public boolean isAllowedScreenShare() {
+        return controlLoop.isAllowedScreenShare();
+    }
+
+    public void setAllowedScreenShare(boolean allowedScreenShare) {
+        controlLoop.setAllowedScreenShare(allowedScreenShare);
+    }
+
+    public boolean isAllowedAudioShare() {
+        return controlLoop.isAllowedAudioShare();
+    }
+
+    public void setAllowedAudioShare(boolean allowedAudioShare) {
+        controlLoop.setAllowedAudioShare(allowedAudioShare);
+    }
+
+    public boolean isServerAcceptsScreenShare()
+    {
+        return controlLoop.isServerAcceptsScreenShare();
+    }
+
+    public boolean isServerAcceptsAudioShare()
+    {
+        return controlLoop.isServerAcceptsAudioShare();
     }
 }

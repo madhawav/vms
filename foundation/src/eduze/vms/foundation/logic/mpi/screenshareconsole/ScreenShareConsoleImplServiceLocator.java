@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package eduze.vms.facilitator.logic.mpi.screenshareconsole;
+package eduze.vms.foundation.logic.mpi.screenshareconsole;
 
-public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client.Service implements eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplService {
+public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client.Service implements eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplService {
 
     public ScreenShareConsoleImplServiceLocator() {
     }
@@ -22,7 +22,7 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
     }
 
     // Use to get a proxy class for ScreenShareConsoleImplPort
-    private java.lang.String ScreenShareConsoleImplPort_address = "http://0.0.0.0:8000/screen-share/-607608222";
+    private java.lang.String ScreenShareConsoleImplPort_address = "http://localhost:8000/screen-share/";
 
     public java.lang.String getScreenShareConsoleImplPortAddress() {
         return ScreenShareConsoleImplPort_address;
@@ -39,7 +39,7 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
         ScreenShareConsoleImplPortWSDDServiceName = name;
     }
 
-    public eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole getScreenShareConsoleImplPort() throws javax.xml.rpc.ServiceException {
+    public eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole getScreenShareConsoleImplPort() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(ScreenShareConsoleImplPort_address);
@@ -50,9 +50,9 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
         return getScreenShareConsoleImplPort(endpoint);
     }
 
-    public eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole getScreenShareConsoleImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole getScreenShareConsoleImplPort(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub _stub = new eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub(portAddress, this);
+            eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub _stub = new eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub(portAddress, this);
             _stub.setPortName(getScreenShareConsoleImplPortWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole.class.isAssignableFrom(serviceEndpointInterface)) {
-                eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub _stub = new eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub(new java.net.URL(ScreenShareConsoleImplPort_address), this);
+            if (eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole.class.isAssignableFrom(serviceEndpointInterface)) {
+                eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub _stub = new eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplPortBindingStub(new java.net.URL(ScreenShareConsoleImplPort_address), this);
                 _stub.setPortName(getScreenShareConsoleImplPortWSDDServiceName());
                 return _stub;
             }
@@ -105,7 +105,7 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "ScreenShareConsoleImplService");
+        return new javax.xml.namespace.QName("http://webservices.logic.foundation.vms.eduze/", "ScreenShareConsoleImplService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class ScreenShareConsoleImplServiceLocator extends org.apache.axis.client
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "ScreenShareConsoleImplPort"));
+            ports.add(new javax.xml.namespace.QName("http://webservices.logic.foundation.vms.eduze/", "ScreenShareConsoleImplPort"));
         }
         return ports.iterator();
     }

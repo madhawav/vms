@@ -8,7 +8,7 @@ import eduze.livestream.exchange.client.FrameBuffer;
 import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 
-import eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
+
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.webservices.AssignedTask;
@@ -17,6 +17,7 @@ import eduze.vms.facilitator.logic.webservices.PresenterConsole;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
+import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
@@ -47,13 +48,13 @@ public class ControlLoop extends Thread {
     private String facilitatorConsoleId  =  null;
     private FacilitatorConsole facilitatorConsole = null;
 
-    private eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole outputScreenShareConsole = null;
+    private eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole outputScreenShareConsole = null;
     private String outScreenShareConsoleId = null;
 
     private eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole outputAudioRelayConsole = null;
     private String outAudioRelayConsoleId = null;
 
-    private eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsole inScreenShareConsole = null;
+    private eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole inScreenShareConsole = null;
     private String inScreenShareConsoleId = null;
     private FrameBuffer inScreenShareBuffer = null;
     private ScreenReceiver screenReceiver = null;
@@ -96,7 +97,7 @@ public class ControlLoop extends Thread {
         String serverUrl = this.serverURL;
         outScreenShareConsoleId = facilitatorConsole.getOutScreenShareConsoleId();
         screenSwitcher = new Multiplexer(new URL(UrlGenerator.generateScreenShareConsoleBufferAccessUrl(serverUrl,outScreenShareConsoleId)));
-        eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator screenShareConsoleImplServiceLocator = new ScreenShareConsoleImplServiceLocator();
+        eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator screenShareConsoleImplServiceLocator = new ScreenShareConsoleImplServiceLocator();
         outputScreenShareConsole = screenShareConsoleImplServiceLocator.getScreenShareConsoleImplPort(new URL(UrlGenerator.generateScreenShareConsoleAccessUrl(serverUrl,outScreenShareConsoleId)));
 
         inScreenShareConsoleId = facilitatorConsole.getInScreenShareConsoleId();

@@ -1,8 +1,8 @@
 package eduze.vms.server.logic.webservices;
 
-import eduze.vms.PasswordUtil;
-import eduze.vms.foundation.logic.webservices.AudioRelayConsole;
+import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
+import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.URLGenerator;
 

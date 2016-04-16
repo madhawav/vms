@@ -1,7 +1,5 @@
 package eduze.vms.server.logic.webservices;
 
-import eduze.vms.foundation.logic.webservices.SharedTask;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;

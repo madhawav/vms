@@ -1,7 +1,7 @@
 /**
  * Created by Madhawa on 12/04/2016.
  */
-package eduze.vms;
+package eduze.vms.server.logic;
 
 import java.util.Random;
 

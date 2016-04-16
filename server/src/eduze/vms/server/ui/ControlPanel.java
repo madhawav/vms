@@ -1,13 +1,12 @@
 package eduze.vms.server.ui;
 
-import eduze.vms.PasswordUtil;
+import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.PairListener;
 import eduze.vms.server.logic.ServerController;
 import eduze.vms.server.logic.URLGenerator;
 import eduze.vms.server.logic.webservices.Facilitator;
 import eduze.vms.server.logic.webservices.FacilitatorConsoleImpl;
-import eduze.vms.server.logic.webservices.VirtualMeeting;
 import eduze.vms.server.logic.webservices.VirtualMeetingImpl;
 
 import javax.swing.*;
@@ -70,8 +69,8 @@ public class ControlPanel extends JFrame {
 
             controller.addFacilitatorSessionListener(new FacilitatorSessionListener() {
                 @Override
-                public void onConnected(FacilitatorConsoleImpl console) {
-                    txtStatus.setText(txtStatus.getText()+"\n" + "Connected " + console.getFacilitatorName() + " " + console.getConsoleId());
+                public void onConnected(String consoleId, String facilitatorName) {
+                    txtStatus.setText(txtStatus.getText()+"\n" + "Connected " + facilitatorName + " " + consoleId);
                 }
 
                 @Override
