@@ -69,8 +69,8 @@ public class ControlPanel extends JFrame {
 
             controller.addFacilitatorSessionListener(new FacilitatorSessionListener() {
                 @Override
-                public void onConnected(String consoleId, String facilitatorName) {
-                    txtStatus.setText(txtStatus.getText()+"\n" + "Connected " + facilitatorName + " " + consoleId);
+                public void onConnected(Facilitator facilitator, String consoleId) {
+                    txtStatus.setText(txtStatus.getText()+"\n" + "Connected " + facilitator.getName() + " " + consoleId);
                 }
 
                 @Override

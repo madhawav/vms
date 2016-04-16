@@ -54,9 +54,11 @@ public class FacilitatorManagerImpl implements FacilitatorManager {
 
     @Override
     public void unPair(String pairKey) {
+        Facilitator facilitator = facilitators.get(pairKey);
         if(facilitators.containsKey(pairKey))
             facilitators.remove(pairKey);
-
+        if(server.getPairListener() != null)
+            server.getPairListener().onUnPair(facilitator);
     }
 
 

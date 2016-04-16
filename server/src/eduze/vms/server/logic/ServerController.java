@@ -23,34 +23,57 @@ public class ServerController {
     private ArrayList<PairListener> pairListeners = new ArrayList<>();
     private ArrayList<FacilitatorSessionListener> facilitatorSessionListeners = new ArrayList<>();
 
+    //Startup configuration of server
     private ServerImpl.Configuration startConfig = new ServerImpl.Configuration();
+
+    //Internal service of server
     private ServerImpl serverService = null;
 
-    private boolean running = false;
+    private boolean running = false; //has the server started?
 
+    /**
+     * Constructor of Server Controller
+     */
     public ServerController()
     {
 
     }
 
+    /**
+     * Return port used by server
+     * @return server port
+     */
     public int getPort() {
         return startConfig.getPort();
     }
 
-    public void setPort(int port) throws Exception {
+    /**
+     * Set the port used by service. Must be set before the server start
+     * @param port Server port
+     * @throws ServerStartedException The service has started already and hence port cannot be changed
+     */
+    public void setPort(int port) throws ServerStartedException {
         if(running)
-            throw new Exception("Already Started");
+            throw new ServerStartedException();
         startConfig.setPort(port);
     }
 
+    /**
+     * Returns whether server is running
+     * @return True if server is running. Otherwise return false.
+     */
     public boolean isRunning()
     {
         return running;
     }
 
-    public void start() throws URISyntaxException {
-        serverService = new ServerImpl(startConfig);
+    /**
+     * Start the service using previously set port and server name
+     */
+    public void start()  {
+        serverService = new ServerImpl(startConfig); //setup server service
 
+        //setup pair listeners to tunnel even from service to user
         serverService.setPairListener(new PairListener() {
             @Override
             public void onPair(Facilitator pairedFacilitator) {
@@ -68,10 +91,11 @@ public class ServerController {
             }
         });
 
+        //Setup facilitator listener to tunnel events from service to user
         serverService.setFacilitatorSessionListener(new FacilitatorSessionListener() {
             @Override
-            public void onConnected(String consoleId, String facilitatorName) {
-                notifyFacilitatorConnected(consoleId,facilitatorName);
+            public void onConnected(Facilitator facilitator, String consoleId) {
+                notifyFacilitatorConnected(facilitator,consoleId);
             }
 
             @Override
@@ -89,14 +113,14 @@ public class ServerController {
             p.onPairNameChanged(pairKey,oldName,newName);
     }
 
-    private void notifyFacilitatorConnected(String consoleId,String facilitatorName) {
+    private void notifyFacilitatorConnected(Facilitator facilitator ,String consoleId) {
         for(FacilitatorSessionListener fsp : facilitatorSessionListeners)
-            fsp.onConnected(consoleId,facilitatorName);
+            fsp.onConnected(facilitator,consoleId);
     }
 
     private void notifyFacilitatorDisconnected(Facilitator facilitator, String console_id) {
         for(FacilitatorSessionListener fsp : facilitatorSessionListeners)
-            fsp.onDisconnected(facilitator,console_id);
+            fsp.onDisconnected(facilitator, console_id);
     }
 
     public String getName() {

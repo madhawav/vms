@@ -68,7 +68,7 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
 
             if(server.getFacilitatorSessionListener() != null)
-                server.getFacilitatorSessionListener().onConnected(facilitatorConsole.getConsoleId(),facilitatorConsole.getFacilitatorName());
+                server.getFacilitatorSessionListener().onConnected(facilitator,facilitatorConsole.getConsoleId());
 
             return result;
         }

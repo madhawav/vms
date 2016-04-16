@@ -79,7 +79,7 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         virtualMeeting.removeFacilitatorConsole(this);
         FacilitatorSessionListener listener =  virtualMeeting.getSessionManager().getServer().getFacilitatorSessionListener();
         if(listener != null)
-            listener.onDisconnected(facilitator, consoleId);
+            listener.onDisconnected(facilitator,consoleId);
         //TODO: Causes null pointer exception on stop. figure out why.
         //endPoint.stop();
     }
