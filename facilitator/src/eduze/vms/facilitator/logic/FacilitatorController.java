@@ -25,6 +25,7 @@ public class FacilitatorController {
     private VirtualMeetingSnapshot vmStatus = null;
 
     private ControlLoop controlLoop = null;
+    private SharedTaskManager sharedTaskManager = null;
 
     /**
      * Construct by calling FacilitatorController.start()
@@ -150,6 +151,12 @@ public class FacilitatorController {
             presenters[writeIndex++] = new Presenter(this,presenterConsoles[i]);
         }
         return presenters;
+    }
+
+    public SharedTaskManager getSharedTaskManager() throws ServerNotReadyException {
+        if(sharedTaskManager == null)
+            throw new ServerNotReadyException();
+        return sharedTaskManager;
     }
 
     public VirtualMeetingParticipantInfo[] getVMParticipants()
@@ -334,6 +341,11 @@ public class FacilitatorController {
         }
     }
 
+    public String getFacilitatorId()
+    {
+        return facilitatorService.getFacilitatorConsoleId();
+    }
+
     private void notifyAudioDataReceived(byte[] bytes, String activeScreenFacilitatorId, String activeScreenPresenterId) {
         for(CaptureReceivedListener listener : captureReceivedListeners)
         {
@@ -362,11 +374,14 @@ public class FacilitatorController {
         this.serverConnectionController =  connectionController;
         this.facilitatorService.establishServerConnection(url,result.getFacilitatorConsoleId(),result.getVirtualMeetingConsoleId());
 
+        sharedTaskManager = new SharedTaskManager(this);
+
         controlLoop = new ControlLoop(this.facilitatorService,url,getConfiguration().getListenerPort());
         controlLoop.setControlLoopListener(new ControlLoopListener() {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
                 vmStatus = vm;
+                sharedTaskManager.onVMStatusUpdate();
                 notifyControlLoopUpdateReceived(vm);
 
             }

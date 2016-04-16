@@ -3,9 +3,9 @@ package eduze.vms.presenter.logic;
 import eduze.livestream.AudioCapturer;
 import eduze.livestream.ScreenCapturer;
 import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
-import eduze.livestream.exchange.server.FrameBuffer;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
+import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsole;
 import eduze.vms.presenter.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
@@ -35,6 +35,8 @@ public class ControlLoop extends Thread {
     private boolean running = false;
 
     private StateChangeListener stateChangeListener = null;
+
+    private AssignedTask[] assignedTasks = null;
 
     private String screenShareConsoleId = null;
     private String audioRelayConsoleId = null;
@@ -89,6 +91,8 @@ public class ControlLoop extends Thread {
                     @Override
                     public void run() {
                         try {
+                            assignedTasks = presenterConsole.getAssignedTasks();
+
                             if(screenShareConsole.isEnabled())
                             {
                                 if(!screenCapturer.isCapturing()) {
@@ -122,6 +126,7 @@ public class ControlLoop extends Thread {
                                         stateChangeListener.onAudioCaptureChanged(false);
                                 }
                             }
+                            notifyControlLoopCycleCompleted();
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
@@ -138,6 +143,11 @@ public class ControlLoop extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    private synchronized void notifyControlLoopCycleCompleted() {
+        if(stateChangeListener != null)
+            stateChangeListener.onControlLoopCycleCompleted();
     }
 
     public synchronized boolean isRunning() {
@@ -186,5 +196,20 @@ public class ControlLoop extends Thread {
 
     public synchronized void setStateChangeListener(StateChangeListener stateChangeListener) {
         this.stateChangeListener = stateChangeListener;
+    }
+
+    public AssignedTask[] getAssignedTasks() {
+        return assignedTasks;
+    }
+
+
+    /**
+     * Created by Madhawa on 14/04/2016.
+     */
+    public static interface StateChangeListener {
+        public void onScreenCaptureChanged(boolean newValue);
+
+        public void onAudioCaptureChanged(boolean newValue);
+        public void onControlLoopCycleCompleted();
     }
 }

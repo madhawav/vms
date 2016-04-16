@@ -5,6 +5,7 @@ import eduze.vms.facilitator.logic.ServerConnectionException;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import java.util.Collection;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -79,5 +80,12 @@ public interface PresenterConsole {
      */
     @WebMethod
     public boolean requestAudioRelayAccess();
+
+    /**
+     * Retrieve assigned tasks of presenter
+     * @return
+     */
+    @WebMethod
+    public Collection<AssignedTask> getAssignedTasks();
 
 }

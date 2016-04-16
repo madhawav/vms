@@ -9,8 +9,11 @@ import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 
 import eduze.vms.facilitator.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
+import eduze.vms.facilitator.logic.webservices.AssignedTask;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
+import eduze.vms.facilitator.logic.webservices.PresenterConsole;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
@@ -23,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -78,6 +82,7 @@ public class ControlLoop extends Thread {
             this.facilitatorConsoleId = facilitatorConsole.getConsoleId();
             setupScreenShare();
             setupAudioRelay();
+
         } catch (RemoteException e) {
             e.printStackTrace();
             throw new ServerConnectionException(e);
@@ -140,6 +145,8 @@ public class ControlLoop extends Thread {
         });
 
     }
+
+
 
     private void audioReceiverDataReceived(byte[] bytes) {
         VirtualMeetingSnapshot vm = getLastKnownVMSnapshot();
@@ -227,7 +234,7 @@ public class ControlLoop extends Thread {
 
                             processScreenShare(vm,facilitatorCode);
                             processAudioRelay(vm,facilitatorCode);
-
+                            updateAssignedTasks(vm,facilitatorCode);
                             setLastKnownVMSnapshot(vm);
                             if (controlLoopListener != null) {
                                 controlLoopListener.updateReceived(vm);
@@ -347,6 +354,33 @@ public class ControlLoop extends Thread {
             screenReceiver.stopReceiving();
         }
 
+
+    }
+
+    public void updateAssignedTasks(VirtualMeetingSnapshot vm, String facilitatorCode)
+    {
+        if(facilitator.getPresenterConsoles() == null)
+            return;
+        for(PresenterConsoleImpl presenterConsole : facilitator.getPresenterConsoles())
+        {
+            presenterConsole.clearAssignedTasks();
+        }
+        if(vm.getSharedTasks() == null)
+            return;
+        for(SharedTask task : vm.getSharedTasks())
+        {
+            if(facilitatorCode.equals(task.getAssignedFacilitatorId()))
+            {
+                if(task.getAssignedPresenterId() != null)
+                {
+                    PresenterConsoleImpl assignedPresenter = facilitator.getPresenterConsole(task.getAssignedPresenterId());
+                    if(assignedPresenter != null)
+                    {
+                        assignedPresenter.addAssignedTask(AssignedTask.fromSharedTask(task));
+                    }
+                }
+            }
+        }
 
     }
 

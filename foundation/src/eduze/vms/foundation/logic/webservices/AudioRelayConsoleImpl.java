@@ -56,5 +56,5 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-    
+
 }

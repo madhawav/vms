@@ -105,7 +105,7 @@ public class PresenterPanel {
                     try {
                         controller = sender.obtainController();
 
-                        controller.addStateChangeListener(new StateChangeListener() {
+                        controller.addStateChangeListener(new ControlLoop.StateChangeListener() {
                             @Override
                             public void onScreenCaptureChanged(boolean newValue) {
                                 screenActiveCheckBox.setSelected(newValue);
@@ -114,6 +114,34 @@ public class PresenterPanel {
                             @Override
                             public void onAudioCaptureChanged(boolean newValue) {
                                 speechActiveCheckbox.setSelected(newValue);
+                            }
+
+                            @Override
+                            public void onControlLoopCycleCompleted() {
+
+                            }
+                        });
+
+                        controller.getAssignedTasksManager().addAssignedTaskListener(new AssignedTasksManager.AssignedTaskListener() {
+                            @Override
+                            public void onInitiated() {
+                                JOptionPane.showMessageDialog(mainFrame,"Assigned Tasks initiated");
+                            }
+
+                            @Override
+                            public void onTaskAssigned(AssignedTaskInfo task) {
+                                JOptionPane.showMessageDialog(mainFrame,"New Task added " + task.getTitle());
+
+                            }
+
+                            @Override
+                            public void onTaskUnAssigned(AssignedTaskInfo task) {
+                                JOptionPane.showMessageDialog(mainFrame,"Task Removed " + task.getTitle());
+                            }
+
+                            @Override
+                            public void onTaskModified(AssignedTaskInfo oldTask, AssignedTaskInfo newTask) {
+                                JOptionPane.showMessageDialog(mainFrame, "Task Modified; Title : " + oldTask.getTitle() + " >> " + newTask.getTitle() + "\nDescription: "+ oldTask.getDescription() + " >> " + newTask.getDescription());
                             }
                         });
 

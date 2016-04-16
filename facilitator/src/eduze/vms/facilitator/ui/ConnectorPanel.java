@@ -9,6 +9,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImpl
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTaskNotFoundException;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
 
@@ -44,6 +45,13 @@ public class ConnectorPanel {
     private JButton btnSetActivePresenter;
     private JButton btnSetActiveSpeechPresenter;
     private JButton setActiveButton;
+    private JTextField txtTaskTitle;
+    private JTextField txtTaskDescription;
+    private JButton newTaskButton;
+    private JTextField txtId;
+    private JButton assignButton;
+    private JButton clearAssignButton;
+    private JButton deleteTaskButton;
     private JButton btnStartListener;
     private JFrame mainFrame;
 
@@ -105,6 +113,79 @@ public class ConnectorPanel {
             }
         });
 
+        deleteTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onDeleteTask();
+            }
+        });
+        assignButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAssignTask();
+            }
+        });
+        clearAssignButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onClearAssign();
+            }
+        });
+        newTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAddNewSharedTask();
+            }
+
+
+        });
+
+    }
+
+    private void onDeleteTask() {
+        try {
+            facilitatorController.getSharedTaskManager().removeSharedTask(txtId.getText());
+        } catch (SharedTaskNotFoundException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onClearAssign() {
+        try {
+            facilitatorController.getSharedTaskManager().unAssignTaskFromPresenter(txtId.getText());
+        } catch (SharedTaskNotFoundException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onAssignTask() {
+        try {
+            facilitatorController.getSharedTaskManager().assignTaskToPresenter(txtId.getText(),facilitatorController.getFacilitatorId(),txtActivePresenterConsoleId.getText());
+        } catch (SharedTaskNotFoundException e) {
+            e.printStackTrace();
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onAddNewSharedTask() {
+        try {
+            txtId.setText(facilitatorController.getSharedTaskManager().createNewSharedTask(txtTaskTitle.getText(),txtTaskDescription.getText()));
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onSetActiveSpeech() {
@@ -169,6 +250,41 @@ public class ConnectorPanel {
         try {
             ServerManager.PairedServer server= facilitatorController.getServerManager().getPairedServerFromName(name);
             facilitatorController.getServerManager().connect(server);
+
+            facilitatorController.getSharedTaskManager().addSharedTasksListener(new SharedTaskManager.SharedTasksListener() {
+                @Override
+                public void onInitiated() {
+                    JOptionPane.showMessageDialog(mainFrame,"Shared Tasks initiated");
+                }
+
+                @Override
+                public void onNewSharedTask(SharedTaskInfo newTask) {
+                    JOptionPane.showMessageDialog(mainFrame,"New Shared Task: " + newTask.getTitle());
+                }
+
+                @Override
+                public void onSharedTaskRemoved(SharedTaskInfo removedTask) {
+                    JOptionPane.showMessageDialog(mainFrame,"Shared Task Removed: " + removedTask.getTitle());
+                }
+
+                @Override
+                public void onSharedTaskModified(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+                    JOptionPane.showMessageDialog(mainFrame,"Shared Task Modifier: " + oldTask.getTitle() + " >> " + newTask.getTitle() + " :: " + oldTask.getDescription() + " >> " + newTask.getDescription());
+                }
+
+                @Override
+                public void onSharedTaskAssignmentChanged(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+                    if(oldTask == null)
+                    {
+                        JOptionPane.showMessageDialog(mainFrame,"New Task " + newTask.getTitle()  + " assigned to " + newTask.getAssignedPresenterName());
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(mainFrame,"Task " + newTask.getTitle()  + " assigned to " + String.valueOf(newTask.getAssignedPresenterName()));
+                    }
+                }
+            });
+
             JOptionPane.showMessageDialog(mainFrame,"Successfully Connected");
         }
         catch (FacilitatorAlreadyConnectedException e)

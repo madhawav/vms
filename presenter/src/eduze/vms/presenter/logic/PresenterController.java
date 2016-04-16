@@ -1,15 +1,12 @@
 package eduze.vms.presenter.logic;
 
-import eduze.livestream.ScreenCapturer;
 import eduze.vms.presenter.logic.mpi.facilitator.Facilitator;
-import eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplServiceLocator;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsoleImplServiceLocator;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -25,7 +22,10 @@ public class PresenterController {
 
     private ControlLoop controlLoop = null;
 
-    private ArrayList<StateChangeListener> stateChangeListeners = new ArrayList<>();
+    private ArrayList<ControlLoop.StateChangeListener> stateChangeListeners = new ArrayList<>();
+
+
+    private AssignedTasksManager assignedTasksManager = null;
 
     PresenterController(FacilitatorConnector facilitatorConnector, Facilitator facilitator, String presenterConsoleId) {
         this.connector = facilitatorConnector;
@@ -44,8 +44,10 @@ public class PresenterController {
             presenterConsole = presenterConsoleImplServiceLocator.getPresenterConsoleImplPort(new URL(URLGenerator.generatePresenterConsoleAccessUrl(getConfiguration().getFacilitatorURL(),presenterConsoleId)));
             presenterConsole.acknowledgeConnection();
 
+            this.assignedTasksManager = new AssignedTasksManager(this);
+
             this.controlLoop = new ControlLoop(presenterConsole,getConfiguration().getFacilitatorURL());
-            this.controlLoop.setStateChangeListener(new StateChangeListener() {
+            this.controlLoop.setStateChangeListener(new ControlLoop.StateChangeListener() {
                 @Override
                 public void onScreenCaptureChanged(boolean newValue) {
                     notifyScreenSharedChanged(newValue);
@@ -55,7 +57,13 @@ public class PresenterController {
                 public void onAudioCaptureChanged(boolean newValue) {
                     notifyAudioSharedChanged(newValue);
                 }
+
+                @Override
+                public void onControlLoopCycleCompleted() {
+                    assignedTasksManager.onAssignedTasksUpdate(controlLoop.getAssignedTasks());
+                }
             });
+
             this.controlLoop.start();
 
         } catch (ServiceException e) {
@@ -107,19 +115,19 @@ public class PresenterController {
         return controlLoop.isAudioShared();
     }
 
-    public void addStateChangeListener(StateChangeListener listener)
+    public void addStateChangeListener(ControlLoop.StateChangeListener listener)
     {
         stateChangeListeners.add(listener);
     }
 
-    public void removeStateChangeListener(StateChangeListener listener)
+    public void removeStateChangeListener(ControlLoop.StateChangeListener listener)
     {
         stateChangeListeners.remove(listener);
     }
 
     void notifyScreenSharedChanged(boolean newValue)
     {
-        for(StateChangeListener listener : stateChangeListeners)
+        for(ControlLoop.StateChangeListener listener : stateChangeListeners)
         {
             listener.onScreenCaptureChanged(newValue);
         }
@@ -127,9 +135,13 @@ public class PresenterController {
 
     void notifyAudioSharedChanged(boolean newValue)
     {
-        for(StateChangeListener listener : stateChangeListeners)
+        for(ControlLoop.StateChangeListener listener : stateChangeListeners)
         {
             listener.onAudioCaptureChanged(newValue);
         }
+    }
+
+    public AssignedTasksManager getAssignedTasksManager() {
+        return assignedTasksManager;
     }
 }

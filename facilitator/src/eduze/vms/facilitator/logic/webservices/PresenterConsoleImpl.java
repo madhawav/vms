@@ -7,6 +7,8 @@ import javafx.stage.Screen;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -19,6 +21,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
     private boolean connectionAcknowledged = false;
     private Endpoint endpoint = null;
     private String connectionRequestId;
+    private ArrayList<AssignedTask> assignedTasks = new ArrayList<>();
 
     private AudioRelayConsoleImpl audioRelayConsole = null;
     private ScreenShareConsoleImpl screenShareConsole = null;
@@ -151,6 +154,26 @@ public class PresenterConsoleImpl implements PresenterConsole {
         if(getFacilitator().getShareRequestListener() == null)
             return false;
         return getFacilitator().getShareRequestListener().onShareRequest(shareRequest);
+    }
+
+    @Override
+    public ArrayList<AssignedTask> getAssignedTasks() {
+        return assignedTasks;
+    }
+
+    public void clearAssignedTasks()
+    {
+        assignedTasks.clear();
+    }
+
+    public void addAssignedTask(AssignedTask assignedTask)
+    {
+        assignedTasks.add(assignedTask);
+    }
+
+    public void removeAssignedTask(AssignedTask assignedTask)
+    {
+        assignedTasks.remove(assignedTask);
     }
 
     public ScreenShareConsoleImpl getScreenShareConsole()

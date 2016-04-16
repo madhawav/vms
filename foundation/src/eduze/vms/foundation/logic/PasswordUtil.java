@@ -22,5 +22,9 @@ public class PasswordUtil {
         return String.valueOf(ran.nextInt());
     }
 
+    public static String generateSharedTaskId()
+    {
+        return String.valueOf(ran.nextInt());
+    }
 
 }

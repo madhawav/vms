@@ -22,6 +22,8 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
 
     private eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants;
 
+    private eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask[] sharedTasks;
+
     public VirtualMeetingSnapshot() {
     }
 
@@ -32,7 +34,8 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
            java.lang.String activeSpeechFacilitatorId,
            java.lang.String activeSpeechPresenterId,
            eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus status,
-           eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants) {
+           eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant[] participants,
+           eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask[] sharedTasks) {
            this.VMId = VMId;
            this.activeScreenFacilitatorId = activeScreenFacilitatorId;
            this.activeScreenPresenterId = activeScreenPresenterId;
@@ -40,6 +43,7 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
            this.activeSpeechPresenterId = activeSpeechPresenterId;
            this.status = status;
            this.participants = participants;
+           this.sharedTasks = sharedTasks;
     }
 
 
@@ -190,6 +194,34 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
         this.participants[i] = _value;
     }
 
+
+    /**
+     * Gets the sharedTasks value for this VirtualMeetingSnapshot.
+     * 
+     * @return sharedTasks
+     */
+    public eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask[] getSharedTasks() {
+        return sharedTasks;
+    }
+
+
+    /**
+     * Sets the sharedTasks value for this VirtualMeetingSnapshot.
+     * 
+     * @param sharedTasks
+     */
+    public void setSharedTasks(eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask[] sharedTasks) {
+        this.sharedTasks = sharedTasks;
+    }
+
+    public eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask getSharedTasks(int i) {
+        return this.sharedTasks[i];
+    }
+
+    public void setSharedTasks(int i, eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask _value) {
+        this.sharedTasks[i] = _value;
+    }
+
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof VirtualMeetingSnapshot)) return false;
@@ -222,7 +254,10 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
               this.status.equals(other.getStatus()))) &&
             ((this.participants==null && other.getParticipants()==null) || 
              (this.participants!=null &&
-              java.util.Arrays.equals(this.participants, other.getParticipants())));
+              java.util.Arrays.equals(this.participants, other.getParticipants()))) &&
+            ((this.sharedTasks==null && other.getSharedTasks()==null) || 
+             (this.sharedTasks!=null &&
+              java.util.Arrays.equals(this.sharedTasks, other.getSharedTasks())));
         __equalsCalc = null;
         return _equals;
     }
@@ -257,6 +292,17 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
                  i<java.lang.reflect.Array.getLength(getParticipants());
                  i++) {
                 java.lang.Object obj = java.lang.reflect.Array.get(getParticipants(), i);
+                if (obj != null &&
+                    !obj.getClass().isArray()) {
+                    _hashCode += obj.hashCode();
+                }
+            }
+        }
+        if (getSharedTasks() != null) {
+            for (int i=0;
+                 i<java.lang.reflect.Array.getLength(getSharedTasks());
+                 i++) {
+                java.lang.Object obj = java.lang.reflect.Array.get(getSharedTasks(), i);
                 if (obj != null &&
                     !obj.getClass().isArray()) {
                     _hashCode += obj.hashCode();
@@ -319,6 +365,14 @@ public class VirtualMeetingSnapshot  implements java.io.Serializable {
         elemField.setFieldName("participants");
         elemField.setXmlName(new javax.xml.namespace.QName("", "Participants"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "VMParticipant"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        elemField.setMaxOccursUnbounded(true);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("sharedTasks");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "SharedTasks"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "SharedTask"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         elemField.setMaxOccursUnbounded(true);

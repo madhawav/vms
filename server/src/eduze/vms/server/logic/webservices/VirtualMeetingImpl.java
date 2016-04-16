@@ -2,6 +2,7 @@ package eduze.vms.server.logic.webservices;
 
 import eduze.vms.PasswordUtil;
 import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
+import eduze.vms.foundation.logic.webservices.SharedTask;
 import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
@@ -32,6 +33,29 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     private AudioRelayConsoleImpl descendingAudioRelayConsole = null;
 
     private SessionStatus status = SessionStatus.NotReady;
+
+    private HashMap<String,SharedTask> sharedTasks = new HashMap();
+
+    private void updateSharedTaskPresenterName(SharedTask task)
+    {
+        if(task.getAssignedPresenterId() == null)
+        {
+            task.setAssignedPresenterName(null);
+            return;
+        }
+        VMParticipant participant = getParticipant(task.getAssignedPresenterId());
+        if(participant != null)
+        {
+            task.setAssignedPresenterName(participant.getName());
+        }
+    }
+    private void updateSharedTaskPresenterNames()
+    {
+        for(SharedTask task : sharedTasks.values())
+        {
+            updateSharedTaskPresenterName(task);
+        }
+    }
 
     public VirtualMeetingImpl()
     {
@@ -160,6 +184,65 @@ public class VirtualMeetingImpl implements VirtualMeeting {
                 return result;
         }
         return null;
+    }
+
+    @Override
+    public Collection<SharedTask> getSharedTasks() {
+        updateSharedTaskPresenterNames();
+        return sharedTasks.values();
+    }
+
+    @Override
+    public SharedTask getSharedTask(String sharedTaskId) {
+        updateSharedTaskPresenterNames();
+        return sharedTasks.get(sharedTaskId);
+    }
+
+    @Override
+    public String addSharedTask(String title, String description) {
+        SharedTask task = new SharedTask();
+        task.setTitle(title);
+        task.setDescription(description);
+        sharedTasks.put(task.getTaskId(),task);
+        return task.getTaskId();
+    }
+
+    @Override
+    public void removeSharedTask(String sharedTaskId) throws SharedTaskNotFoundException {
+        SharedTask task = sharedTasks.get(sharedTaskId);
+        if(task == null)
+            throw new SharedTaskNotFoundException();
+
+        sharedTasks.remove(sharedTaskId);
+    }
+
+    @Override
+    public void modifySharedTask(String sharedTaskId, String newTitle, String newDescription) throws SharedTaskNotFoundException {
+        SharedTask task = sharedTasks.get(sharedTaskId);
+        if(task == null)
+            throw new SharedTaskNotFoundException();
+        task.setTitle(newTitle);
+        task.setDescription(newDescription);
+    }
+
+    @Override
+    public void assignSharedTask(String sharedTaskId, String facilitatorId, String presenterId) throws SharedTaskNotFoundException {
+        SharedTask task = sharedTasks.get(sharedTaskId);
+        if(task == null)
+            throw new SharedTaskNotFoundException();
+        task.setAssignedFacilitatorId(facilitatorId);
+        task.setAssignedPresenterId(presenterId);
+        updateSharedTaskPresenterName(task);
+    }
+
+    @Override
+    public void unAssignSharedTask(String sharedTaskId) throws SharedTaskNotFoundException {
+        SharedTask task = sharedTasks.get(sharedTaskId);
+        if(task == null)
+            throw new SharedTaskNotFoundException();
+        task.setAssignedPresenterName(null);
+        task.setAssignedFacilitatorId(null);
+        task.setAssignedPresenterId(null);
     }
 
 

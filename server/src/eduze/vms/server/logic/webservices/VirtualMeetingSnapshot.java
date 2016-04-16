@@ -5,6 +5,8 @@ package eduze.vms.server.logic.webservices;
  */
 
 
+import eduze.vms.foundation.logic.webservices.SharedTask;
+
 import javax.jws.WebMethod;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -38,6 +40,17 @@ public class VirtualMeetingSnapshot {
 
     @XmlElement(name="Participants")
     protected Collection<VMParticipant> participants = null;
+
+    @XmlElement(name = "SharedTasks")
+    protected Collection<SharedTask> sharedTasks = null;
+
+    public Collection<SharedTask> getSharedTasks() {
+        return sharedTasks;
+    }
+
+    public void setSharedTasks(Collection<SharedTask> sharedTasks) {
+        this.sharedTasks = sharedTasks;
+    }
 
     public Collection<VMParticipant> getParticipants() {
         return participants;
@@ -104,6 +117,7 @@ public class VirtualMeetingSnapshot {
             result.setStatus(vm.getStatus());
             result.setVmId(vm.getVMId());
             result.setParticipants(vm.getParticipants());
+            result.setSharedTasks(vm.getSharedTasks());
             return result;
 
 
