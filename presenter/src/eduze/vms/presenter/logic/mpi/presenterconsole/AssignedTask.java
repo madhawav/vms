@@ -7,6 +7,7 @@
 
 package eduze.vms.presenter.logic.mpi.presenterconsole;
 
+
 public class AssignedTask  implements java.io.Serializable {
     private java.lang.String taskId;
 

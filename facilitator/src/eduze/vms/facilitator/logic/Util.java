@@ -8,11 +8,22 @@ import java.io.IOException;
 /**
  * Created by Madhawa on 14/04/2016.
  */
+
+/**
+ * UTility Functions
+ */
 public class Util {
     private Util()
     {
 
     }
+
+    /**
+     * Obtain Buffered Image from Raw byte stream
+     * @param data
+     * @return
+     * @throws IOException
+     */
     public static BufferedImage generateBufferedImage(byte[] data) throws IOException {
         ByteArrayInputStream stream = null;
         BufferedImage resultImage = null;

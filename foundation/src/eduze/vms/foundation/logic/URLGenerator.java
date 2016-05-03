@@ -33,5 +33,29 @@ public class URLGenerator {
     {
         return serverUrl + "/audio-relay/"+ String.valueOf(consoleId) + "/buffer";
     }
+
+
+    /**
+     * Generate Screen Share Console Access URL
+     * @param serverUrl
+     * @param consoleId
+     * @return
+     */
+    public static String generateScreenShareConsoleBufferAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId) + "/buffer";
+    }
+
+    /**
+     * Generate Screen Share Console Access URL
+     * @param serverUrl
+     * @param consoleId
+     * @return
+     */
+    public static String generateScreenShareConsoleAccessUrl(String serverUrl, String consoleId)
+    {
+        return serverUrl + "/screen-share/"+ String.valueOf(consoleId);
+    }
 }
+
 

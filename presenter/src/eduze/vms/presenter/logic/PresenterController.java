@@ -13,40 +13,66 @@ import java.util.ArrayList;
 /**
  * Created by Madhawa on 14/04/2016.
  */
-public class PresenterController {
-    private final String presenterConsoleId;
-    // Configuration configuration;
-    private Facilitator facilitator = null;
-    private PresenterConsole presenterConsole = null;
-    private FacilitatorConnector connector = null;
 
+/**
+ * Main Controller for managing logic of Presenter Subsystem
+ */
+public class PresenterController {
+    //Presenter console id provided by facilitator
+    private final String presenterConsoleId;
+    //Facilitator MPI provided by Facilitator Web Service
+    private Facilitator facilitator = null;
+    //Presenter Console MPI provided by Facilitator Web Service
+    private PresenterConsole presenterConsole = null;
+    //Connector to manage connections with Facilitator
+    private FacilitatorConnector connector = null;
+    //Control Mechanism of Presenter Subsystem
     private ControlLoop controlLoop = null;
 
+    //Event listeners from UI
     private ArrayList<ControlLoop.StateChangeListener> stateChangeListeners = new ArrayList<>();
 
-
-
+    //Assigned tasks manager
     private AssignedTasksManager assignedTasksManager = null;
 
+    /**
+     * Constructor to Presenter Controller. Presenter Controller should be constructed by following procedure in Facilitator Connector.
+     * @param facilitatorConnector Facilitator Connector used to establish connection
+     * @param facilitator Facilitator MPI provided by Facilitator
+     * @param presenterConsoleId Presenter Console id
+     */
     PresenterController(FacilitatorConnector facilitatorConnector, Facilitator facilitator, String presenterConsoleId) {
         this.connector = facilitatorConnector;
         this.facilitator = facilitator;
         this.presenterConsoleId = presenterConsoleId;
     }
 
+    /**
+     * Retrieve Configuration of Presenter Subsystem
+     * @return
+     */
     public FacilitatorConnector.Configuration getConfiguration()
     {
         return connector.getConfiguration();
     }
 
+    /**
+     * Start Controller
+     * @throws MalformedURLException
+     * @throws FacilitatorConnectionException
+     */
     void start() throws MalformedURLException, FacilitatorConnectionException {
+        //Establish Connection to Web Services
         PresenterConsoleImplServiceLocator presenterConsoleImplServiceLocator = new PresenterConsoleImplServiceLocator();
         try {
+            //Acknowledge Connection
             presenterConsole = presenterConsoleImplServiceLocator.getPresenterConsoleImplPort(new URL(URLGenerator.generatePresenterConsoleAccessUrl(getConfiguration().getFacilitatorURL(),presenterConsoleId)));
             presenterConsole.acknowledgeConnection();
 
+            //Setup Assigned Tasks Manager
             this.assignedTasksManager = new AssignedTasksManager(this);
 
+            //Setup Control Loop
             this.controlLoop = new ControlLoop(presenterConsole,getConfiguration().getFacilitatorURL());
             this.controlLoop.setStateChangeListener(new ControlLoop.StateChangeListener() {
                 @Override
@@ -65,6 +91,7 @@ public class PresenterController {
                 }
             });
 
+            //Start Control Loop
             this.controlLoop.start();
 
         } catch (ServiceException e) {
@@ -74,6 +101,10 @@ public class PresenterController {
         }
     }
 
+    /**
+     * Disconnect from Facilitator
+     * @throws FacilitatorConnectionException
+     */
     public void disconnect() throws FacilitatorConnectionException {
         try {
             presenterConsole.disconnect();
@@ -84,6 +115,12 @@ public class PresenterController {
 
     }
 
+    /**
+     * Request from facilitator, permission to share screen
+     * @param includeAudio include audio share request
+     * @return False if request is immediately denied. True if request is being considered.
+     * @throws FacilitatorConnectionException
+     */
     public boolean requestScreenShare(boolean includeAudio) throws FacilitatorConnectionException {
         try{
             return presenterConsole.requestScreenAccess(includeAudio);
@@ -95,6 +132,11 @@ public class PresenterController {
 
     }
 
+    /**
+     * Request permission from facilitator to share audio
+     * @return True if request is being considered. False if request is immediately rejected.
+     * @throws FacilitatorConnectionException
+     */
     public boolean requestAudioShare() throws FacilitatorConnectionException {
         try{
             return presenterConsole.requestAudioRelayAccess();
@@ -107,27 +149,46 @@ public class PresenterController {
     }
 
 
-
+    /**
+     * Retrieve whether the screen shared
+     * @return
+     */
     public boolean isScreenShared()
     {
         return controlLoop.isScreenShared();
     }
 
+    /**
+     * Retrieve whether the audio is shared
+     * @return
+     */
     public boolean isAudioShared()
     {
         return controlLoop.isAudioShared();
     }
 
+    /**
+     * Register a listener to state changes of Presenter Logic
+     * @param listener
+     */
     public void addStateChangeListener(ControlLoop.StateChangeListener listener)
     {
         stateChangeListeners.add(listener);
     }
 
+    /**
+     * Removes a StateChange listener
+     * @param listener
+     */
     public void removeStateChangeListener(ControlLoop.StateChangeListener listener)
     {
         stateChangeListeners.remove(listener);
     }
 
+    /**
+     * Notify listeners on change in screen share state
+     * @param newValue is screen shared enabled
+     */
     void notifyScreenSharedChanged(boolean newValue)
     {
         for(ControlLoop.StateChangeListener listener : stateChangeListeners)
@@ -136,6 +197,10 @@ public class PresenterController {
         }
     }
 
+    /**
+     * Notify listeners on change in audio share state
+     * @param newValue is audio shared enabled
+     */
     void notifyAudioSharedChanged(boolean newValue)
     {
         for(ControlLoop.StateChangeListener listener : stateChangeListeners)
@@ -144,31 +209,59 @@ public class PresenterController {
         }
     }
 
+    /**
+     * Retrieve assinged tasks manager
+     * @return
+     */
     public AssignedTasksManager getAssignedTasksManager() {
         return assignedTasksManager;
     }
 
+    /**
+     * Retrieve whether presenter has given consent to share screen
+     * @return
+     */
     public boolean isAllowedScreenShare() {
         return controlLoop.isAllowedScreenShare();
     }
 
+    /**
+     * Set whether presenter has given consent to share screen
+     * @param allowedScreenShare
+     */
     public void setAllowedScreenShare(boolean allowedScreenShare) {
         controlLoop.setAllowedScreenShare(allowedScreenShare);
     }
 
+    /**
+     * Retrieve whether presenter has given consent to share audio
+     * @return
+     */
     public boolean isAllowedAudioShare() {
         return controlLoop.isAllowedAudioShare();
     }
 
+    /**
+     * Set whether presenter has given consent to share audio
+     * @param allowedAudioShare
+     */
     public void setAllowedAudioShare(boolean allowedAudioShare) {
         controlLoop.setAllowedAudioShare(allowedAudioShare);
     }
 
+    /**
+     * Retrieve whether facilitator is willing to accept screen share
+     * @return
+     */
     public boolean isServerAcceptsScreenShare()
     {
         return controlLoop.isServerAcceptsScreenShare();
     }
 
+    /**
+     * Retrieve whether facilitator is willing to acccept audio share
+     * @return
+     */
     public boolean isServerAcceptsAudioShare()
     {
         return controlLoop.isServerAcceptsAudioShare();

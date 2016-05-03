@@ -11,6 +11,13 @@ public class AudioRelayRequest extends AbstractShareRequest {
         super(presenterConsoleId,facilitator);
     }
 
+    /**
+     * Accept the Request
+     * @throws RequestAlreadyProcessedException Request has been processed already
+     * @throws ServerConnectionException Server connection exception
+     * @throws InvalidIdException Invalid presenter console
+     * @throws ServerNotReadyException Server is not ready
+     */
     @Override
     public void honour() throws RequestAlreadyProcessedException, ServerConnectionException, InvalidIdException, ServerNotReadyException {
         if(answered)
@@ -19,6 +26,10 @@ public class AudioRelayRequest extends AbstractShareRequest {
         markAnswered();
     }
 
+    /**
+     * Dismiss the Request
+     * @throws RequestAlreadyProcessedException
+     */
     @Override
     public void dismiss() throws RequestAlreadyProcessedException {
         if(answered)
