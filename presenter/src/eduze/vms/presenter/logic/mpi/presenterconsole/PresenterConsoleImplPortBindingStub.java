@@ -41,6 +41,12 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
         _operations[1] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
@@ -48,27 +54,13 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ServerConnectionException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ServerConnectionException"), 
+                      true
+                     ));
         _operations[2] = oper;
-
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("requestAudioRelayAccess");
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
-        oper.setReturnClass(boolean.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
-        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
-        oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[3] = oper;
-
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("requestScreenAccess");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "IncludeAudio"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"), boolean.class, false, false);
-        oper.addParameter(param);
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
-        oper.setReturnClass(boolean.class);
-        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
-        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
-        oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getVMSnapshot");
@@ -83,7 +75,7 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
                       new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ServerConnectionException"), 
                       true
                      ));
-        _operations[5] = oper;
+        _operations[3] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getConsoleId");
@@ -92,16 +84,39 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[6] = oper;
+        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getOutAudioRelayConsoleId");
-        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        oper.setReturnClass(java.lang.String.class);
+        oper.setName("requestScreenAccess");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "IncludeAudio"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"), boolean.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        oper.setReturnClass(boolean.class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
-        _operations[7] = oper;
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
+        _operations[5] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("requestAudioRelayAccess");
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        oper.setReturnClass(boolean.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
+        _operations[6] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getOutScreenShareConsoleId");
@@ -110,8 +125,49 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
         oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
+        _operations[7] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("getOutAudioRelayConsoleId");
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        oper.setReturnClass(java.lang.String.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
         _operations[8] = oper;
 
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("getAssignedTasks");
+        oper.setReturnType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "AssignedTask"));
+        oper.setReturnClass(eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"),
+                      "eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException"), 
+                      true
+                     ));
+        _operations[9] = oper;
+
+    }
+
+    private static void _initOperationDesc2(){
+        org.apache.axis.description.OperationDesc oper;
+        org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("acknowledgeConnection");
         oper.setReturnType(org.apache.axis.encoding.XMLType.AXIS_VOID);
@@ -123,20 +179,6 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
                       new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "ServerConnectionException"), 
                       true
                      ));
-        _operations[9] = oper;
-
-    }
-
-    private static void _initOperationDesc2(){
-        org.apache.axis.description.OperationDesc oper;
-        org.apache.axis.description.ParameterDesc param;
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getAssignedTasks");
-        oper.setReturnType(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "AssignedTask"));
-        oper.setReturnClass(eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[].class);
-        oper.setReturnQName(new javax.xml.namespace.QName("", "return"));
-        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
-        oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[10] = oper;
 
     }
@@ -173,6 +215,13 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
             qName = new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "AssignedTask");
             cachedSerQNames.add(qName);
             cls = eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "DisconnectedException");
+            cachedSerQNames.add(qName);
+            cls = eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -298,7 +347,7 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
 }
     }
 
-    public void setName(java.lang.String newName) throws java.rmi.RemoteException {
+    public void setName(java.lang.String newName) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -321,11 +370,19 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         }
         extractAttachments(_call);
   } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
   throw axisFaultException;
 }
     }
 
-    public void disconnect() throws java.rmi.RemoteException {
+    public void disconnect() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -348,74 +405,14 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         }
         extractAttachments(_call);
   } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
-    }
-
-    public boolean requestAudioRelayAccess() throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
-            throw new org.apache.axis.NoEndPointException();
-        }
-        org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[3]);
-        _call.setUseSOAPAction(true);
-        _call.setSOAPActionURI("");
-        _call.setEncodingStyle(null);
-        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
-        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
-        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "requestAudioRelayAccess"));
-
-        setRequestHeaders(_call);
-        setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
-
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Boolean) _resp).booleanValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
-            }
-        }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
-    }
-
-    public boolean requestScreenAccess(boolean includeAudio) throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
-            throw new org.apache.axis.NoEndPointException();
-        }
-        org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[4]);
-        _call.setUseSOAPAction(true);
-        _call.setSOAPActionURI("");
-        _call.setEncodingStyle(null);
-        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
-        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
-        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "requestScreenAccess"));
-
-        setRequestHeaders(_call);
-        setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Boolean(includeAudio)});
-
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return ((java.lang.Boolean) _resp).booleanValue();
-            } catch (java.lang.Exception _exception) {
-                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
-            }
-        }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException) axisFaultException.detail;
+         }
+   }
   throw axisFaultException;
 }
     }
@@ -425,7 +422,7 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[5]);
+        _call.setOperation(_operations[3]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -467,7 +464,7 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[6]);
+        _call.setOperation(_operations[4]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -496,19 +493,61 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
 }
     }
 
-    public java.lang.String getOutAudioRelayConsoleId() throws java.rmi.RemoteException {
+    public boolean requestScreenAccess(boolean includeAudio) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[7]);
+        _call.setOperation(_operations[5]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "getOutAudioRelayConsoleId"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "requestScreenAccess"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {new java.lang.Boolean(includeAudio)});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return ((java.lang.Boolean) _resp).booleanValue();
+            } catch (java.lang.Exception _exception) {
+                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public boolean requestAudioRelayAccess() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[6]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "requestAudioRelayAccess"));
 
         setRequestHeaders(_call);
         setAttachments(_call);
@@ -520,22 +559,30 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
         else {
             extractAttachments(_call);
             try {
-                return (java.lang.String) _resp;
+                return ((java.lang.Boolean) _resp).booleanValue();
             } catch (java.lang.Exception _exception) {
-                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
   throw axisFaultException;
 }
     }
 
-    public java.lang.String getOutScreenShareConsoleId() throws java.rmi.RemoteException {
+    public java.lang.String getOutScreenShareConsoleId() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[8]);
+        _call.setOperation(_operations[7]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -560,6 +607,98 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public java.lang.String getOutAudioRelayConsoleId() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[8]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "getOutAudioRelayConsoleId"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (java.lang.String) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (java.lang.String) org.apache.axis.utils.JavaUtils.convert(_resp, java.lang.String.class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[] getAssignedTasks() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[9]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "getAssignedTasks"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[]) org.apache.axis.utils.JavaUtils.convert(_resp, eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) {
+              throw (eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException) axisFaultException.detail;
+         }
+   }
   throw axisFaultException;
 }
     }
@@ -569,7 +708,7 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[9]);
+        _call.setOperation(_operations[10]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -595,40 +734,6 @@ public class PresenterConsoleImplPortBindingStub extends org.apache.axis.client.
               throw (eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException) axisFaultException.detail;
          }
    }
-  throw axisFaultException;
-}
-    }
-
-    public eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[] getAssignedTasks() throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
-            throw new org.apache.axis.NoEndPointException();
-        }
-        org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[10]);
-        _call.setUseSOAPAction(true);
-        _call.setSOAPActionURI("");
-        _call.setEncodingStyle(null);
-        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
-        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
-        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://webservices.logic.facilitator.vms.eduze/", "getAssignedTasks"));
-
-        setRequestHeaders(_call);
-        setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
-
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[]) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[]) org.apache.axis.utils.JavaUtils.convert(_resp, eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[].class);
-            }
-        }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
   throw axisFaultException;
 }
     }

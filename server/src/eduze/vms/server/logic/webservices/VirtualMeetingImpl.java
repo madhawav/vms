@@ -246,6 +246,8 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     }
 
 
+
+
     FacilitatorConsoleImpl getFacilitatorConsole(String consoleId)
     {
         for(FacilitatorConsoleImpl fac: facilitatorConsoles)
@@ -317,6 +319,8 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     }
 
     void updateStatus() {
+        if(status == SessionStatus.Adjourned)
+            return;
         if(status == SessionStatus.NotReady)
             return;
         if(getFacilitatorConsoleCount() == 0)
@@ -326,5 +330,12 @@ public class VirtualMeetingImpl implements VirtualMeeting {
 
         if(getFacilitatorConsoleCount() == 2)
             status = SessionStatus.MeetingOnline;
+    }
+
+    void adjournMeeting()
+    {
+        status = SessionStatus.Adjourned;
+        if(getSessionManager().getServer().getFacilitatorSessionListener() != null)
+            getSessionManager().getServer().getFacilitatorSessionListener().onMeetingAdjourned();
     }
 }

@@ -159,6 +159,11 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         }
     }
 
+    @Override
+    public void adjournMeeting() {
+        virtualMeeting.adjournMeeting();
+    }
+
     Facilitator getFacilitator()
     {
         return facilitator;

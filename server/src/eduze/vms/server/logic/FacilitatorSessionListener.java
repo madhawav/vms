@@ -25,4 +25,9 @@ public interface FacilitatorSessionListener {
      * @param consoleId Console id of Facilitator Console
      */
     public void onDisconnected( Facilitator facilitator, String consoleId);
+
+    /**
+     * The meeting has been adjourned
+     */
+    public void onMeetingAdjourned();
 }

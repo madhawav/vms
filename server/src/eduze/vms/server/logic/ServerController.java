@@ -102,10 +102,22 @@ public class ServerController {
             public void onDisconnected(Facilitator facilitator, String consoleId) {
                 notifyFacilitatorDisconnected(facilitator,consoleId);
             }
+
+            @Override
+            public void onMeetingAdjourned() {
+                notifyMeetingAdjourned();
+            }
         });
 
         serverService.start();
         running = true;
+    }
+
+    private void notifyMeetingAdjourned() {
+        for(FacilitatorSessionListener l : facilitatorSessionListeners)
+        {
+            l.onMeetingAdjourned();
+        }
     }
 
     private void notifyPairNameChanged(String pairKey, String oldName, String newName) {

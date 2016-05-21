@@ -45,4 +45,9 @@ public interface FacilitatorConsole {
     @WebMethod
     public void setParticipants(@WebParam(name="Participants") Collection<VMParticipant> participants);
 
+    /**
+     * Adjourn the meeting
+     */
+    @WebMethod
+    public void adjournMeeting();
 }

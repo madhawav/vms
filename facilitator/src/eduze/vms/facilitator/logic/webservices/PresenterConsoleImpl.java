@@ -104,7 +104,12 @@ public class PresenterConsoleImpl implements PresenterConsole {
      */
     public boolean isConnected()
     {
-        return connectionAcknowledged;//TODO: Improve logic here
+       if(!connectionAcknowledged)
+           return false;
+        if(getFacilitator().getPresenterConsole(consoleId) == null)
+            return false;
+        return true;
+        //TODO: Improve logic here
     }
 
     /**
@@ -141,8 +146,9 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return
      */
     @Override
-    public String getConsoleId() {
-        return consoleId;
+    public String getConsoleId()  {
+
+            return consoleId;
     }
 
     /**
@@ -150,7 +156,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return
      */
     @Override
-    public String getName() {
+    public String getName(){
         return name;
     }
 
@@ -159,7 +165,9 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @param newName
      */
     @Override
-    public void setName(String newName) {
+    public void setName(String newName) throws DisconnectedException {
+        if(!isConnected())
+            throw new DisconnectedException();
         if(!name.equals(newName))
         {
             name = newName;
@@ -176,7 +184,8 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @throws ServerConnectionException
      */
     @Override
-    public VirtualMeetingSnapshot getVMSnapshot() throws ServerConnectionException {
+    public VirtualMeetingSnapshot getVMSnapshot() throws ServerConnectionException{
+
         //Generate Virtual Meeting Snapshot from Virtual Meeting provided by Facilitator
         VirtualMeetingSnapshot snap = VirtualMeetingSnapshot.fromVirtualMeeting(getFacilitator().getVirtualMeeting());
         return snap;
@@ -187,7 +196,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return
      */
     @Override
-    public String getOutScreenShareConsoleId() {
+    public String getOutScreenShareConsoleId()  {
         return screenShareConsole.getConsoleId();
     }
 
@@ -206,7 +215,9 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return
      */
     @Override
-    public boolean requestScreenAccess(boolean includeAudio) {
+    public boolean requestScreenAccess(boolean includeAudio) throws DisconnectedException {
+        if(!isConnected())
+            throw new DisconnectedException();
         if(includeAudio)
         {
             //Generate share request
@@ -233,7 +244,9 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return
      */
     @Override
-    public boolean requestAudioRelayAccess() {
+    public boolean requestAudioRelayAccess() throws DisconnectedException {
+        if(!isConnected())
+            throw new DisconnectedException();
         //Generate Share Request
         AudioRelayRequest shareRequest = new AudioRelayRequest(getConsoleId(),getFacilitator());
         //Notify listeners
@@ -247,7 +260,10 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * @return Array of AssignedTasks
      */
     @Override
-    public ArrayList<AssignedTask> getAssignedTasks() {
+    public ArrayList<AssignedTask> getAssignedTasks() throws DisconnectedException {
+
+        if(!isConnected())
+            throw new DisconnectedException();
         return assignedTasks;
     }
 

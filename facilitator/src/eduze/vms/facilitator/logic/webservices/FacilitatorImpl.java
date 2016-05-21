@@ -271,6 +271,7 @@ public class FacilitatorImpl implements Facilitator  {
      * @param console PresenterConsole Id
      */
     void disconnectPresenter(PresenterConsoleImpl console) throws ServerConnectionException {
+
         presenterConsoles.remove(console.getConsoleId());
 
         updateVMParticipants();

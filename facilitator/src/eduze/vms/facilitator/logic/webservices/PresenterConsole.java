@@ -43,7 +43,7 @@ public interface PresenterConsole {
      * @param newName
      */
     @WebMethod
-    public void setName(@WebParam(name = "NewName") String newName);
+    public void setName(@WebParam(name = "NewName") String newName) throws DisconnectedException;
 
     /**
      * Return snapshot of current status of virtual meeting
@@ -57,14 +57,14 @@ public interface PresenterConsole {
      * @return
      */
     @WebMethod
-    public String getOutScreenShareConsoleId();
+    public String getOutScreenShareConsoleId() throws DisconnectedException;
 
     /**
      * Retrieve ID for AudioRelayConsole
      * @return
      */
     @WebMethod
-    public String getOutAudioRelayConsoleId();
+    public String getOutAudioRelayConsoleId() throws DisconnectedException;
 
     /**
      * Request permission to share screen
@@ -72,20 +72,20 @@ public interface PresenterConsole {
      * @return true if request is considered. false if request is immediately rejected.
      */
     @WebMethod
-    public boolean requestScreenAccess(@WebParam(name = "IncludeAudio") boolean includeAudio);
+    public boolean requestScreenAccess(@WebParam(name = "IncludeAudio") boolean includeAudio) throws DisconnectedException;
 
     /**
      * Request permission to speak
      * @return True if request is being considered. False if request is immediately rejected.
      */
     @WebMethod
-    public boolean requestAudioRelayAccess();
+    public boolean requestAudioRelayAccess() throws DisconnectedException;
 
     /**
      * Retrieve assigned tasks of presenter
      * @return
      */
     @WebMethod
-    public Collection<AssignedTask> getAssignedTasks();
+    public Collection<AssignedTask> getAssignedTasks() throws DisconnectedException;
 
 }
