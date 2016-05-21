@@ -52,6 +52,7 @@ public class ConnectorPanel {
     private JButton assignButton;
     private JButton clearAssignButton;
     private JButton deleteTaskButton;
+    private JButton disconnectButton;
     private JButton btnStartListener;
     private JFrame mainFrame;
 
@@ -140,6 +141,20 @@ public class ConnectorPanel {
 
         });
 
+        disconnectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onDisconnectClicked();
+            }
+        });
+    }
+
+    private void onDisconnectClicked() {
+        try {
+            facilitatorController.getServerConnectionController().disconnect();
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onDeleteTask() {
@@ -383,6 +398,11 @@ public class ConnectorPanel {
 
             @Override
             public void onConnected(String connectionRequestId, String consoleId) {
+
+            }
+
+            @Override
+            public void onDisconnected(String consoleId) {
 
             }
         });

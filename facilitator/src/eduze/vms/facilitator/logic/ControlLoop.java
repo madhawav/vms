@@ -327,9 +327,24 @@ public class ControlLoop extends Thread {
                 screenReceiver.stopReceiving();
                 audioReceiver.stopReceiving();
                 audioSwitcher.Stop();
-                screenReceiver.stopReceiving();
+                screenSwitcher.Stop();
+
+                //Stop incoming traffic
+                stopIncoming();
             }
         });
+    }
+
+    /**
+     * Stop incoming traffic
+     */
+    private void stopIncoming() {
+
+        for (PresenterConsoleImpl presenterConsole : facilitator.getPresenterConsoles()) {
+            presenterConsole.getAudioRelayConsole().setEnabled(false);
+            presenterConsole.getScreenShareConsole().setEnabled(false);
+        }
+
     }
 
     /**

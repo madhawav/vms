@@ -104,6 +104,11 @@ public class FacilitatorController {
             public void onConnected(String connectionRequestId, String consoleId) {
                 notifyPresenterConnected(connectionRequestId,consoleId);
             }
+
+            @Override
+            public void onDisconnected(String consoleId) {
+                notifyPresenterDisconnected(consoleId);
+            }
         });
         facilitatorService.setPresenterModifiedListener(new PresenterModifiedListener() {
             @Override
@@ -128,6 +133,8 @@ public class FacilitatorController {
 
         running = true;
     }
+
+
 
 
     /**
@@ -180,6 +187,14 @@ public class FacilitatorController {
 
         //Start Control Loop
         controlLoop.start();
+    }
+
+    void notifyServerDisconnected() throws ServerConnectionException {
+        controlLoop.stopRunning();
+        controlLoop = null;
+        sharedTaskManager = null;
+        facilitatorService.disconnectServerConnection();
+
     }
 
 
@@ -305,6 +320,15 @@ public class FacilitatorController {
     private void notifyPresenterConnected(String connectionRequestId, String consoleId) {
         for(PresenterConnectionListener connectionListener : presenterConnectionListeners)
             connectionListener.onConnected(connectionRequestId,consoleId);
+    }
+
+    /**
+     * Notifies listeners that a presenter has been disconnected
+     * @param consoleId
+     */
+    private void notifyPresenterDisconnected(String consoleId) {
+        for(PresenterConnectionListener connectionListener : presenterConnectionListeners)
+            connectionListener.onDisconnected(consoleId);
     }
 
 

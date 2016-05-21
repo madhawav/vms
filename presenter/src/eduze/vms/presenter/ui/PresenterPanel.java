@@ -30,6 +30,7 @@ public class PresenterPanel {
     private JButton btnAllShare;
     private JCheckBox allowedScreenShareCheckBox;
     private JCheckBox allowedSpeechShareCheckbox;
+    private JButton disconnectButton;
     private JFrame mainFrame;
 
     private PresenterController controller = null;
@@ -76,6 +77,16 @@ public class PresenterPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.setAllowedAudioShare(allowedSpeechShareCheckbox.isSelected());
+            }
+        });
+        disconnectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    controller.disconnect();
+                } catch (FacilitatorConnectionException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
     }

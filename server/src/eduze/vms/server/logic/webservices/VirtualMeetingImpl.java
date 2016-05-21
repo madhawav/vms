@@ -267,6 +267,7 @@ public class VirtualMeetingImpl implements VirtualMeeting {
             if(facilitatorConsoles[i] == null)
             {
                 facilitatorConsoles[i] = console;
+                updateStatus();
                 return i;
             }
         }
@@ -279,10 +280,11 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     {
         for(int i = 0; i < facilitatorConsoles.length;i++)
         {
-            if(facilitatorConsoles[i].getConsoleId().equals(console.getConsoleId()))
-                facilitatorConsoles[i] = null;
+            if(facilitatorConsoles[i] != null)
+                if(facilitatorConsoles[i].getConsoleId().equals(console.getConsoleId()))
+                    facilitatorConsoles[i] = null;
         }
-
+        updateStatus();
     }
 
     int getFacilitatorConsoleCount()

@@ -68,12 +68,30 @@ public class FacilitatorImpl implements Facilitator  {
             virtualMeeting = vmLocator.getVirtualMeetingImplPort(new URL(UrlGenerator.generateVMAccessUrl(serverURL,virtualMeetingId)));
             facilitatorConsole = facilitatorLocator.getFacilitatorConsoleImplPort(new URL(UrlGenerator.generateFacilitatorConsoleAccessUrl(serverURL,facilitatorConsoleId)));
 
+
             //Update the list of Virtual Meeting participants in Server to include participants connected to this facilitator
             updateVMParticipants();
         }
         catch (ServiceException e)
         {
             //Error in connection with Server
+            throw new ServerConnectionException(e);
+        }
+
+    }
+
+    /**
+     * Disconnect from Server
+     */
+    public void disconnectServerConnection() throws ServerConnectionException {
+        try {
+            getFacilitatorConsole().disconnect();
+            this.virtualMeeting = null;
+            this.facilitatorConsole = null;
+            this.facilitatorConsoleId = null;
+            this.virtualMeetingId = null;
+
+        } catch (RemoteException e) {
             throw new ServerConnectionException(e);
         }
 
@@ -252,10 +270,13 @@ public class FacilitatorImpl implements Facilitator  {
      * Disconnect a presenter connected to facilitator
      * @param console PresenterConsole Id
      */
-    void disconnectPresenter(PresenterConsoleImpl console)
-    {
-        console.stop();
+    void disconnectPresenter(PresenterConsoleImpl console) throws ServerConnectionException {
         presenterConsoles.remove(console.getConsoleId());
+
+        updateVMParticipants();
+        if(getPresenterConnectionListener()!=null)
+            getPresenterConnectionListener().onDisconnected(console.getConsoleId());
+
     }
 
 

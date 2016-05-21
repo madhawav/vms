@@ -23,6 +23,9 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
     public String consoleId = "";
     private int port = 0;
 
+    private Endpoint audioRelayConsoleEndPoint = null;
+    private Endpoint audioRelayFrameBufferEndPoint = null;
+
     //Communication Buffer
     private FrameBufferImpl frameBuffer = null;
     public AudioRelayConsoleImpl()
@@ -50,8 +53,20 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
         Logger.getLogger("DEBUG").log(Level.INFO, "Audio RelayConsole Started " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
         Logger.getLogger("DEBUG").log(Level.INFO, "Audio Relay Frame Buffer Started " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
         //Publish Endpoints
-        Endpoint.publish(URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId),frameBuffer);
-        Endpoint.publish(URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId),this);
+        audioRelayFrameBufferEndPoint = Endpoint.publish(URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId),frameBuffer);
+        audioRelayConsoleEndPoint = Endpoint.publish(URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId),this);
+    }
+
+    /**
+     * Stop the Audio Relay Console Web Service
+     */
+    public void stop()
+    {
+        Logger.getLogger("DEBUG").log(Level.INFO, "Audio RelayConsole Stopped " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
+        Logger.getLogger("DEBUG").log(Level.INFO, "Audio Relay Frame Buffer Stopped " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
+        //Publish Endpoints
+       // audioRelayConsoleEndPoint.stop();
+       // audioRelayFrameBufferEndPoint.stop();
     }
 
 

@@ -73,6 +73,8 @@ public class PresenterConsoleImpl implements PresenterConsole {
      */
     void stop()
     {
+        screenShareConsole.stop();
+        audioRelayConsole.stop();
         //TODO: put stop logic here
         //endpoint.stop();
     }
@@ -129,9 +131,9 @@ public class PresenterConsoleImpl implements PresenterConsole {
      * Disconnect Presenter from Facilitator
      */
     @Override
-    public void disconnect() {
-        this.stop();
+    public void disconnect() throws ServerConnectionException {
         getFacilitator().disconnectPresenter(this);
+        this.stop();
     }
 
     /**

@@ -24,6 +24,9 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
     public String consoleId = "";
     private int port = 0;
 
+    private Endpoint screenShareConsoleEndPoint = null;
+    private Endpoint screenShareFrameBufferEndPoint = null;
+
     //Buffer used for communication
     private FrameBufferImpl frameBuffer = null;
     public ScreenShareConsoleImpl()
@@ -50,8 +53,15 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
     {
         Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Console Started " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
         Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Frame Buffer Started " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
-        Endpoint.publish(URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId),frameBuffer);
-        Endpoint.publish(URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId),this);
+        screenShareFrameBufferEndPoint = Endpoint.publish(URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId),frameBuffer);
+        screenShareConsoleEndPoint = Endpoint.publish(URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId),this);
+    }
+
+    public void stop() {
+        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Console Stopped " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
+        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Frame Buffer Stopped " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
+        //screenShareFrameBufferEndPoint.stop();
+        // screenShareConsoleEndPoint.stop();
     }
 
     /**
@@ -106,6 +116,7 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
 
 
 }

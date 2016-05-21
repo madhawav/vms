@@ -21,5 +21,11 @@ public interface PresenterConnectionListener {
      */
     public void onConnected(String connectionRequestId, String consoleId);
 
+    /**
+     * A Presenter has been disconnected from Facilitator
+     * @param consoleId
+     */
+    public void onDisconnected(String consoleId);
+
     //TODO: onDisconnect method should be added
 }

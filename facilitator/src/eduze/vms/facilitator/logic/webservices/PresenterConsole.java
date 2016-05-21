@@ -22,7 +22,7 @@ public interface PresenterConsole {
      * Disconnect from Facilitator
      */
     @WebMethod
-    public void disconnect();
+    public void disconnect() throws ServerConnectionException;
 
     /**
      * Return console id

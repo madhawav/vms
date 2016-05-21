@@ -205,6 +205,16 @@ public class ControlLoop extends Thread {
                 e.printStackTrace();
             }
         }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if(audioCapturer.isCapturing())
+                    audioCapturer.stopCapture();
+                if(screenCapturer.isCapturing())
+                    screenCapturer.stopCapture();
+            }
+        });
     }
 
     /**

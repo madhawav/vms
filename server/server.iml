@@ -11,6 +11,7 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../livestream/out/artifacts/livestream_jar/livestream.jar!/" />
+          <root url="jar://$MODULE_DIR$/../lib/livestream.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

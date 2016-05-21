@@ -59,7 +59,7 @@ public class VMSessionManagerImpl implements VMSessionManager {
             facilitatorConsole.initialize(slotId);
 
             facilitatorConsole.start();
-            virtualMeeting.updateStatus();
+
 
             ConnectionResult result = new ConnectionResult();
             result.setSuccessful(true);

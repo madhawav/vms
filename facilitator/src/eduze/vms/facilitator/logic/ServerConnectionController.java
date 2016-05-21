@@ -56,6 +56,7 @@ public class ServerConnectionController {
         facilitatorManager = facilitatorManagerImplServiceLocator.getFacilitatorManagerImplPort(new URL(UrlGenerator.generateFacilitatorManagerAccessURL(url)));
         vmSessionManager = vmSesssionManagerImplServiceLocator.getVMSessionManagerImplPort(new URL(UrlGenerator.generateVMSessionManagerAccessURL(url)));
 
+
         //Obtain ids
         virtualMeetingConsoleId = connectionResult.getVirtualMeetingConsoleId();
         facilitatorConsoleId = connectionResult.getFacilitatorConsoleId();
@@ -83,9 +84,12 @@ public class ServerConnectionController {
     /**
      * Disconnect Facilitator from Server
      */
-    public void disconnect()
-    {
-        //TODO: Setup server disconnection logic here
+    public void disconnect() throws ServerConnectionException {
+        facilitatorController.notifyServerDisconnected();
+        this.vmSessionManager = null;
+        this.facilitatorController = null;
+        this.server = null;
+        isConnected = false;
     }
 
     /**
@@ -113,6 +117,8 @@ public class ServerConnectionController {
     public FacilitatorController getFacilitatorController() {
         return facilitatorController;
     }
+
+
 
     /**
      * Retrieve FaciltiatorManager MPIf from Server
