@@ -11,6 +11,6 @@ public interface VMSessionManager {
     @WebMethod
     public SessionStatus getStatus();
     @WebMethod
-    public ConnectionResult connect(String name, String pairKey) throws ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException;
+    public ConnectionResult connect(String name, String pairKey) throws ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException,MeetingAdjournedException;
 
 }

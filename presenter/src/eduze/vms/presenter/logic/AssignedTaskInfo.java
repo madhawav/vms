@@ -4,6 +4,8 @@ package eduze.vms.presenter.logic;
  * Created by Fujitsu on 4/16/2016.
  */
 
+import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
+
 /**
  * Structure representing information on an Assigned Task to Presenter
  */

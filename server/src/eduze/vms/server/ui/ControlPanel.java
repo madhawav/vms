@@ -77,6 +77,12 @@ public class ControlPanel extends JFrame {
                 public void onDisconnected(Facilitator facilitator, String consoleId) {
                     txtStatus.setText(txtStatus.getText()+"\n" + "Disconnected " + facilitator.getName() + " " + consoleId);
                 }
+
+                @Override
+                public void onMeetingAdjourned() {
+                    txtStatus.setText(txtStatus.getText()+"\n" + "Meeting Adjourned");
+
+                }
             });
             controller.start();
 

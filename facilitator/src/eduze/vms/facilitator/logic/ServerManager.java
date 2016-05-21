@@ -185,7 +185,7 @@ public class ServerManager {
      * @throws UnknownFacilitatorException Facilitator has not paired previously
      * @throws FacilitatorAlreadyConnectedException Facilitator is already connected
      */
-    public ServerConnectionController connect(PairedServer server) throws MalformedURLException, ServerConnectionException, ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException {
+    public ServerConnectionController connect(PairedServer server) throws MalformedURLException, ServerConnectionException, ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException, MeetingAdjournedException {
         //Obtain server url
         String url = server.getServerURL();
 
@@ -211,6 +211,9 @@ public class ServerManager {
         }
         catch (ServerNotReadyException e)
         {
+            throw e;
+        }
+        catch (MeetingAdjournedException e){
             throw e;
         }
         catch (MeetingAlreadyStartedException e)

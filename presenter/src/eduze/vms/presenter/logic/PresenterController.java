@@ -1,6 +1,8 @@
 package eduze.vms.presenter.logic;
 
 import eduze.vms.presenter.logic.mpi.facilitator.Facilitator;
+import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
+import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsoleImplServiceLocator;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;

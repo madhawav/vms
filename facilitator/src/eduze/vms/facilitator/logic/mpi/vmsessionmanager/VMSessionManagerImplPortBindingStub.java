@@ -49,6 +49,12 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
                       true
                      ));
         oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "MeetingAdjournedException"),
+                      "eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException",
+                      new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "MeetingAdjournedException"), 
+                      true
+                     ));
+        oper.addFault(new org.apache.axis.description.FaultDesc(
                       new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "MeetingAlreadyStartedException"),
                       "eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException",
                       new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "MeetingAlreadyStartedException"), 
@@ -112,6 +118,13 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
             qName = new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "FacilitatorAlreadyConnectedException");
             cachedSerQNames.add(qName);
             cls = eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "MeetingAdjournedException");
+            cachedSerQNames.add(qName);
+            cls = eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException.class;
             cachedSerClasses.add(cls);
             cachedSerFactories.add(beansf);
             cachedDeserFactories.add(beandf);
@@ -210,7 +223,7 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
         }
     }
 
-    public eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult connect(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.UnknownFacilitatorException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException {
+    public eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult connect(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.UnknownFacilitatorException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -249,6 +262,9 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
          }
         if (axisFaultException.detail instanceof eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException) {
               throw (eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException) {
+              throw (eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException) axisFaultException.detail;
          }
         if (axisFaultException.detail instanceof eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException) {
               throw (eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException) axisFaultException.detail;

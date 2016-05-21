@@ -4,6 +4,8 @@ import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Madhawa on 12/04/2016.
@@ -30,8 +32,10 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
 
     @Override
-    public ConnectionResult connect(String name, String pairKey) throws ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException {
+    public ConnectionResult connect(String name, String pairKey) throws ServerNotReadyException, MeetingAlreadyStartedException, UnknownFacilitatorException, FacilitatorAlreadyConnectedException, MeetingAdjournedException {
 
+        if(virtualMeeting.getStatus() == SessionStatus.Adjourned)
+            throw new MeetingAdjournedException();
         if(virtualMeeting.getStatus()== SessionStatus.MeetingOnline)
             throw new MeetingAlreadyStartedException();
         if(virtualMeeting.getStatus() == SessionStatus.WaitingForSecondFacilitator || virtualMeeting.getStatus()==SessionStatus.WaitingForFirstFacilitator)
@@ -85,5 +89,12 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
     public ServerImpl getServer() {
         return server;
+    }
+
+    public void resetVirtualMeeting() {
+        this.virtualMeeting.stop();
+        this.virtualMeeting = new VirtualMeetingImpl(this);
+        Logger.getLogger("Info").log(Level.INFO,"Virtual Meeting reset");
+        virtualMeeting.start();
     }
 }

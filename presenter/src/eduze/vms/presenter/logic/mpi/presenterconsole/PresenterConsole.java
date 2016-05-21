@@ -12,11 +12,11 @@ public interface PresenterConsole extends java.rmi.Remote {
     public void setName(java.lang.String newName) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
     public void disconnect() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
     public eduze.vms.presenter.logic.mpi.presenterconsole.VirtualMeetingSnapshot getVMSnapshot() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
-    public java.lang.String getConsoleId() throws java.rmi.RemoteException;
     public boolean requestScreenAccess(boolean includeAudio) throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
     public boolean requestAudioRelayAccess() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
+    public java.lang.String getConsoleId() throws java.rmi.RemoteException;
     public java.lang.String getOutScreenShareConsoleId() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
     public java.lang.String getOutAudioRelayConsoleId() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
-    public eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[] getAssignedTasks() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
     public void acknowledgeConnection() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.ServerConnectionException;
+    public eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask[] getAssignedTasks() throws java.rmi.RemoteException, eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
 }

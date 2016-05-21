@@ -15,4 +15,6 @@ public interface ControlLoopListener {
      * @param vm Virtual Meeting State received upon update
      */
     public void updateReceived(VirtualMeetingSnapshot vm);
+
+    public void onMeetingAdjourned() throws ServerConnectionException;
 }

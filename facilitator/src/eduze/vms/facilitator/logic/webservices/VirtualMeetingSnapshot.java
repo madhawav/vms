@@ -101,6 +101,8 @@ public class VirtualMeetingSnapshot {
                 result.status = SessionStatus.WaitingForFirstFacilitator;
             if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.WaitingForSecondFacilitator)
                 result.status = SessionStatus.WaitingForSecondFacilitator;
+            if(status == eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus.Adjourned)
+                result.status = SessionStatus.Adjourned;
             return result;
         }
         catch (RemoteException ex)

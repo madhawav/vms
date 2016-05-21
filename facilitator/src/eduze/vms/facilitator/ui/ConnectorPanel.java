@@ -53,6 +53,7 @@ public class ConnectorPanel {
     private JButton clearAssignButton;
     private JButton deleteTaskButton;
     private JButton disconnectButton;
+    private JButton adjournMeetingButton;
     private JButton btnStartListener;
     private JFrame mainFrame;
 
@@ -147,6 +148,20 @@ public class ConnectorPanel {
                 onDisconnectClicked();
             }
         });
+        adjournMeetingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    onAdjournClicked();
+                } catch (ServerConnectionException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void onAdjournClicked() throws ServerConnectionException {
+        facilitatorController.adjournMeeting();
     }
 
     private void onDisconnectClicked() {
@@ -328,6 +343,9 @@ public class ConnectorPanel {
         } catch (ServerConnectionException e) {
             JOptionPane.showMessageDialog(mainFrame,"Server Connection Error");
             e.printStackTrace();
+        } catch (MeetingAdjournedException e) {
+            JOptionPane.showMessageDialog(mainFrame,"Error: Meeting Adjourned");
+            e.printStackTrace();
         }
     }
 
@@ -411,6 +429,11 @@ public class ConnectorPanel {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
                 vmUpdateReceived(vm);
+            }
+
+            @Override
+            public void onMeetingAdjourned() throws ServerConnectionException {
+                JOptionPane.showMessageDialog(mainFrame,"Meeting Adjourned");
             }
         });
         facilitatorController.addCaptureReceivedListener(new CaptureReceivedListener() {

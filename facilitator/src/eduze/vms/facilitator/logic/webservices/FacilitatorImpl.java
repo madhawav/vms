@@ -16,6 +16,7 @@ import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
+import java.rmi.ServerException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -462,5 +463,17 @@ public class FacilitatorImpl implements Facilitator  {
      */
     public void setShareRequestListener(ShareRequestListener shareRequestListener) {
         this.shareRequestListener = shareRequestListener;
+    }
+
+    public void adjournMeeting() throws ServerConnectionException {
+        try
+        {
+            getFacilitatorConsole().adjournMeeting();
+        }
+        catch (RemoteException e)
+        {
+            throw new ServerConnectionException(e);
+        }
+
     }
 }

@@ -9,6 +9,7 @@ import eduze.livestream.exchange.client.FrameBufferImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 
 
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.SessionStatus;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.SharedTask;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.webservices.AssignedTask;
@@ -294,6 +295,20 @@ public class ControlLoop extends Thread {
                             processAudioRelay(vm,facilitatorCode); //Process Audio Relay Controls
                             updateAssignedTasks(vm,facilitatorCode); //Process Assigned Tasks List
                             setLastKnownVMSnapshot(vm); //Remember the lastly received Virtual Meeting State
+
+                            if(vm.getStatus() == SessionStatus.Adjourned)
+                            {
+                                if(controlLoopListener != null)
+                                {
+                                    try {
+                                        controlLoopListener.onMeetingAdjourned();
+                                        stopRunning();
+                                    } catch (ServerConnectionException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }
 
                             if (controlLoopListener != null) {
                                 controlLoopListener.updateReceived(vm); //Notify through control loop listener

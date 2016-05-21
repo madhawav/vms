@@ -21,10 +21,12 @@ public class SessionStatus implements java.io.Serializable {
     public static final java.lang.String _WaitingForFirstFacilitator = "WaitingForFirstFacilitator";
     public static final java.lang.String _WaitingForSecondFacilitator = "WaitingForSecondFacilitator";
     public static final java.lang.String _MeetingOnline = "MeetingOnline";
+    public static final java.lang.String _Adjourned = "Adjourned";
     public static final SessionStatus NotReady = new SessionStatus(_NotReady);
     public static final SessionStatus WaitingForFirstFacilitator = new SessionStatus(_WaitingForFirstFacilitator);
     public static final SessionStatus WaitingForSecondFacilitator = new SessionStatus(_WaitingForSecondFacilitator);
     public static final SessionStatus MeetingOnline = new SessionStatus(_MeetingOnline);
+    public static final SessionStatus Adjourned = new SessionStatus(_Adjourned);
     public java.lang.String getValue() { return _value_;}
     public static SessionStatus fromValue(java.lang.String value)
           throws java.lang.IllegalArgumentException {

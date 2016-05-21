@@ -35,6 +35,7 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     private SessionStatus status = SessionStatus.NotReady;
 
     private HashMap<String,SharedTask> sharedTasks = new HashMap();
+    private Endpoint endpoint = null;
 
     private void updateSharedTaskPresenterName(SharedTask task)
     {
@@ -315,12 +316,20 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         descendingAudioRelayConsole.start();
 
         System.out.println("Virtual Meeting Started " + URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId) );
-        Endpoint.publish(URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId),this);
+        endpoint = Endpoint.publish(URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId),this);
     }
+
 
     void updateStatus() {
         if(status == SessionStatus.Adjourned)
+        {
+            if(getFacilitatorConsoleCount() == 0)
+            {
+                getSessionManager().resetVirtualMeeting();
+                status = SessionStatus.NotReady;
+            }
             return;
+        }
         if(status == SessionStatus.NotReady)
             return;
         if(getFacilitatorConsoleCount() == 0)
@@ -337,5 +346,10 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         status = SessionStatus.Adjourned;
         if(getSessionManager().getServer().getFacilitatorSessionListener() != null)
             getSessionManager().getServer().getFacilitatorSessionListener().onMeetingAdjourned();
+    }
+
+    public void stop() {
+        status = SessionStatus.NotReady;
+        //endpoint.stop();
     }
 }

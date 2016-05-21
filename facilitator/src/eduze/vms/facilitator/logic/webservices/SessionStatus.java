@@ -17,5 +17,6 @@ public enum SessionStatus {
     NotReady,
     WaitingForFirstFacilitator,
     WaitingForSecondFacilitator,
-    MeetingOnline
+    MeetingOnline,
+    Adjourned
 }

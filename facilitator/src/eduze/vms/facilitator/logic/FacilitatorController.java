@@ -161,9 +161,17 @@ public class FacilitatorController {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
                 vmStatus = vm;
-                sharedTaskManager.onVMStatusUpdate();
+                if(sharedTaskManager != null)
+                    sharedTaskManager.onVMStatusUpdate();
                 notifyControlLoopUpdateReceived(vm);
 
+            }
+
+            @Override
+            public void onMeetingAdjourned() throws ServerConnectionException {
+                getServerConnectionController().disconnect();
+                notifyMeetingAdjourned();
+                //TODO: Disconnect from server
             }
         });
 
@@ -188,6 +196,8 @@ public class FacilitatorController {
         //Start Control Loop
         controlLoop.start();
     }
+
+
 
     void notifyServerDisconnected() throws ServerConnectionException {
         controlLoop.stopRunning();
@@ -409,6 +419,11 @@ public class FacilitatorController {
             listener.updateReceived(vm);
     }
 
+    private void notifyMeetingAdjourned() throws ServerConnectionException {
+        for(ControlLoopListener listener : controlLoopListeners)
+            listener.onMeetingAdjourned();
+    }
+
     /**
      * Retrieve ServerManager used to manage connection with server
      * @return ServerManager of FacilitatorController
@@ -469,6 +484,11 @@ public class FacilitatorController {
         {
             listener.onException(e);
         }
+    }
+
+    public void adjournMeeting() throws ServerConnectionException {
+
+        getFacilitatorService().adjournMeeting();
     }
 
     /**

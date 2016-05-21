@@ -7,6 +7,8 @@ import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsole;
 import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplServiceLocator;
 import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole;
 import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
+import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
+import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 
 
 import javax.swing.*;
