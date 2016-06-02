@@ -1,5 +1,6 @@
 package eduze.vms.facilitator.logic;
 
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
@@ -308,7 +309,16 @@ public class FacilitatorController {
             return null;
 
         //Search for relevant participant in known participants
-        VirtualMeetingParticipantInfo[] results = new VirtualMeetingParticipantInfo[vmStatus.getParticipants().length];
+      //  VirtualMeetingParticipantInfo[] results = new VirtualMeetingParticipantInfo[vmStatus.getParticipants().length];
+
+        for(VMParticipant participant : vmStatus.getParticipants())
+        {
+            if(presenterId.equals(participant.getPresenterId()))
+            {
+                return VirtualMeetingParticipantInfo.fromVMParticipant(participant);
+            }
+        }
+        /*
         for(int i = 0; i <results.length; i++)
         {
             if(presenterId.equals(results[i].getPresenterId()))
@@ -317,7 +327,7 @@ public class FacilitatorController {
                 return VirtualMeetingParticipantInfo.fromVMParticipant(vmStatus.getParticipants()[i]);
             }
 
-        }
+        }*/
         //No match found
         return null;
     }
@@ -598,7 +608,7 @@ public class FacilitatorController {
     /**
      * Configuration of Facilitator. Mainly includes configuration on WebServices for Presenters.
      */
-    public static class Configuration
+    public static class Configuration implements java.io.Serializable
     {
         private String name = "Facilitator"; //Name of Facilitator
         private int listenerPort = 7000; //Port used by Facilitators Web Services

@@ -75,7 +75,7 @@
             </constraints>
             <properties>
               <enabled value="true"/>
-              <text value="qwerty"/>
+              <text value="password"/>
             </properties>
           </component>
           <component id="18c6c" class="javax.swing.JButton" binding="btnStart">

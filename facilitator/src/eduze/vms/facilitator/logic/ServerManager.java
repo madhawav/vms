@@ -240,7 +240,7 @@ public class ServerManager {
     /**
      * A paired server known by facilitator
      */
-    public static class PairedServer
+    public static class PairedServer implements java.io.Serializable
     {
         private String serverName; //Server Name
         private String serverURL; //Server URL

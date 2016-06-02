@@ -94,6 +94,13 @@ public class Presenter {
     }
 
     /**
+     * Disconnect presenter
+     */
+    public void disconnect() throws ServerConnectionException {
+        presenterConsole.disconnect();
+    }
+
+    /**
      * Is the presenter connected to facilitator
      * @return
      */
