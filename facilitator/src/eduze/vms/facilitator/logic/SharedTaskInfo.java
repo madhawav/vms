@@ -55,7 +55,7 @@ public class SharedTaskInfo {
      */
     public boolean isAssigned()
     {
-        if(sharedTask.getAssignedPresenterId() == null)
+        if(sharedTask.getAssignedPresenterId() == null )
             return false;
         if("".equals(sharedTask.getAssignedPresenterId()))
             return false;

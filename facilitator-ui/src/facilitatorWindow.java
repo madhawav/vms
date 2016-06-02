@@ -23,8 +23,6 @@ public class FacilitatorWindow {
     private JComboBox comboServerList;
     private JButton connectButton;
     private JButton btnPair;
-    private JTextArea invitationsShouldBeSentTextArea;
-    private JComboBox comboBox3;
     private JLabel lblConnectionStatus;
     private JPanel pnlConnectionRequests;
     private JPanel tabConnection;
@@ -35,6 +33,10 @@ public class FacilitatorWindow {
     private JButton btnChangeActiveScreen;
     private JButton btnChangeActiveVoice;
     private JLabel lblActiveVoice;
+    private JPanel pnlShareRequests;
+    private JButton deleteButton;
+    private JButton addTaskButton;
+    private JPanel pnlSharedTasksList;
 
     private ScreenFrame frmScreenFrame = null;
 
@@ -76,6 +78,23 @@ public class FacilitatorWindow {
                 controller.getServerManager().addPairedServer(server.getServerName(),server.getServerURL(),server.getServerURL());
             }
             refreshServerList();
+
+            controller.setShareRequestListener(new ShareRequestListener() {
+                @Override
+                public boolean onShareRequest(AbstractShareRequest shareRequest) {
+
+                    ShareRequestForm shareRequestForm = new ShareRequestForm(shareRequest);
+                    JPanel pnl = shareRequestForm.getPnlContainer();
+                    GridBagConstraints constraints = new GridBagConstraints();
+                    constraints.weightx = 1;
+                    constraints.fill = GridBagConstraints.HORIZONTAL;
+                    constraints.gridy = pnlShareRequests.getComponentCount();
+                    pnlShareRequests.add(pnl,constraints);
+                    pnl.setVisible(true);
+                    return true;
+
+                }
+            });
 
             controller.addControlLoopListener(new ControlLoopListener() {
                 @Override
@@ -186,8 +205,68 @@ public class FacilitatorWindow {
             e.printStackTrace();
             JOptionPane.showMessageDialog(mainPanel,"System Error","Error",JOptionPane.OK_OPTION);
         }
+
+
+
     }
 
+    private void setupSharedTasksSystem()
+    {
+        try {
+            sharedTaskManager = controller.getSharedTaskManager();
+        } catch (ServerNotReadyException e) {
+            JOptionPane.showMessageDialog(mainPanel,"Server not ready","Error",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+
+        sharedTaskManager.addSharedTasksListener(new SharedTaskManager.SharedTasksListener() {
+            @Override
+            public void onInitiated() {
+                SharedTaskInfo[] sharedTasks = sharedTaskManager.getSharedTasks();
+                pnlSharedTasksList.removeAll();
+                for(SharedTaskInfo sharedTask : sharedTasks)
+                {
+                    SharedTaskForm sharedTaskForm = new SharedTaskForm(controller, sharedTask);
+                    JPanel pnl = sharedTaskForm.getPnlContainer();
+                    GridBagConstraints constraints = new GridBagConstraints();
+                    constraints.weightx = 1;
+                    constraints.fill = GridBagConstraints.HORIZONTAL;
+                    constraints.gridy = pnlSharedTasksList.getComponentCount();
+                    pnlSharedTasksList.add(pnl,constraints);
+                    pnl.setVisible(true);
+
+                }
+            }
+
+            @Override
+            public void onNewSharedTask(SharedTaskInfo newTask) {
+                SharedTaskForm sharedTaskForm = new SharedTaskForm(controller, newTask);
+                JPanel pnl = sharedTaskForm.getPnlContainer();
+                GridBagConstraints constraints = new GridBagConstraints();
+                constraints.weightx = 1;
+                constraints.fill = GridBagConstraints.HORIZONTAL;
+                constraints.gridy = pnlSharedTasksList.getComponentCount();
+                pnlSharedTasksList.add(pnl,constraints);
+                pnl.setVisible(true);
+            }
+
+            @Override
+            public void onSharedTaskRemoved(SharedTaskInfo removedTask) {
+
+            }
+
+            @Override
+            public void onSharedTaskModified(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+
+            }
+
+            @Override
+            public void onSharedTaskAssignmentChanged(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+
+            }
+        });
+    }
+    private SharedTaskManager sharedTaskManager = null;
     public FacilitatorWindow()
     {
         init();
@@ -225,6 +304,22 @@ public class FacilitatorWindow {
                 onAudioSwitchClicked();
             }
         });
+        addTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onAddNewTask();
+            }
+        });
+    }
+
+    private void onAddNewTask() {
+        NewSharedTask dlg = null;
+        try {
+            dlg = new NewSharedTask(controller.getSharedTaskManager());
+        } catch (ServerNotReadyException e) {
+            e.printStackTrace();
+        }
+        dlg.setVisible(true);
     }
 
     private void onAudioSwitchClicked() {
@@ -349,6 +444,7 @@ public class FacilitatorWindow {
             tabHolder.setEnabledAt(tabHolder.indexOfComponent(tabVM),true);
             frmScreenFrame.show();
 
+            setupSharedTasksSystem();
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -409,7 +505,8 @@ public class FacilitatorWindow {
         JFrame frame = new JFrame();
 
         frame.setContentPane(this.mainPanel);
-        frame.setSize(800,600);
+        frame.setSize(1024,768);
+       // frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
 

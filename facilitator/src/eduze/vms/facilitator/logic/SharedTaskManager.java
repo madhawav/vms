@@ -35,6 +35,8 @@ public class SharedTaskManager {
     public SharedTaskInfo[] getSharedTasks()
     {
         SharedTask[] sharedTasks =  controller.getVmStatus().getSharedTasks();
+        if(sharedTasks == null)
+            return new SharedTaskInfo[0];
         SharedTaskInfo[] results = new SharedTaskInfo[sharedTasks.length];
         for(int i = 0; i < results.length;i++)
         {
@@ -51,6 +53,8 @@ public class SharedTaskManager {
     public SharedTaskInfo getSharedTask(String sharedTaskId)
     {
         SharedTask[] tasks = controller.getVmStatus().getSharedTasks();
+        if(tasks == null)
+            return null;
         for(SharedTask task : tasks)
         {
             //Found a shared task with matching id

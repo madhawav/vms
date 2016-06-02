@@ -4,8 +4,7 @@ import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsole;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.VMParticipant;
-import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeeting;
-import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingImplServiceLocator;
+import eduze.vms.facilitator.logic.mpi.virtualmeeting.*;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 
 import javax.jws.WebMethod;
@@ -273,6 +272,24 @@ public class FacilitatorImpl implements Facilitator  {
      */
     void disconnectPresenter(PresenterConsoleImpl console) throws ServerConnectionException {
 
+        //during disconnection, check whether presenter is active. if so, it should be deactivated
+        if(virtualMeeting != null)
+        {
+            try {
+                eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot snapshot = virtualMeeting.getSnapshot();
+                if(console.getConsoleId().equals(snapshot.getActiveScreenPresenterId()))
+                {
+                    facilitatorConsole.requestScreenAccess(null,false);
+                }
+                if(console.getConsoleId().equals(snapshot.getActiveSpeechPresenterId()))
+                {
+                    facilitatorConsole.requestAudioRelayAccess(null);
+                }
+            } catch (RemoteException e) {
+                throw new ServerConnectionException(e);
+            }
+
+        }
         presenterConsoles.remove(console.getConsoleId());
 
         updateVMParticipants();
