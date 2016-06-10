@@ -24,6 +24,9 @@ public class FacilitatorConnection extends JDialog {
     public FacilitatorConnection() {
         setContentPane(contentPane);
         setModal(true);
+        setTitle("Facilitator Startup");
+        pack();
+        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -124,15 +127,17 @@ public class FacilitatorConnection extends JDialog {
 
     public boolean validateInput()
     {
-        int port = 0;
-        try{
-             port = Integer.parseInt(txtPort.getText());
-        }
-        catch (NumberFormatException e)
+        if(!InputUtil.validatePort(txtPort.getText()))
         {
-            JOptionPane.showMessageDialog(contentPane,"Invalid Port Specified","Error",JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(contentPane,"Invalid Port Specified. The port should be a number between 1025 and 65535.","Error",JOptionPane.OK_OPTION);
             return false;
         }
+        if(!InputUtil.validateFacilitatorName(txtFacilitatorName.getText()))
+        {
+            JOptionPane.showMessageDialog(contentPane,"Invalid Facilitator Name Specified. The facilitator name should only include alphanumeric characters and underscore.","Error",JOptionPane.OK_OPTION);
+            return false;
+        }
+
         return true;
     }
     private void onOK() {
@@ -186,8 +191,9 @@ public class FacilitatorConnection extends JDialog {
 
             FacilitatorWindow window = new FacilitatorWindow();
             window.run();
+            dispose();
         }
-        dispose();
+
     }
 
     private void onCancel() {

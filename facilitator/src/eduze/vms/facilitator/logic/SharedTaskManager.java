@@ -100,6 +100,26 @@ public class SharedTaskManager {
     }
 
     /**
+     * Modifies a shared task
+     * @param taskId Task Id of task to be modified
+     * @param title New title
+     * @param description New description
+     * @throws SharedTaskNotFoundException Shared Task is no longer presenter
+     * @throws ServerConnectionException Error in Connection to Server
+     */
+    public void modifySharedTask(String taskId, String title, String description) throws SharedTaskNotFoundException, ServerConnectionException {
+        try {
+            controller.getFacilitatorService().getVirtualMeeting().modifySharedTask(taskId,title,description);
+        } catch (SharedTaskNotFoundException e)
+        {
+            throw e;
+        }
+        catch (RemoteException e) {
+            throw new ServerConnectionException(e);
+        }
+    }
+
+    /**
      * Assign a shared task to a presenter
      * @param taskId Task Id
      * @param facilitatorId Facilitator Id of Presenter

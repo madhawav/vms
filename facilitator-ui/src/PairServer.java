@@ -25,6 +25,8 @@ public class PairServer extends JDialog {
         setModal(true);
         setSize(new Dimension(400,200));
         setTitle("Pair New Server");
+        pack();
+        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {

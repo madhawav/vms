@@ -605,6 +605,21 @@ public class FacilitatorController {
         this.shareRequestListener = shareRequestListener;
     }
 
+
+    /**
+     * Terminate the Facilitator Controller
+     */
+    public void finish() throws ServerConnectionException {
+
+            if(getServerConnectionController() != null)
+                getServerConnectionController().disconnect();
+            for(Presenter presenter : getPresenters())
+            {
+                presenter.disconnect();
+            }
+
+    }
+
     /**
      * Configuration of Facilitator. Mainly includes configuration on WebServices for Presenters.
      */
@@ -700,6 +715,7 @@ public class FacilitatorController {
         public void setPassword(String password) {
             this.password = password;
         }
+
     }
 
 }

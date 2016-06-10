@@ -25,6 +25,8 @@ public class ScreenFrame {
         this.controller = controller;
         frame.setContentPane(this.screenPanel);
         frame.setSize(800,600);
+        frame.setTitle("Projector Output");
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         frame.addComponentListener(new ComponentAdapter() {

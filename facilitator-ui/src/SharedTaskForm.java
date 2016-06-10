@@ -5,7 +5,9 @@ import eduze.vms.facilitator.logic.mpi.virtualmeeting.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Admin on 6/2/2016.
@@ -114,6 +116,18 @@ public class SharedTaskForm {
         });
 
 
+        btnModify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModifySharedTask dlg = null;
+                try {
+                    dlg = new ModifySharedTask(controller.getSharedTaskManager(),sharedTaskManager.getSharedTask(sharedTask.getId()));
+                } catch (ServerNotReadyException de) {
+                    de.printStackTrace();
+                }
+                dlg.setVisible(true);
+            }
+        });
     }
 
     private JPopupMenu getParticipantsPopup()

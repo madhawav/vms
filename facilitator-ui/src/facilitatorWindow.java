@@ -1,4 +1,3 @@
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
@@ -11,7 +10,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,6 +35,11 @@ public class FacilitatorWindow {
     private JButton deleteButton;
     private JButton addTaskButton;
     private JPanel pnlSharedTasksList;
+    private JLabel lblServerConnectionCompleted;
+    private JLabel lblServerConnectionNotCompleted;
+    private JLabel lblPresenterConnectionsAcceptable;
+    private JLabel lblPresenterConnectionsNotDone;
+    private JButton btnFinishMeeting;
 
     private ScreenFrame frmScreenFrame = null;
 
@@ -67,6 +70,8 @@ public class FacilitatorWindow {
     }
     private void init() {
         btnDisconnect.setVisible(false);
+        lblServerConnectionCompleted.setVisible(false);
+        lblPresenterConnectionsAcceptable.setVisible(false);
         try {
             StorageManager.DataNode dataNode = StorageManager.getInstance().readStorage();
             controller = FacilitatorController.start(dataNode.getConfiguration());
@@ -75,7 +80,7 @@ public class FacilitatorWindow {
 
             //Load paired devices
             for (ServerManager.PairedServer server:dataNode.getPairedServers()) {
-                controller.getServerManager().addPairedServer(server.getServerName(),server.getServerURL(),server.getServerURL());
+                controller.getServerManager().addPairedServer(server.getServerName(),server.getServerURL(),server.getServerPairKey());
             }
             refreshServerList();
 
@@ -139,7 +144,8 @@ public class FacilitatorWindow {
 
                 @Override
                 public void onMeetingAdjourned() throws ServerConnectionException {
-
+                    JOptionPane.showMessageDialog(mainPanel,"The meeting has been adjourned.","Meeting Adjourned",JOptionPane.OK_OPTION);
+                    System.exit(0);
                 }
             });
 
@@ -186,12 +192,21 @@ public class FacilitatorWindow {
                     constraints.gridy = pnlConnectionRequests.getComponentCount();
                     pnlConnectionRequests.add(pnl,constraints);
                     connectionStatusFormMap.put(consoleId,connectionStatusForm);
+
+                    lblPresenterConnectionsAcceptable.setVisible(true);
+                    lblPresenterConnectionsNotDone.setVisible(false);
                 }
 
                 @Override
                 public void onDisconnected(String consoleId) {
                     ConnectionStatusForm form = connectionStatusFormMap.get(consoleId);
                     form.getPnlContainer().getParent().remove(form.getPnlContainer());
+
+                    if(controller.getPresenterCount() == 0)
+                    {
+                        lblPresenterConnectionsAcceptable.setVisible(false);
+                        lblPresenterConnectionsNotDone.setVisible(true);
+                    }
                 }
             });
 
@@ -310,6 +325,26 @@ public class FacilitatorWindow {
                 onAddNewTask();
             }
         });
+        btnFinishMeeting.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onFinishMeeting();
+            }
+        });
+    }
+
+    private void onFinishMeeting() {
+        if(controller.isServerConnected())
+        {
+            try {
+                controller.adjournMeeting();
+                tabHolder.setEnabledAt(tabHolder.indexOfComponent(tabVM),false);
+                tabHolder.setSelectedIndex(0);
+            } catch (ServerConnectionException e) {
+                JOptionPane.showMessageDialog(mainPanel,"Server Connection Error. Please try again in a while.","Error",JOptionPane.OK_OPTION);
+                e.printStackTrace();
+            }
+        }
     }
 
     private void onAddNewTask() {
@@ -443,7 +478,8 @@ public class FacilitatorWindow {
             btnDisconnect.setVisible(true);
             tabHolder.setEnabledAt(tabHolder.indexOfComponent(tabVM),true);
             frmScreenFrame.show();
-
+            lblServerConnectionCompleted.setVisible(true);
+            lblServerConnectionNotCompleted.setVisible(false);
             setupSharedTasksSystem();
 
         } catch (MalformedURLException e) {
@@ -503,17 +539,25 @@ public class FacilitatorWindow {
 
     protected void run() {
         JFrame frame = new JFrame();
-
+        frame.setTitle("Facilitator Control Panel");
         frame.setContentPane(this.mainPanel);
+
         frame.setSize(1024,768);
        // frame.setExtendedState(Frame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
+                try {
+                    controller.finish();
+                } catch (ServerConnectionException e1) {
+                    e1.printStackTrace();
+                }
                 System.exit(0);
             }
         });
