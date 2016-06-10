@@ -40,6 +40,8 @@ public class FacilitatorWindow {
     private JLabel lblPresenterConnectionsAcceptable;
     private JLabel lblPresenterConnectionsNotDone;
     private JButton btnFinishMeeting;
+    private JPanel pnlPreview;
+    private JLabel lblPreview;
 
     private ScreenFrame frmScreenFrame = null;
 
@@ -76,7 +78,7 @@ public class FacilitatorWindow {
             StorageManager.DataNode dataNode = StorageManager.getInstance().readStorage();
             controller = FacilitatorController.start(dataNode.getConfiguration());
 
-            frmScreenFrame = new ScreenFrame(controller);
+            frmScreenFrame = new ScreenFrame(controller,facilitatorWindowFrame);
 
             //Load paired devices
             for (ServerManager.PairedServer server:dataNode.getPairedServers()) {
@@ -108,6 +110,8 @@ public class FacilitatorWindow {
                     if (vm.getActiveScreenPresenterId() == null || vm.getActiveScreenPresenterId().equals(""))
                     {
                         lblActiveScreen.setText("Not Set");
+                        setPreviewImage(null,null,null);
+                        frmScreenFrame.setImage(null,null,null);
                     }
                     else
                     {
@@ -155,6 +159,7 @@ public class FacilitatorWindow {
                     if(frmScreenFrame != null)
                     {
                         frmScreenFrame.setImage(image,facilitatorConsoleId,presenterConsoleId);
+                        setPreviewImage(image,facilitatorConsoleId,presenterConsoleId);
                     }
                 }
 
@@ -347,6 +352,24 @@ public class FacilitatorWindow {
         }
     }
 
+    public void setPreviewImage(Image image, String facilitatorConsoleId, String presenterConsoleId)
+    {
+        if(image != null)
+        {
+            Image scaledImage = image.getScaledInstance(pnlPreview.getWidth(),pnlPreview.getHeight(),Image.SCALE_SMOOTH);
+            lblPreview.setText("");
+            lblPreview.setIcon(new ImageIcon(scaledImage));
+        }
+        else
+        {
+            lblPreview.setIcon(null);
+            lblPreview.setText("No Preview");
+        }
+
+
+    }
+
+
     private void onAddNewTask() {
         NewSharedTask dlg = null;
         try {
@@ -535,21 +558,21 @@ public class FacilitatorWindow {
         }
     }
 
-
+    JFrame facilitatorWindowFrame = new JFrame();
 
     protected void run() {
-        JFrame frame = new JFrame();
-        frame.setTitle("Facilitator Control Panel");
-        frame.setContentPane(this.mainPanel);
 
-        frame.setSize(1024,768);
-       // frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        facilitatorWindowFrame.setTitle("Facilitator Control Panel");
+        facilitatorWindowFrame.setContentPane(this.mainPanel);
 
-        frame.addWindowListener(new WindowAdapter() {
+        facilitatorWindowFrame.setSize(1024,768);
+       // facilitatorWindowFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
+        facilitatorWindowFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        facilitatorWindowFrame.pack();
+        facilitatorWindowFrame.setLocationRelativeTo(null);
+        facilitatorWindowFrame.setVisible(true);
+
+        facilitatorWindowFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);

@@ -22,9 +22,9 @@ public class ConnectionRequestForm {
         btnAccept.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                pnlContainer.getParent().remove(pnlContainer);
                 try {
                     connectionRequest.accept();
-                    pnlContainer.getParent().remove(pnlContainer);
                 } catch (RequestAlreadyProcessedException e1) {
                     e1.printStackTrace();
                 }
@@ -34,6 +34,12 @@ public class ConnectionRequestForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnlContainer.getParent().remove(pnlContainer);
+                try {
+                    connectionRequest.reject();
+                } catch (RequestAlreadyProcessedException e1) {
+                    e1.printStackTrace();
+                }
+
             }
         });
     }

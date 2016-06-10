@@ -88,6 +88,7 @@ public class PresenterController {
                 @Override
                 public void onControlLoopCycleCompleted() {
                     assignedTasksManager.onAssignedTasksUpdate(controlLoop.getAssignedTasks());
+                    notifyControlLoopCycleCompleted();
                 }
             });
 
@@ -98,6 +99,13 @@ public class PresenterController {
             throw new FacilitatorConnectionException(e);
         } catch (RemoteException e) {
             throw new FacilitatorConnectionException(e);
+        }
+    }
+
+    private void notifyControlLoopCycleCompleted() {
+        for(ControlLoop.StateChangeListener listener : stateChangeListeners)
+        {
+            listener.onControlLoopCycleCompleted();
         }
     }
 

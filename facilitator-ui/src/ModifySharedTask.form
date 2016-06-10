@@ -98,6 +98,7 @@
                   </grid>
                 </constraints>
                 <properties>
+                  <lineWrap value="true"/>
                   <text value=""/>
                   <toolTipText value="The description is optional."/>
                 </properties>
