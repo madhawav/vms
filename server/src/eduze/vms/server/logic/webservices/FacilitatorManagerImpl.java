@@ -3,8 +3,10 @@ package eduze.vms.server.logic.webservices;
 import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.server.logic.URLGenerator;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -28,6 +30,11 @@ public class FacilitatorManagerImpl implements FacilitatorManager {
     Facilitator getFacilitator(String pairKey)
     {
         return facilitators.get(pairKey);
+    }
+    @WebMethod(exclude = true)
+    public Collection<Facilitator> getFacilitators()
+    {
+        return facilitators.values();
     }
 
     @Override

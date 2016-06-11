@@ -1,6 +1,7 @@
 import eduze.vms.presenter.logic.FacilitatorConnectionException;
 import eduze.vms.presenter.logic.FacilitatorConnectionNotReadyException;
 import eduze.vms.presenter.logic.FacilitatorConnector;
+import eduze.vms.presenter.logic.FacilitatorDisconnectedException;
 import eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException;
 
 import javax.swing.*;
@@ -77,6 +78,10 @@ public class ConnectionWindow extends JDialog {
                             JOptionPane.showMessageDialog(contentPane,"Error in Connection to Facilitator","Connection Error",JOptionPane.OK_OPTION);
                             System.exit(0);
                         } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(contentPane,"Error in Connection to Facilitator","Connection Error",JOptionPane.OK_OPTION);
+                            System.exit(0);
+                        } catch (FacilitatorDisconnectedException e) {
                             e.printStackTrace();
                             JOptionPane.showMessageDialog(contentPane,"Error in Connection to Facilitator","Connection Error",JOptionPane.OK_OPTION);
                             System.exit(0);

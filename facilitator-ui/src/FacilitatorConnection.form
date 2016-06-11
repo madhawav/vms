@@ -79,7 +79,7 @@
             <properties>
               <editable value="true"/>
               <enabled value="true"/>
-              <text value="C:\Users\Admin\Desktop\Eduze\SEP\vms\config.bin"/>
+              <text value="C:\Users\Admin\Desktop\VMS\vms\config.bin"/>
               <toolTipText value="A new configuration file will be created if it doesn't exist"/>
             </properties>
           </component>

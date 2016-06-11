@@ -1,7 +1,8 @@
-import eduze.vms.facilitator.logic.FacilitatorController;
-import eduze.vms.facilitator.logic.ServerManager;
+package eduze.vms.server.ui;
 import eduze.vms.foundation.ui.CryptoUtil;
 import eduze.vms.foundation.ui.StreamHelper;
+import eduze.vms.server.logic.webservices.Facilitator;
+import eduze.vms.server.logic.webservices.ServerImpl;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -66,13 +67,13 @@ public class StorageManager {
     }
 
 
-    public void updatePairedServers(Collection<ServerManager.PairedServer> servers) throws CryptoUtil.CryptoException, StorageException {
+    public void updatePairedFacilitators(Collection<Facilitator> facilitators) throws CryptoUtil.CryptoException, StorageException {
         DataNode dataNode = readStorage();
 
-        ArrayList<ServerManager.PairedServer> pairedServers = new ArrayList<>();
-        pairedServers.addAll(servers);
+        ArrayList<Facilitator> pairedFacilitators = new ArrayList<>();
+        pairedFacilitators.addAll(facilitators);
 
-        dataNode.setPairedServers(pairedServers);
+        dataNode.setPairedFacilitators(pairedFacilitators);
 
         updateStorage(dataNode);
 
@@ -106,12 +107,12 @@ public class StorageManager {
         }
     }
 
-    public void saveDefaultConfiguration(String facilitatorName, int port) throws CryptoUtil.CryptoException, StorageException {
+    public void saveDefaultConfiguration(String serverName, int port) throws CryptoUtil.CryptoException, StorageException {
         DataNode dataNode = new DataNode();
-        dataNode.setPairedServers(new ArrayList<ServerManager.PairedServer>());
-        FacilitatorController.Configuration configuration = new FacilitatorController.Configuration();
-        configuration.setName(facilitatorName);
-        configuration.setListenerPort(port);
+        dataNode.setPairedFacilitators(new ArrayList<Facilitator>());
+        ServerImpl.Configuration configuration = new ServerImpl.Configuration();
+        configuration.setName(serverName);
+        configuration.setPort(port);
         dataNode.setConfiguration(configuration);
         updateStorage(dataNode);
     }
@@ -119,23 +120,23 @@ public class StorageManager {
     public static class DataNode implements java.io.Serializable
     {
 
-        private Collection<ServerManager.PairedServer> pairedServers = null;
-        public Collection<ServerManager.PairedServer> getPairedServers()
+        private Collection<Facilitator> pairedFacilitators = null;
+        public Collection<Facilitator> getPairedFacilitators()
         {
-            return pairedServers;
+            return pairedFacilitators;
         }
 
-        public void setPairedServers(Collection<ServerManager.PairedServer> pairedServers) {
-            this.pairedServers = pairedServers;
+        public void setPairedFacilitators(Collection<Facilitator> pairedFacilitators) {
+            this.pairedFacilitators = pairedFacilitators;
         }
 
-        private FacilitatorController.Configuration configuration = null;
+        private ServerImpl.Configuration configuration = null;
 
-        public FacilitatorController.Configuration getConfiguration() {
+        public ServerImpl.Configuration getConfiguration() {
             return configuration;
         }
 
-        public void setConfiguration(FacilitatorController.Configuration configuration) {
+        public void setConfiguration(ServerImpl.Configuration configuration) {
             this.configuration = configuration;
         }
     }

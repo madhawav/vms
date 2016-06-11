@@ -1,13 +1,12 @@
 package eduze.vms.server.logic;
 
-import eduze.vms.server.logic.webservices.Facilitator;
-import eduze.vms.server.logic.webservices.FacilitatorConsoleImpl;
-import eduze.vms.server.logic.webservices.ServerImpl;
+import eduze.vms.server.logic.webservices.*;
 
 import javax.xml.ws.Endpoint;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Madhawa on 12/04/2016.
@@ -155,6 +154,18 @@ public class ServerController {
         this.startConfig.setPassword(password);
     }
 
+    public Collection<Facilitator> getPairedFacilitators()
+    {
+        return serverService.getFacilitatorManager().getFacilitators();
+    }
+
+    public void addPairedFacilitator(String facilitatorName, String facilitatorPairKey)
+    {
+        Facilitator facilitator = new Facilitator();
+        facilitator.setName(facilitatorName);
+        facilitator.setPairKey(facilitatorPairKey);
+        serverService.getFacilitatorManager().addFacilitator(facilitator);
+    }
     public void addPairListener(PairListener p)
     {
         pairListeners.add(p);
@@ -184,5 +195,13 @@ public class ServerController {
     {
         for(PairListener p : pairListeners)
             p.onUnPair(pair);
+    }
+
+    public void adjournMeeting() throws ServerNotReadyException {
+       VMSessionManagerImpl sessionManager = serverService.getVmSessionManager();
+        if(sessionManager != null)
+        {
+            sessionManager.adjournMeeting();
+        }
     }
 }

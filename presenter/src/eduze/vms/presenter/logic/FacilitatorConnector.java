@@ -171,7 +171,7 @@ public class FacilitatorConnector {
      * Obtain Controller if checkConnectionRequestState returns success. Return the handle to manage presenter system with connected facilitator.
      * @return Handle to manage presenter session
      */
-    public PresenterController obtainController() throws FacilitatorConnectionNotReadyException, FacilitatorConnectionException, MalformedURLException {
+    public PresenterController obtainController() throws FacilitatorConnectionNotReadyException, FacilitatorConnectionException, MalformedURLException, FacilitatorDisconnectedException {
         //Check for availability of presenter controller (if already connected)
         if(presenterController != null)
             return presenterController;

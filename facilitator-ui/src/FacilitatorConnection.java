@@ -1,14 +1,10 @@
-import eduze.vms.facilitator.logic.FacilitatorController;
+import eduze.vms.foundation.ui.CryptoUtil;
 
-import javax.crypto.NoSuchPaddingException;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 
 public class FacilitatorConnection extends JDialog {
     private JPanel contentPane;

@@ -4,8 +4,10 @@ import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.PairListener;
 import eduze.vms.server.logic.URLGenerator;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 
 /**
@@ -19,6 +21,11 @@ public class ServerImpl implements Server {
     private FacilitatorManagerImpl facilitatorManager = null;
     public ServerImpl()
     {
+    }
+
+    @WebMethod(exclude = true)
+    public VMSessionManagerImpl getVmSessionManager() {
+        return vmSessionManager;
     }
 
     public ServerImpl(Configuration startConfiguration)
@@ -87,7 +94,7 @@ public class ServerImpl implements Server {
         return config;
     }
 
-    public static class Configuration
+    public static class Configuration implements Serializable
     {
         private String name = "ServerImpl";
         private int port = 8000;

@@ -344,8 +344,10 @@ public class VirtualMeetingImpl implements VirtualMeeting {
     void adjournMeeting()
     {
         status = SessionStatus.Adjourned;
+
         if(getSessionManager().getServer().getFacilitatorSessionListener() != null)
             getSessionManager().getServer().getFacilitatorSessionListener().onMeetingAdjourned();
+        updateStatus();
     }
 
     public void stop() {

@@ -33,5 +33,6 @@
     </orderEntry>
     <orderEntry type="module" module-name="facilitator" />
     <orderEntry type="library" name="JAX-WS-Apache Axis" level="project" />
+    <orderEntry type="module" module-name="foundation" />
   </component>
 </module>

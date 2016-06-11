@@ -1,4 +1,5 @@
-import eduze.vms.facilitator.logic.FacilitatorController;
+package eduze.vms.foundation.ui;
+
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
@@ -90,52 +91,6 @@ public class CryptoUtil {
 
     }
 
-    public static void main(String[] args) throws CryptoException
-    {
-        CipherOutputStream cos = null;
-        CipherInputStream cis = null;
-        ByteArrayOutputStream bos = null;
-        ByteArrayInputStream bis = null;
-        try {
-            bos= new ByteArrayOutputStream();
-
-
-            cos = getOutputStream(bos,"password", Cipher.ENCRYPT_MODE);
-
-            ObjectOutputStream oos = new ObjectOutputStream(cos);
-            oos.writeObject(new FacilitatorController.Configuration());
-            oos.close();
-            cos.close();
-
-            byte[] data = bos.toByteArray();
-            bis = new ByteArrayInputStream(data);
-            cis = getInputStream(bis,"password",Cipher.DECRYPT_MODE);
-            ObjectInputStream ois = new ObjectInputStream(cis);
-            Object o = ois.readObject();
-            System.out.println(o);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            throw new CryptoException(e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new CryptoException(e);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new CryptoException(e);
-        }
-        finally {
-            StreamHelper.safelyClose(cis);
-            cis = null;
-            StreamHelper.safelyClose(cos);
-            cos = null;
-            StreamHelper.safelyClose(bos);
-            bos = null;
-            StreamHelper.safelyClose(bis);
-            bis = null;
-
-        }
-
-    }
 
     public static class CryptoException extends Exception
     {

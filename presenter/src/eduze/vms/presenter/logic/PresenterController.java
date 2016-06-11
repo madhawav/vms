@@ -61,7 +61,7 @@ public class PresenterController {
      * @throws MalformedURLException
      * @throws FacilitatorConnectionException
      */
-    void start() throws MalformedURLException, FacilitatorConnectionException {
+    void start() throws MalformedURLException, FacilitatorConnectionException, FacilitatorDisconnectedException {
         //Establish Connection to Web Services
         PresenterConsoleImplServiceLocator presenterConsoleImplServiceLocator = new PresenterConsoleImplServiceLocator();
         try {
@@ -90,6 +90,11 @@ public class PresenterController {
                     assignedTasksManager.onAssignedTasksUpdate(controlLoop.getAssignedTasks());
                     notifyControlLoopCycleCompleted();
                 }
+
+                @Override
+                public void onFacilitatorDisconnected() {
+                    notifyFacilitatorDisconnected();
+                }
             });
 
             //Start Control Loop
@@ -99,6 +104,16 @@ public class PresenterController {
             throw new FacilitatorConnectionException(e);
         } catch (RemoteException e) {
             throw new FacilitatorConnectionException(e);
+        } catch (FacilitatorDisconnectedException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    private void notifyFacilitatorDisconnected() {
+        for(ControlLoop.StateChangeListener listener : stateChangeListeners)
+        {
+            listener.onFacilitatorDisconnected();
         }
     }
 

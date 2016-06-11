@@ -8,6 +8,7 @@ import eduze.vms.foundation.logic.mpi.audiorelayconsole.AudioRelayConsoleImplSer
 import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsole;
 import eduze.vms.foundation.logic.mpi.screenshareconsole.ScreenShareConsoleImplServiceLocator;
 import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
+import eduze.vms.presenter.logic.mpi.presenterconsole.DisconnectedException;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 
 
@@ -64,7 +65,7 @@ public class ControlLoop extends Thread {
      * @throws FacilitatorConnectionException Error in Connection to Facilitator
      * @throws MalformedURLException Error in Facilitator URL
      */
-    ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException {
+    ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException, FacilitatorDisconnectedException {
         try {
             //Store parameters
             this.facilitatorURL = facilitatorURL;
@@ -88,7 +89,12 @@ public class ControlLoop extends Thread {
             //Setup capturers
             screenCapturer = new ScreenCapturer(screenShareBuffer,screenCaptureInterval);
             audioCapturer = new AudioCapturer(audioRelayBuffer);
-        } catch (RemoteException e) {
+        } catch (DisconnectedException e)
+        {
+            e.printStackTrace();
+            throw new FacilitatorDisconnectedException(e);
+        }
+        catch (RemoteException e) {
             e.printStackTrace();
             throw new FacilitatorConnectionException(e);
         } catch (ServiceException e) {
@@ -189,7 +195,12 @@ public class ControlLoop extends Thread {
 
                             //Notify Control Loop Listeners
                             notifyControlLoopCycleCompleted();
-                        } catch (RemoteException e) {
+                        }catch (DisconnectedException e)
+                        {
+                            e.printStackTrace();
+                            notifyFacilitatorDisconnected();
+                        }
+                        catch (RemoteException e) {
                             e.printStackTrace();
                         }
                     }
@@ -215,6 +226,12 @@ public class ControlLoop extends Thread {
                     screenCapturer.stopCapture();
             }
         });
+    }
+
+    private synchronized void notifyFacilitatorDisconnected()
+    {
+        if(stateChangeListener != null)
+            stateChangeListener.onFacilitatorDisconnected();
     }
 
     /**
@@ -408,5 +425,10 @@ public class ControlLoop extends Thread {
          * Control Loop cycle has been completed
          */
         public void onControlLoopCycleCompleted();
+
+        /**
+         * Facilitator has disconnected from presenter
+         */
+        public void onFacilitatorDisconnected();
     }
 }

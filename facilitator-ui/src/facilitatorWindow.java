@@ -1,6 +1,7 @@
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.VirtualMeetingSnapshot;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
+import eduze.vms.foundation.ui.CryptoUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +43,7 @@ public class FacilitatorWindow {
     private JButton btnFinishMeeting;
     private JPanel pnlPreview;
     private JLabel lblPreview;
+    private JButton btnUnpair;
 
     private ScreenFrame frmScreenFrame = null;
 
@@ -336,7 +338,15 @@ public class FacilitatorWindow {
                 onFinishMeeting();
             }
         });
+        btnUnpair.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onUnpairClicked();
+            }
+        });
     }
+
+
 
     private void onFinishMeeting() {
         if(controller.isServerConnected())
@@ -493,11 +503,18 @@ public class FacilitatorWindow {
         if(comboServerList.getSelectedItem() == null)
             return;
         ServerManager.PairedServer server = pairedServerHashMap.get(comboServerList.getSelectedItem());
+        if(server == null)
+        {
+            JOptionPane.showMessageDialog(mainPanel,"Please Select a Server in order to connect.","No Server",JOptionPane.OK_OPTION);
+            return;
+        }
         try {
             controller.getServerManager().connect(server);
 
             lblConnectionStatus.setText("Connected");
             connectButton.setVisible(false);
+            btnPair.setEnabled(false);
+            btnUnpair.setEnabled(false);
             btnDisconnect.setVisible(true);
             tabHolder.setEnabledAt(tabHolder.indexOfComponent(tabVM),true);
             frmScreenFrame.show();
@@ -528,6 +545,28 @@ public class FacilitatorWindow {
         } catch (ServiceNotStartedException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(mainPanel,"Service has not started","Error",JOptionPane.OK_OPTION);
+        }
+    }
+    private void onUnpairClicked() {
+        ServerManager.PairedServer pairedServer = pairedServerHashMap.get(comboServerList.getSelectedItem());
+        if(pairedServer == null)
+        {
+            JOptionPane.showMessageDialog(mainPanel,"Please Select a Server in order to un-pair.","No Server",JOptionPane.OK_OPTION);
+            return;
+        }
+        try {
+            controller.getServerManager().unPair(pairedServer);
+        } catch (ServerConnectionException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ServiceNotStartedException e) {
+            e.printStackTrace();
+        }
+        try {
+            refreshServerList();
+        } catch (ServiceNotStartedException e) {
+            e.printStackTrace();
         }
     }
 

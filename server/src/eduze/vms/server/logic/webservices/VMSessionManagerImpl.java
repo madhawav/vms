@@ -19,6 +19,12 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
     }
 
+    public void adjournMeeting() throws ServerNotReadyException {
+        if(virtualMeeting != null)
+            virtualMeeting.adjournMeeting();
+        else throw new ServerNotReadyException();
+    }
+
     public VMSessionManagerImpl(ServerImpl server)
     {
         this.server = server;

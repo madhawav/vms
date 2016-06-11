@@ -1,6 +1,5 @@
-import eduze.vms.presenter.logic.ControlLoop;
-import eduze.vms.presenter.logic.FacilitatorConnectionException;
-import eduze.vms.presenter.logic.PresenterController;
+import eduze.vms.presenter.logic.*;
+import eduze.vms.presenter.logic.mpi.presenterconsole.AssignedTask;
 import eduze.vms.presenter.logic.mpi.presenterconsole.PresenterConsole;
 
 import javax.swing.*;
@@ -13,7 +12,7 @@ import java.awt.event.*;
 public class PresenterWindow {
     private JFrame presenterWindowFrame = null;
     private JPanel mainFrame;
-    private JList list1;
+    private JList lstAssignedTasks;
     private JButton btnScreenShare;
     private JButton btnAllShare;
     private JButton btnAudioShare;
@@ -37,6 +36,12 @@ public class PresenterWindow {
             @Override
             public void onControlLoopCycleCompleted() {
                 updateUI();
+            }
+
+            @Override
+            public void onFacilitatorDisconnected() {
+                JOptionPane.showMessageDialog(mainFrame,"Facilitator has disconnected the presenter. Application will now close.","Disconnected",JOptionPane.OK_OPTION);
+                System.exit(0);
             }
         });
 
@@ -91,6 +96,47 @@ public class PresenterWindow {
                 }
             }
         });
+
+        setupAssignedTasksListUI();
+
+        controller.getAssignedTasksManager().addAssignedTaskListener(new AssignedTasksManager.AssignedTaskListener() {
+            @Override
+            public void onInitiated() {
+                loadAssignedTasks();
+            }
+
+            @Override
+            public void onTaskAssigned(AssignedTaskInfo task) {
+                loadAssignedTasks();
+            }
+
+            @Override
+            public void onTaskUnAssigned(AssignedTaskInfo task) {
+                loadAssignedTasks();
+            }
+
+            @Override
+            public void onTaskModified(AssignedTaskInfo oldTask, AssignedTaskInfo newTask) {
+                loadAssignedTasks();
+            }
+        });
+    }
+
+    private void loadAssignedTasks() {
+        DefaultListModel<AssignedTaskListItemForm.ComplexListItem> listModel = new DefaultListModel<>();
+        AssignedTasksManager assignedTasksManager = PresenterApp.getInstance().getController().getAssignedTasksManager();
+        for(AssignedTaskInfo assignedTask : assignedTasksManager.getAssignedTasks())
+        {
+            listModel.addElement(new AssignedTaskListItemForm.ComplexListItem(assignedTask.getTitle(),assignedTask.getDescription()));
+        }
+        lstAssignedTasks.setModel(listModel);
+    }
+
+    private void setupAssignedTasksListUI() {
+        DefaultListModel<AssignedTaskListItemForm.ComplexListItem> listModel = new DefaultListModel<>();
+        lstAssignedTasks.setModel(listModel);
+        lstAssignedTasks.setCellRenderer(new AssignedTaskListItemForm());
+
     }
 
     public void run()

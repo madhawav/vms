@@ -145,6 +145,11 @@ public class PresenterPanel {
                             public void onControlLoopCycleCompleted() {
 
                             }
+
+                            @Override
+                            public void onFacilitatorDisconnected() {
+                                JOptionPane.showMessageDialog(mainFrame,"Facilitator has been disconnected","Disconnected",JOptionPane.OK_OPTION);
+                            }
                         });
 
                         controller.getAssignedTasksManager().addAssignedTaskListener(new AssignedTasksManager.AssignedTaskListener() {
@@ -179,6 +184,9 @@ public class PresenterPanel {
                         JOptionPane.showMessageDialog(mainFrame,"Facilitator Connection Error");
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
+                    } catch (FacilitatorDisconnectedException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(mainFrame,"Facilitator Connection Error");
                     }
 
                 }
