@@ -1,5 +1,6 @@
 package eduze.vms.server.logic.webservices;
 
+import eduze.vms.server.logic.ConnectivityManager;
 import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.PairListener;
 import eduze.vms.server.logic.URLGenerator;
@@ -44,6 +45,9 @@ public class ServerImpl implements Server {
         Endpoint.publish(URLGenerator.generateServerPublishURL(config.getPort()),this);
         facilitatorManager.start();
         vmSessionManager.start();;
+
+
+
     }
     @Override
     public String getServerName() {
@@ -99,6 +103,16 @@ public class ServerImpl implements Server {
         private String name = "ServerImpl";
         private int port = 8000;
         private String password = "pass";
+
+        private int FacilitatorConnectivityTimeoutInterval = 10000;
+
+        public int getFacilitatorConnectivityTimeoutInterval() {
+            return FacilitatorConnectivityTimeoutInterval;
+        }
+
+        public void setFacilitatorConnectivityTimeoutInterval(int facilitatorConnectivityTimeoutInterval) {
+            FacilitatorConnectivityTimeoutInterval = facilitatorConnectivityTimeoutInterval;
+        }
 
         private int screenShareBufferSize = 2;
         private int audioRelayBufferSize = 5;

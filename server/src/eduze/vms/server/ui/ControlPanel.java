@@ -136,11 +136,25 @@ public class ControlPanel extends JFrame {
         }
 
 
-        controller = new ServerController();
+
         try {
+            controller = new ServerController();
             controller.setName(txtServerName.getText());
             controller.setPort(Integer.valueOf(txtPort.getText()));
             controller.setPassword(PasswordUtil.hashPassword(txtPassword.getPassword()));
+            try{
+                StorageManager.DataNode dataNode = storageManager.readStorage();
+                controller.setFacilitatorConnectivityTimeoutInterval(dataNode.getConfiguration().getFacilitatorConnectivityTimeoutInterval());
+            }
+            catch (StorageManager.StorageException e)
+            {
+                e.printStackTrace();
+            }
+            catch (CryptoUtil.CryptoException e)
+            {
+                e.printStackTrace();
+            }
+
 
 
             controller.addPairListener(new PairListener() {

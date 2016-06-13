@@ -68,7 +68,13 @@ public class ServerApp {
             serverController.setPort(config.getConfiguration().getPort());
             serverController.setPassword(config.getConfiguration().getPassword());
             serverController.setName(config.getConfiguration().getName());
+            serverController.setFacilitatorConnectivityTimeoutInterval(config.getConfiguration().getFacilitatorConnectivityTimeoutInterval());
             serverController.start();
+
+            for(Facilitator facilitator : config.getPairedFacilitators())
+            {
+                serverController.addPairedFacilitator(facilitator.getName(),facilitator.getPairKey());
+            }
 
             serverController.addFacilitatorSessionListener(new FacilitatorSessionListener() {
                 @Override

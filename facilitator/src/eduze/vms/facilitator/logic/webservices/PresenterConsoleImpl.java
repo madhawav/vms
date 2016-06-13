@@ -5,6 +5,7 @@ import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import javafx.stage.Screen;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.rmi.RemoteException;
@@ -34,6 +35,12 @@ public class PresenterConsoleImpl implements PresenterConsole {
     private AudioRelayConsoleImpl audioRelayConsole = null; //Audio relay console of presenter
     private ScreenShareConsoleImpl screenShareConsole = null; //Screen share console of presenter
 
+    /**
+     * Automatic Disconnection related variables
+     */
+    private long lastNotifyAliveTime = -1;
+
+
     public PresenterConsoleImpl()
     {
 
@@ -54,6 +61,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
         //Setup audio relay console to presenter
         audioRelayConsole = new AudioRelayConsoleImpl(getFacilitator().getConfiguration().getListenerPort(),getFacilitator().getConfiguration().getAudioRelayBufferSize());
 
+        lastNotifyAliveTime = System.currentTimeMillis();
     }
 
     /**
@@ -265,6 +273,43 @@ public class PresenterConsoleImpl implements PresenterConsole {
         if(!isConnected())
             throw new DisconnectedException();
         return assignedTasks;
+    }
+    /**
+     * Notify the Facilitator that presenter is alive
+     * @throws DisconnectedException
+     */
+    @Override
+    public void notifyAlive() throws DisconnectedException {
+        this.lastNotifyAliveTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Engage automatic disconnection logic
+     */
+    @WebMethod(exclude = true)
+    public void updateConnectionStatus()
+    {
+        long time = System.currentTimeMillis();
+        long delta = time - lastNotifyAliveTime;
+        if(delta > getFacilitator().getConfiguration().getPresenterConnectionTerminationTimeout())
+        {
+            try {
+                disconnect();
+            } catch (ServerConnectionException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Retrieve time since last response from presenter
+     * @return
+     */
+    public long getInactiveTime()
+    {
+        long time = System.currentTimeMillis();
+        long delta = time - lastNotifyAliveTime;
+        return delta;
     }
 
     /**

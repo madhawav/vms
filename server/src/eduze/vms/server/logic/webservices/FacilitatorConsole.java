@@ -50,4 +50,10 @@ public interface FacilitatorConsole {
      */
     @WebMethod
     public void adjournMeeting();
+
+    /**
+     * Notify the server that facilitator is alive
+     */
+    @WebMethod
+    public void notifyAlive();
 }

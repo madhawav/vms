@@ -160,8 +160,7 @@ public class ServerManager {
             FacilitatorManager facilitatorManager = facilitatorManagerImplServiceLocator.getFacilitatorManagerImplPort(new URL(UrlGenerator.generateFacilitatorManagerAccessURL(url)));
             //request unpair
             facilitatorManager.unPair(server.getServerPairKey());
-            //forget device
-            pairedServers.remove(server.getServerName());
+
         }
 
         catch (ServiceException e)
@@ -169,6 +168,10 @@ public class ServerManager {
             throw new ServerConnectionException(e);
         } catch (RemoteException e) {
             throw new ServerConnectionException(e);
+        }
+        finally {
+            //forget device
+            pairedServers.remove(server.getServerName());
         }
 
 

@@ -18,9 +18,10 @@ public class NewSharedTask extends JDialog {
         this.sharedTaskManager = sharedTaskManager;
         setContentPane(contentPane);
         setModal(true);
-        setSize(new Dimension(300,200));
+
         setTitle("Add New Shared Task");
         pack();
+        setSize(new Dimension(400,300));
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 

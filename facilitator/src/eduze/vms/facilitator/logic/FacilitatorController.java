@@ -7,8 +7,10 @@ import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
 import eduze.vms.facilitator.logic.webservices.FacilitatorImpl;
 import eduze.vms.facilitator.logic.webservices.PresenterConsoleImpl;
 
+import javax.swing.*;
 import javax.xml.rpc.ServiceException;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
@@ -28,6 +30,16 @@ public class FacilitatorController {
     private ControlLoop controlLoop = null; //The control loop that manages Facilitator and its stake holders
     private SharedTaskManager sharedTaskManager = null; //Manager for Shared Tasks (Assigned Tasks)
 
+    private ConnectivityManager connectivityManager;
+
+    /**
+     * Retrieve the connectivity manager
+     * @return
+     */
+    public ConnectivityManager getConnectivityManager() {
+        return connectivityManager;
+    }
+
     /**
      * Construct by calling FacilitatorController.start()
      * @param config Facilitator Service Startup Configuration
@@ -35,6 +47,7 @@ public class FacilitatorController {
     private  FacilitatorController(FacilitatorController.Configuration config)
     {
         this.configuration = config;
+        this.connectivityManager = new ConnectivityManager(this);
     }
 
     //Controller to manage connection with server. Not set until a connection is established with server
@@ -132,8 +145,12 @@ public class FacilitatorController {
         //Setup Server Connection Manager
         serverManager = new ServerManager(this);
 
+        connectivityManager.start();
+
         running = true;
     }
+
+
 
 
 
@@ -156,8 +173,11 @@ public class FacilitatorController {
         //Setup Shared Task Manager
         sharedTaskManager = new SharedTaskManager(this);
 
+        //notify automatic disconnection
+        connectivityManager.recordServerConnected();
+
         //Setup Control Loop
-        controlLoop = new ControlLoop(this.facilitatorService,url,getConfiguration().getListenerPort());
+        controlLoop = new ControlLoop(this.facilitatorService,url,getConfiguration().getListenerPort(),connectivityManager);
         controlLoop.setControlLoopListener(new ControlLoopListener() {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
@@ -171,6 +191,7 @@ public class FacilitatorController {
             @Override
             public void onMeetingAdjourned() throws ServerConnectionException {
                 getServerConnectionController().disconnect();
+
                 notifyMeetingAdjourned();
                 //TODO: Disconnect from server
             }
@@ -201,8 +222,13 @@ public class FacilitatorController {
 
 
     void notifyServerDisconnected() throws ServerConnectionException {
-        controlLoop.stopRunning();
-        controlLoop = null;
+
+        connectivityManager.recordServerDisconnected();
+        if(controlLoop != null)
+        {
+            controlLoop.stopRunning();
+            controlLoop = null;
+        }
         sharedTaskManager = null;
         facilitatorService.disconnectServerConnection();
 
@@ -605,7 +631,6 @@ public class FacilitatorController {
         this.shareRequestListener = shareRequestListener;
     }
 
-
     /**
      * Terminate the Facilitator Controller
      */
@@ -613,11 +638,13 @@ public class FacilitatorController {
 
             if(getServerConnectionController() != null)
                 getServerConnectionController().disconnect();
+
+            connectivityManager.stop();
             for(Presenter presenter : getPresenters())
             {
                 presenter.disconnect();
             }
-
+            facilitatorService.stop();
     }
 
     /**
@@ -631,6 +658,27 @@ public class FacilitatorController {
         //Buffer Configuration used by FrameBuffers
         private int screenShareBufferSize = 2;
         private int audioRelayBufferSize = 5;
+
+        private long serverConnectionPauseTimeout = 1000;
+        private long serverConnectionLostTimeout = 10000;
+
+        private long presenterConnectionTerminationTimeout = 10000;
+
+        /**
+         * Retrieve the timeout used to automatic disconnection of presenter
+         * @return
+         */
+        public long getPresenterConnectionTerminationTimeout() {
+            return presenterConnectionTerminationTimeout;
+        }
+
+        /**
+         * Set the timeout used for automatic disconnection of presenter
+         * @param presenterConnectionTerminationTimeout
+         */
+        public void setPresenterConnectionTerminationTimeout(long presenterConnectionTerminationTimeout) {
+            this.presenterConnectionTerminationTimeout = presenterConnectionTerminationTimeout;
+        }
 
         //Pass Key of Faciliator
         private String password = "password";
@@ -716,6 +764,39 @@ public class FacilitatorController {
             this.password = password;
         }
 
+        /**
+         * Return the time taken to identify server connection to be paused
+         * @return
+         */
+        public long getServerConnectionPauseTimeout() {
+            return serverConnectionPauseTimeout;
+        }
+
+        /**
+         * Set the time required to identify server connection as paused
+         * @param serverConnectionPauseTimeout
+         */
+        public void setServerConnectionPauseTimeout(long serverConnectionPauseTimeout) {
+            this.serverConnectionPauseTimeout = serverConnectionPauseTimeout;
+        }
+
+        /**
+         * Retrieve the time taken to identify server connection to be lost
+         * @return
+         */
+        public long getServerConnectionLostTimeout() {
+            return serverConnectionLostTimeout;
+        }
+
+        /**
+         * Set the time taken to identify server connection to be lost
+         * @param serverConnectionLostTimeout
+         */
+        public void setServerConnectionLostTimeout(long serverConnectionLostTimeout) {
+            this.serverConnectionLostTimeout = serverConnectionLostTimeout;
+        }
     }
+
+
 
 }

@@ -36,6 +36,8 @@ public class ScreenFrame {
             @Override
             public void componentResized(ComponentEvent e) {
                 super.componentResized(e);
+                if(originalImage == null)
+                    return;
                 Image scaledImage = originalImage.getScaledInstance(frame.getWidth(),frame.getHeight() - 100,Image.SCALE_SMOOTH);
                 lblImage.setIcon(new ImageIcon(scaledImage));
 

@@ -81,7 +81,7 @@ public class ControlLoop extends Thread {
     private String facilitatorURL = null; //URL of Facilitator
     private ControlLoopListener controlLoopListener = null; //Listener to events of control loop
     private VirtualMeetingSnapshot lastKnownVMSnapshot; //Last known status of Virtual Meeting. Switching decisions are taken by Control Loop based on the information in this.
-
+    private ConnectivityManager connectivityManager;
     private CaptureReceivedListener captureReceivedListener = null; //Listener to be notified on reception of screen captures/audio relays
 
     /**
@@ -89,10 +89,12 @@ public class ControlLoop extends Thread {
      * @param facilitator Facilitator Web Service provided to presenter subsystems
      * @param serverUrl URL of Server
      * @param facilitatorPort Port used to host
+     * @param connectivityManager Connectivity Manager to be notified on server connectivity
      * @throws MalformedURLException Port used to host Facilitator Web Service hosted by Facilitator and used by Presenter Subsystems
      * @throws ServerConnectionException Error in Connection to Server
      */
-    public ControlLoop(FacilitatorImpl facilitator, String serverUrl, int facilitatorPort) throws MalformedURLException, ServerConnectionException {
+    public ControlLoop(FacilitatorImpl facilitator, String serverUrl, int facilitatorPort, ConnectivityManager connectivityManager) throws MalformedURLException, ServerConnectionException {
+        this.connectivityManager = connectivityManager;
         this.facilitatorURL = UrlGenerator.generateLocalURL(facilitatorPort); //Generate URL to Facilitator Web Service
         this.serverURL = UrlGenerator.extractURL(serverUrl);
         this.facilitator = facilitator;
@@ -310,17 +312,23 @@ public class ControlLoop extends Thread {
 
                             }
 
+                            connectivityManager.recordSignal();
                             if (controlLoopListener != null) {
                                 controlLoopListener.updateReceived(vm); //Notify through control loop listener
                             }
+
+
 
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
+
+                        connectivityManager.serverPulse();
                     }
                 });
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
@@ -349,6 +357,8 @@ public class ControlLoop extends Thread {
             }
         });
     }
+
+
 
     /**
      * Stop incoming traffic

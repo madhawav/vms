@@ -88,4 +88,12 @@ public interface PresenterConsole {
     @WebMethod
     public Collection<AssignedTask> getAssignedTasks() throws DisconnectedException;
 
+    /**
+     * Notify the Facilitator that presenter is alive
+     * @throws DisconnectedException
+     */
+    @WebMethod
+    public void notifyAlive() throws DisconnectedException;
+
+
 }

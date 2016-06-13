@@ -18,6 +18,7 @@ public class PresenterWindow {
     private JButton btnAudioShare;
     private JCheckBox chkAllowScreenShare;
     private JCheckBox chkAllowAudioShare;
+    private JLabel lblStatus;
 
     public PresenterWindow()
     {
@@ -42,6 +43,35 @@ public class PresenterWindow {
             public void onFacilitatorDisconnected() {
                 JOptionPane.showMessageDialog(mainFrame,"Facilitator has disconnected the presenter. Application will now close.","Disconnected",JOptionPane.OK_OPTION);
                 System.exit(0);
+            }
+        });
+
+        controller.getConnectivityMonitor().addConnectivityListener(new FacilitatorConnectivityMonitor.ConnectivityListener() {
+            @Override
+            public void onConnectionTerminated() {
+                lblStatus.setText("Connection Terminated");
+                JOptionPane.showMessageDialog(mainFrame,"Facilitator is disconnected as it failed to respond within timout period. Application will now close.","Disconnected",JOptionPane.OK_OPTION);
+                System.exit(0);
+            }
+
+            @Override
+            public void onConnectionPaused() {
+                lblStatus.setText("Connection Paused");
+            }
+
+            @Override
+            public void onConnectionResumed() {
+                lblStatus.setText("Connection Online");
+            }
+
+            @Override
+            public void onUpdated() {
+
+            }
+
+            @Override
+            public void onPausePulse() {
+                lblStatus.setText("Connection Paused for " + Long.toString(controller.getConnectivityMonitor().getPauseTime()/1000) + " seconds");
             }
         });
 

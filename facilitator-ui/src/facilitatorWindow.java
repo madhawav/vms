@@ -217,6 +217,29 @@ public class FacilitatorWindow {
                 }
             });
 
+            controller.getConnectivityManager().addServerConnectivityListener(new ConnectivityManager.ServerConnectivityListener() {
+                @Override
+                public void onConnectionPause() {
+                    lblConnectionStatus.setText("No response from server");
+                }
+
+                @Override
+                public void onConnectionResumed() {
+                    lblConnectionStatus.setText("Connected");
+                }
+
+                @Override
+                public void onConnectionTerminated() {
+                    lblConnectionStatus.setText("Disconnected");
+                    JOptionPane.showMessageDialog(mainPanel,"Server connection lost. Application will exit now.", "Error" , JOptionPane.OK_OPTION);
+                    System.exit(0);
+                }
+
+                @Override
+                public void onConnectionPauseUpdate() {
+                    lblConnectionStatus.setText("No response from server for " + Long.toString(controller.getConnectivityManager().serverPauseTime()/1000) +" seconds");
+                }
+            });
         } catch (StorageManager.StorageException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(mainPanel,"Storage Error","Error",JOptionPane.OK_OPTION);
@@ -563,6 +586,19 @@ public class FacilitatorWindow {
         } catch (ServiceNotStartedException e) {
             e.printStackTrace();
         }
+
+        try {
+            StorageManager.getInstance().updatePairedServers(controller.getServerManager().getPairedServers());
+        } catch (CryptoUtil.CryptoException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainPanel,"Crypto Error","Error",JOptionPane.OK_OPTION);
+        } catch (StorageManager.StorageException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(mainPanel,"Storage Error","Error",JOptionPane.OK_OPTION);
+        } catch (ServiceNotStartedException e) {
+            e.printStackTrace();
+        }
+
         try {
             refreshServerList();
         } catch (ServiceNotStartedException e) {

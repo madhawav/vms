@@ -58,16 +58,20 @@ public class ControlLoop extends Thread {
     private boolean serverAcceptsScreenShare = false;
     private boolean serverAcceptsAudioShare = false;
 
+    private FacilitatorConnectivityMonitor connectivityMonitor;
+
     /**
      * Constructor
      * @param presenterConsole Presenter Console provided by Facilitator
      * @param facilitatorURL URL of Facilitator
+     * @param connectivityMonitor Connectivity monitor used to determine faciltiator connection timeout
      * @throws FacilitatorConnectionException Error in Connection to Facilitator
      * @throws MalformedURLException Error in Facilitator URL
      */
-    ControlLoop(PresenterConsole presenterConsole, String facilitatorURL) throws FacilitatorConnectionException, MalformedURLException, FacilitatorDisconnectedException {
+    ControlLoop(PresenterConsole presenterConsole, String facilitatorURL, FacilitatorConnectivityMonitor connectivityMonitor) throws FacilitatorConnectionException, MalformedURLException, FacilitatorDisconnectedException {
         try {
             //Store parameters
+            this.connectivityMonitor = connectivityMonitor;
             this.facilitatorURL = facilitatorURL;
             this.presenterConsole = presenterConsole;
             this.screenShareConsoleId = presenterConsole.getOutScreenShareConsoleId();
@@ -143,6 +147,9 @@ public class ControlLoop extends Thread {
                     @Override
                     public void run() {
                         try {
+                            //notify alive
+                            presenterConsole.notifyAlive();
+
                             //Retrieve list of assigned tasks
                             assignedTasks = presenterConsole.getAssignedTasks();
 
@@ -193,7 +200,13 @@ public class ControlLoop extends Thread {
                                 }
                             }
 
+
                             //Notify Control Loop Listeners
+                            if(connectivityMonitor != null)
+                                connectivityMonitor.recordSignal();
+
+
+
                             notifyControlLoopCycleCompleted();
                         }catch (DisconnectedException e)
                         {
@@ -203,6 +216,9 @@ public class ControlLoop extends Thread {
                         catch (RemoteException e) {
                             e.printStackTrace();
                         }
+
+                        if(connectivityMonitor != null)
+                            connectivityMonitor.pulse();
                     }
                 });
             } catch (InterruptedException e) {

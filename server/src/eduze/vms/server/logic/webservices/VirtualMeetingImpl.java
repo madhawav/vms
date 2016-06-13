@@ -5,6 +5,7 @@ import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import eduze.vms.server.logic.URLGenerator;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 import java.util.Arrays;
@@ -301,7 +302,8 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         return  count;
     }
 
-    FacilitatorConsoleImpl[] getFacilitatorConsoles()
+    @WebMethod(exclude = true)
+    public FacilitatorConsoleImpl[] getFacilitatorConsoles()
     {
         return facilitatorConsoles;
     }

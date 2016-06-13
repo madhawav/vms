@@ -31,6 +31,8 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     private VirtualMeetingImpl virtualMeeting = null;
     private String consoleId = null;
 
+    private long lastAliveNotifyTime = -1;
+
     private int slotId = -1;
 
     public FacilitatorConsoleImpl()
@@ -44,6 +46,7 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
         consoleId = PasswordUtil.generateFacilitatorConsoleId();
         this.facilitator = facilitator;
         this.participants = new HashMap<>();
+        lastAliveNotifyTime = System.currentTimeMillis();
     }
 
     //initialize should be called after facilitator console is added to array in virtual meeting
@@ -163,6 +166,24 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
     public void adjournMeeting() {
         virtualMeeting.adjournMeeting();
     }
+
+    /**
+     * Notify server that facilitator is alive
+     */
+    @Override
+    public void notifyAlive() {
+        lastAliveNotifyTime = System.currentTimeMillis();
+    }
+
+    /**
+     * Retrieve last recorded time of alive
+     * @return
+     */
+    public long getLastAliveNotifyTime() {
+        return lastAliveNotifyTime;
+    }
+
+
 
     Facilitator getFacilitator()
     {

@@ -211,6 +211,16 @@ public class FacilitatorImpl implements Facilitator  {
     }
 
     /**
+     * Stop the Facilitator Web Service
+     */
+    public void stop()
+    {
+        //Publish Web Service
+       // Endpoint.publish(UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()),this);
+        Logger.getLogger("DEBUG").log(Level.INFO,"Facilitator Console Stopped " +UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()));
+    }
+
+    /**
      * Retrieve Facilitator Service Startup Configuration
      * @return
      */

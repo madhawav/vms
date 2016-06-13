@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * Main Controller for managing logic of Presenter Subsystem
  */
 public class PresenterController {
+    private FacilitatorConnectivityMonitor connectivityMonitor;
     //Presenter console id provided by facilitator
     private final String presenterConsoleId;
     //Facilitator MPI provided by Facilitator Web Service
@@ -45,6 +46,15 @@ public class PresenterController {
         this.connector = facilitatorConnector;
         this.facilitator = facilitator;
         this.presenterConsoleId = presenterConsoleId;
+        this.connectivityMonitor = new FacilitatorConnectivityMonitor(facilitatorConnector.getConfiguration().getConnectionTerminateTimeout(),facilitatorConnector.getConfiguration().getConnectionPauseTimeout());
+    }
+
+    /**
+     * Retrieve the connectivity monitor associated with controller
+     * @return ConnectivityMonitor
+     */
+    public FacilitatorConnectivityMonitor getConnectivityMonitor() {
+        return connectivityMonitor;
     }
 
     /**
@@ -73,7 +83,7 @@ public class PresenterController {
             this.assignedTasksManager = new AssignedTasksManager(this);
 
             //Setup Control Loop
-            this.controlLoop = new ControlLoop(presenterConsole,getConfiguration().getFacilitatorURL());
+            this.controlLoop = new ControlLoop(presenterConsole,getConfiguration().getFacilitatorURL(),connectivityMonitor);
             this.controlLoop.setStateChangeListener(new ControlLoop.StateChangeListener() {
                 @Override
                 public void onScreenCaptureChanged(boolean newValue) {

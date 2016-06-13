@@ -22,7 +22,7 @@ public class PresenterConsoleImplServiceLocator extends org.apache.axis.client.S
     }
 
     // Use to get a proxy class for PresenterConsoleImplPort
-    private java.lang.String PresenterConsoleImplPort_address = "http://0.0.0.0:7000/presenter/pc_2018325726";
+    private java.lang.String PresenterConsoleImplPort_address = "http://0.0.0.0:7000/presenter/pc_954656532";
 
     public java.lang.String getPresenterConsoleImplPortAddress() {
         return PresenterConsoleImplPort_address;

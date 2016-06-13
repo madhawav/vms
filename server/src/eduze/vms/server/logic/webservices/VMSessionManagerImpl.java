@@ -1,5 +1,6 @@
 package eduze.vms.server.logic.webservices;
 
+import eduze.vms.server.logic.ConnectivityManager;
 import eduze.vms.server.logic.URLGenerator;
 
 import javax.jws.WebService;
@@ -15,6 +16,8 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
     private VirtualMeetingImpl virtualMeeting = null;
     private  ServerImpl server = null;
+    private ConnectivityManager connectivityManager;
+
     public VMSessionManagerImpl() throws Exception {
 
     }
@@ -29,6 +32,7 @@ public class VMSessionManagerImpl implements VMSessionManager {
     {
         this.server = server;
         this.virtualMeeting = new VirtualMeetingImpl(this);
+        connectivityManager = new ConnectivityManager(virtualMeeting,server.getConfiguration().getFacilitatorConnectivityTimeoutInterval());
     }
 
     @Override
@@ -91,6 +95,10 @@ public class VMSessionManagerImpl implements VMSessionManager {
         System.out.println("VMSession Manager Started " +URLGenerator.generateVMSessionManagerPublishURL(server.getPort()) );
         Endpoint.publish(URLGenerator.generateVMSessionManagerPublishURL(server.getPort()),this);
         virtualMeeting.start();
+
+
+
+        connectivityManager.start();
     }
 
     public ServerImpl getServer() {
@@ -99,8 +107,13 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
     public void resetVirtualMeeting() {
         this.virtualMeeting.stop();
+        connectivityManager.stop();
+
         this.virtualMeeting = new VirtualMeetingImpl(this);
+        connectivityManager = new ConnectivityManager(virtualMeeting,server.getConfiguration().getFacilitatorConnectivityTimeoutInterval());
+
         Logger.getLogger("Info").log(Level.INFO,"Virtual Meeting reset");
         virtualMeeting.start();
+        connectivityManager.start();
     }
 }

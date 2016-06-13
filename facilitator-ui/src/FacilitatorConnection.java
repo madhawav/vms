@@ -177,6 +177,9 @@ public class FacilitatorConnection extends JDialog {
                 storageManager.updateStorage(dataNode);
 
                 //Load the new window
+                FacilitatorWindow window = new FacilitatorWindow();
+                window.run();
+                dispose();
             }catch (StorageManager.StorageException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(contentPane,"Unable to Read Storage File","Error",JOptionPane.OK_OPTION);
@@ -185,9 +188,7 @@ public class FacilitatorConnection extends JDialog {
                 JOptionPane.showMessageDialog(contentPane,"Encryption Error","Error",JOptionPane.OK_OPTION);
             }
 
-            FacilitatorWindow window = new FacilitatorWindow();
-            window.run();
-            dispose();
+
         }
 
     }

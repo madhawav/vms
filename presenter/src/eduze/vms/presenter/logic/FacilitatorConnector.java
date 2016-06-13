@@ -366,6 +366,42 @@ public class FacilitatorConnector {
         //Facilitator Password
         private String facilitatorPasskey = "password";
 
+        //Timeouts used for connection
+        private int connectionPauseTimeout = 1000;
+        private int connectionTerminateTimeout = 15000;
+
+        /**
+         * Return timeout used for connectivity pausing
+         * @return
+         */
+        public int getConnectionPauseTimeout() {
+            return connectionPauseTimeout;
+        }
+
+        /**
+         * Return timeout for connection termination
+         * @return
+         */
+        public int getConnectionTerminateTimeout() {
+            return connectionTerminateTimeout;
+        }
+
+        /**
+         * Set the timeout used to pause connection
+         * @param connectionPauseTimeout
+         */
+        public void setConnectionPauseTimeout(int connectionPauseTimeout) {
+            this.connectionPauseTimeout = connectionPauseTimeout;
+        }
+
+        /**
+         * Set the timeout used to terminate connection
+         * @param connectionTerminateTimeout
+         */
+        public void setConnectionTerminateTimeout(int connectionTerminateTimeout) {
+            this.connectionTerminateTimeout = connectionTerminateTimeout;
+        }
+
         /**
          * Retrieve Facilitator URL
          * @return

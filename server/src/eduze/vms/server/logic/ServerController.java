@@ -22,6 +22,8 @@ public class ServerController {
     private ArrayList<PairListener> pairListeners = new ArrayList<>();
     private ArrayList<FacilitatorSessionListener> facilitatorSessionListeners = new ArrayList<>();
 
+
+
     //Startup configuration of server
     private ServerImpl.Configuration startConfig = new ServerImpl.Configuration();
 
@@ -109,6 +111,9 @@ public class ServerController {
         });
 
         serverService.start();
+
+
+
         running = true;
     }
 
@@ -203,5 +208,13 @@ public class ServerController {
         {
             sessionManager.adjournMeeting();
         }
+    }
+
+    public int getFacilitatorConnectivityTimeoutInterval() {
+        return startConfig.getFacilitatorConnectivityTimeoutInterval();
+    }
+
+    public void setFacilitatorConnectivityTimeoutInterval(int facilitatorConnectivityTimeoutInterval) {
+        startConfig.setFacilitatorConnectivityTimeoutInterval(facilitatorConnectivityTimeoutInterval);
     }
 }
