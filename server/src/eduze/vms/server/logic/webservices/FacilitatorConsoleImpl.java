@@ -5,6 +5,7 @@ import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import eduze.vms.server.logic.FacilitatorSessionListener;
 import eduze.vms.server.logic.URLGenerator;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
@@ -93,7 +94,7 @@ public class FacilitatorConsoleImpl implements FacilitatorConsole {
      */
     public void start()
     {
-        System.out.println("Facilitator Console Started " + URLGenerator.generateFacilitatorConsolePublishURL(virtualMeeting.getSessionManager().getServer().getPort(),consoleId));
+        Logger.getLogger(this.getClass()).info("Facilitator Console Started " + URLGenerator.generateFacilitatorConsolePublishURL(virtualMeeting.getSessionManager().getServer().getPort(),consoleId));
         endPoint = Endpoint.publish(URLGenerator.generateFacilitatorConsolePublishURL(virtualMeeting.getSessionManager().getServer().getPort(),consoleId),this);
     }
 

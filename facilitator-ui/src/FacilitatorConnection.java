@@ -198,15 +198,5 @@ public class FacilitatorConnection extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-      //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        FacilitatorConnection dialog = new FacilitatorConnection();
-        dialog.pack();
-        dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        dialog.setVisible(true);
 
-        //System.exit(0);
-    }
 }

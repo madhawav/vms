@@ -439,7 +439,7 @@ public class ConnectorPanel {
         facilitatorController.addCaptureReceivedListener(new CaptureReceivedListener() {
             @Override
             public void onScreenCaptureReceived(byte[] rawData, BufferedImage image, String facilitatorConsoleId, String presenterConsoleId) {
-                System.out.println("Screen Capture Received " + String.valueOf(rawData.length) + " bytes");
+                //System.out.println("Screen Capture Received " + String.valueOf(rawData.length) + " bytes");
                 screenShow.setImage(image);
             }
 
@@ -450,7 +450,7 @@ public class ConnectorPanel {
 
             @Override
             public void onAudioDataReceived(byte[] bytes, String activeScreenFacilitatorId, String activeScreenPresenterId) {
-                System.out.println("Audio Data Received " + String.valueOf(bytes.length) + " bytes");
+                //System.out.println("Audio Data Received " + String.valueOf(bytes.length) + " bytes");
             }
         });
 
@@ -591,7 +591,7 @@ public class ConnectorPanel {
 
     }
 
-    private void testSequence()
+    /*private void testSequence()
     {
         eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator locator = new ServerImplServiceLocator();
         eduze.vms.facilitator.logic.mpi.facilitatormanager.FacilitatorManagerImplServiceLocator loc = new FacilitatorManagerImplServiceLocator();
@@ -634,5 +634,5 @@ public class ConnectorPanel {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

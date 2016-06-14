@@ -4,6 +4,7 @@ import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import eduze.vms.server.logic.URLGenerator;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -317,7 +318,7 @@ public class VirtualMeetingImpl implements VirtualMeeting {
         ascendingAudioRelayConsole.start();
         descendingAudioRelayConsole.start();
 
-        System.out.println("Virtual Meeting Started " + URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId) );
+        Logger.getLogger(this.getClass()).info("Virtual Meeting Started " + URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId) );
         endpoint = Endpoint.publish(URLGenerator.generateVMPublishURL(sessionManager.getServer().getPort(),virtualMeetingId),this);
     }
 

@@ -289,6 +289,8 @@ public class ControlLoop extends Thread {
                     public void run() {
                         //Switch to UI Thread since we are interacting with objects used in UI thread
                         try {
+
+                            facilitatorConsole.notifyAlive();
                             //Obtain Virtual Meeting State
                             VirtualMeetingSnapshot vm = facilitator.getVirtualMeeting().getSnapshot();
                             String facilitatorCode = getFacilitatorConsoleId();

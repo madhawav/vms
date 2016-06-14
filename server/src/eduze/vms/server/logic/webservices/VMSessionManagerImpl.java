@@ -92,7 +92,7 @@ public class VMSessionManagerImpl implements VMSessionManager {
 
     public void start()
     {
-        System.out.println("VMSession Manager Started " +URLGenerator.generateVMSessionManagerPublishURL(server.getPort()) );
+        org.apache.log4j.Logger.getLogger(getClass()).info("VMSession Manager Started " +URLGenerator.generateVMSessionManagerPublishURL(server.getPort()) );
         Endpoint.publish(URLGenerator.generateVMSessionManagerPublishURL(server.getPort()),this);
         virtualMeeting.start();
 

@@ -6,6 +6,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatorconsole.FacilitatorConsoleImpl
 import eduze.vms.facilitator.logic.mpi.facilitatorconsole.VMParticipant;
 import eduze.vms.facilitator.logic.mpi.virtualmeeting.*;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -19,8 +20,7 @@ import java.rmi.ServerException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -207,7 +207,7 @@ public class FacilitatorImpl implements Facilitator  {
     {
         //Publish Web Service
         Endpoint.publish(UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()),this);
-        Logger.getLogger("DEBUG").log(Level.INFO,"Facilitator Console Started " +UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()));
+        Logger.getLogger(getClass()).info("Facilitator Console Started " +UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()));
     }
 
     /**
@@ -217,7 +217,7 @@ public class FacilitatorImpl implements Facilitator  {
     {
         //Publish Web Service
        // Endpoint.publish(UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()),this);
-        Logger.getLogger("DEBUG").log(Level.INFO,"Facilitator Console Stopped " +UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()));
+        Logger.getLogger(getClass()).info("Facilitator Console Stopped " +UrlGenerator.generateFacilitatorPublishUrl(configuration.getListenerPort()));
     }
 
     /**

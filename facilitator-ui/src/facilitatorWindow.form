@@ -309,9 +309,9 @@
               <grid id="b8201" binding="pnlShareRequests" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="8" fill="2" indent="0" use-parent-layout="false">
-                    <minimum-size width="300" height="-1"/>
-                    <preferred-size width="300" height="-1"/>
-                    <maximum-size width="300" height="-1"/>
+                    <minimum-size width="350" height="-1"/>
+                    <preferred-size width="350" height="-1"/>
+                    <maximum-size width="350" height="-1"/>
                   </grid>
                 </constraints>
                 <properties/>

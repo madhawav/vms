@@ -3,11 +3,10 @@ package eduze.vms.foundation.logic.webservices;
 import eduze.livestream.exchange.server.FrameBufferImpl;
 import eduze.vms.foundation.logic.URLGenerator;
 import eduze.vms.foundation.logic.PasswordUtil;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Madhawa on 12/04/2016.
@@ -51,15 +50,15 @@ public class ScreenShareConsoleImpl implements ScreenShareConsole {
      */
     public void start()
     {
-        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Console Started " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
-        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Frame Buffer Started " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Screen Share Console Started " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Screen Share Frame Buffer Started " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
         screenShareFrameBufferEndPoint = Endpoint.publish(URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId),frameBuffer);
         screenShareConsoleEndPoint = Endpoint.publish(URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId),this);
     }
 
     public void stop() {
-        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Console Stopped " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
-        Logger.getLogger("DEBUG").log(Level.INFO,"Screen Share Frame Buffer Stopped " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Screen Share Console Stopped " + URLGenerator.generateScreenShareConsolePublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Screen Share Frame Buffer Stopped " + URLGenerator.generateScreenShareFrameBufferPublishUrl(port,consoleId));
         //screenShareFrameBufferEndPoint.stop();
         // screenShareConsoleEndPoint.stop();
     }

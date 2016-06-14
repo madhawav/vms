@@ -3,11 +3,11 @@ package eduze.vms.foundation.logic.webservices;
 import eduze.livestream.exchange.server.FrameBufferImpl;
 import eduze.vms.foundation.logic.PasswordUtil;
 import eduze.vms.foundation.logic.URLGenerator;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Fujitsu on 4/15/2016.
@@ -50,8 +50,8 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
      */
     public void start()
     {
-        Logger.getLogger("DEBUG").log(Level.INFO, "Audio RelayConsole Started " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
-        Logger.getLogger("DEBUG").log(Level.INFO, "Audio Relay Frame Buffer Started " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Audio RelayConsole Started " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Audio Relay Frame Buffer Started " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
         //Publish Endpoints
         audioRelayFrameBufferEndPoint = Endpoint.publish(URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId),frameBuffer);
         audioRelayConsoleEndPoint = Endpoint.publish(URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId),this);
@@ -62,8 +62,8 @@ public class AudioRelayConsoleImpl implements AudioRelayConsole {
      */
     public void stop()
     {
-        Logger.getLogger("DEBUG").log(Level.INFO, "Audio RelayConsole Stopped " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
-        Logger.getLogger("DEBUG").log(Level.INFO, "Audio Relay Frame Buffer Stopped " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Audio RelayConsole Stopped " + URLGenerator.generateAudioRelayConsolePublishUrl(port,consoleId));
+        Logger.getLogger(getClass()).info("Audio Relay Frame Buffer Stopped " + URLGenerator.generateAudioRelayFrameBufferPublishUrl(port,consoleId));
         //Publish Endpoints
        // audioRelayConsoleEndPoint.stop();
        // audioRelayFrameBufferEndPoint.stop();

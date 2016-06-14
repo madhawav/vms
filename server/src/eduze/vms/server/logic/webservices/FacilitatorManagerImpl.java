@@ -2,6 +2,7 @@ package eduze.vms.server.logic.webservices;
 
 import eduze.vms.server.logic.PasswordUtil;
 import eduze.vms.server.logic.URLGenerator;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -114,7 +115,7 @@ public class FacilitatorManagerImpl implements FacilitatorManager {
      * Start the Facilitator Manager Service
      */
     public void start() {
-        System.out.println("FacilitatorManager Started " +URLGenerator.generateFacilitatorManagerPublishURL(server.getPort()) );
+        Logger.getLogger(this.getClass()).info("FacilitatorManager Started " +URLGenerator.generateFacilitatorManagerPublishURL(server.getPort()));
         Endpoint.publish(URLGenerator.generateFacilitatorManagerPublishURL(server.getPort()),this);
     }
 

@@ -6,6 +6,10 @@ import eduze.vms.server.logic.PairListener;
 import eduze.vms.server.logic.ServerController;
 import eduze.vms.server.logic.ServerStartedException;
 import eduze.vms.server.logic.webservices.Facilitator;
+import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 
 import javax.swing.*;
 import java.io.File;
@@ -15,18 +19,24 @@ import java.util.Scanner;
  * Created by Admin on 6/12/2016.
  */
 public class ServerApp {
+
+
     private String[] args;
     public ServerApp(String[] args)
     {
         this.args = args;
     }
 
+
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        //Setup Log4J
+        BasicConfigurator.configure();
+
         ServerApp serverApp = new ServerApp(args);
         serverApp.run();
     }
 
-    private void run() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+    public void run() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         if(args == null || args.length == 0)
         {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");

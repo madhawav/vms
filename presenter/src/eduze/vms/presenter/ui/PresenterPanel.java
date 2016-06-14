@@ -4,6 +4,7 @@ import eduze.vms.presenter.logic.*;
 import eduze.vms.presenter.logic.mpi.facilitator.Facilitator;
 import eduze.vms.presenter.logic.mpi.facilitator.FacilitatorImplServiceLocator;
 import eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.xml.rpc.ServiceException;
@@ -229,10 +230,10 @@ public class PresenterPanel {
         FacilitatorImplServiceLocator locator = new FacilitatorImplServiceLocator();
         try {
             Facilitator facilitator =  locator.getFacilitatorImplPort(new URL("http://localhost:7000/facilitator"));
-            System.out.println("Facilitator Name " + facilitator.getFacilitatorName());
+            Logger.getLogger(getClass()).info("Facilitator Name " + facilitator.getFacilitatorName());
 
             String result = facilitator.requestConnection("My Presenter", "password");
-            System.out.println("Connection Request Id " + result);
+            Logger.getLogger(getClass()).info("Connection Request Id " + result);
         } catch (ServiceException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {

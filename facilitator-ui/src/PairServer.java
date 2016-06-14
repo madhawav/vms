@@ -2,14 +2,14 @@ import eduze.vms.facilitator.logic.ServerConnectionException;
 import eduze.vms.facilitator.logic.ServerManager;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.AlreadyPairedException;
 import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordException;
+import org.apache.log4j.Logger;
 import sun.rmi.runtime.Log;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class PairServer extends JDialog {
     private JPanel contentPane;
@@ -70,11 +70,11 @@ public class PairServer extends JDialog {
             return;
         } catch (AlreadyPairedException e) {
             JOptionPane.showMessageDialog(this,"Server is already paired","Error",JOptionPane.OK_OPTION);
-            Logger.getLogger("Error").log(Level.SEVERE,"Already Paired");
+            Logger.getLogger(getClass()).info("Already Paired");
             return;
         } catch (InvalidServerPasswordException e) {
             JOptionPane.showMessageDialog(this,"Invalid Password","Error",JOptionPane.OK_OPTION);
-            Logger.getLogger("Error").log(Level.SEVERE,"Invalid Password");
+            Logger.getLogger(getClass()).info("Invalid Password");
             return;
         }
         dispose();

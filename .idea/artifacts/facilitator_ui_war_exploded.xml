@@ -6,6 +6,14 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="facilitator-ui" />
+          <element id="module-output" name="foundation" />
+          <element id="module-output" name="facilitator" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../livestream/out/artifacts/livestream_jar/livestream.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/livestream.jar" />
+          <element id="library" level="project" name="JAX-WS-Apache Axis" />
+          <element id="file-copy" path="$PROJECT_DIR$/facilitator-ui/lib/darcula.jar" />
         </element>
       </element>
     </root>

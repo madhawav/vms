@@ -4,6 +4,7 @@ import eduze.vms.facilitator.logic.*;
 import eduze.vms.foundation.logic.webservices.AudioRelayConsoleImpl;
 import eduze.vms.foundation.logic.webservices.ScreenShareConsoleImpl;
 import javafx.stage.Screen;
+import org.apache.log4j.Logger;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -11,8 +12,7 @@ import javax.xml.ws.Endpoint;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Madhawa on 13/04/2016.
@@ -73,7 +73,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
         screenShareConsole.start();
         audioRelayConsole.start();
         endpoint = Endpoint.publish(UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId),this);
-        Logger.getLogger("DEBUG").log(Level.INFO,"Presenter Console Started " + UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId));
+        Logger.getLogger(getClass()).info("Presenter Console Started " + UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId));
     }
 
     /**
@@ -83,6 +83,7 @@ public class PresenterConsoleImpl implements PresenterConsole {
     {
         screenShareConsole.stop();
         audioRelayConsole.stop();
+        Logger.getLogger(getClass()).info("Presenter Console Stopped " + UrlGenerator.generatePresenterConsolePublishUrl(facilitator.getConfiguration().getListenerPort(),consoleId));
         //TODO: put stop logic here
         //endpoint.stop();
     }

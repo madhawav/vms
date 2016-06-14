@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="facilitator-ui:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/facilitator_ui_jar</output-path>
+    <root id="archive" name="facilitator-ui.jar">
+      <element id="module-output" name="facilitator-ui" />
+      <element id="module-output" name="facilitator" />
+      <element id="module-output" name="foundation" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../livestream/out/artifacts/livestream_jar/livestream.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/livestream.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/commons-discovery-0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/commons-logging-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/jaxrpc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/log4j-1.2.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/axis.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/saaj.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/wsdl4j-1.5.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator-ui/lib/darcula.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

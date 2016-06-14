@@ -640,10 +640,11 @@ public class FacilitatorWindow {
         facilitatorWindowFrame.setTitle("Facilitator Control Panel");
         facilitatorWindowFrame.setContentPane(this.mainPanel);
 
-        facilitatorWindowFrame.setSize(1024,768);
+
        // facilitatorWindowFrame.setExtendedState(Frame.MAXIMIZED_BOTH);
         facilitatorWindowFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         facilitatorWindowFrame.pack();
+        facilitatorWindowFrame.setSize(1024,768);
         facilitatorWindowFrame.setLocationRelativeTo(null);
         facilitatorWindowFrame.setVisible(true);
 

@@ -1,4 +1,5 @@
 import eduze.vms.presenter.logic.PresenterController;
+import org.apache.log4j.BasicConfigurator;
 
 import javax.swing.*;
 
@@ -31,13 +32,14 @@ public class PresenterApp {
         this.controller = controller;
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-
+    public void run(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        PresenterApp presenterApp = PresenterApp.getInstance();
+
+        BasicConfigurator.configure();
+
         ConnectionWindow dialog = new ConnectionWindow();
         dialog.setVisible(true);
-        if(getInstance().getController() == null)
+        if(getController() == null)
         {
             return;
         }
@@ -46,5 +48,10 @@ public class PresenterApp {
             PresenterWindow presenterWindow = new PresenterWindow();
             presenterWindow.run();
         }
+    }
+    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+        PresenterApp presenterApp = PresenterApp.getInstance();
+        presenterApp.run(args);
+
     }
 }

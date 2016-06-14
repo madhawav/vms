@@ -3,25 +3,27 @@ import eduze.vms.facilitator.logic.FacilitatorController;
 import eduze.vms.facilitator.logic.PresenterConnectionListener;
 import eduze.vms.facilitator.logic.RequestAlreadyProcessedException;
 import eduze.vms.presenter.logic.*;
-import org.testng.Assert;
+import eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException;
+import org.junit.Assert;
 
 import java.net.MalformedURLException;
 
-/**
- * Created by Admin on 6/11/2016.
- */
-public class PresenterControllerTest {
+import static org.junit.Assert.*;
 
-    private FacilitatorController facilitatorController;
-    private PresenterController presenterController;
-    @org.testng.annotations.BeforeMethod
-    public void setup() throws Exception
-    {
+/**
+ * Created by Admin on 6/14/2016.
+ */
+public class PresenterControllerTest2 {
+    private static FacilitatorController facilitatorController;
+    private static PresenterController presenterController;
+
+    @org.junit.Before
+    public void setup() throws FacilitatorConnectionException, MalformedURLException, InvalidFacilitatorPasskeyException, FacilitatorConnectionNotReadyException, FacilitatorDisconnectedException {
         FacilitatorController.Configuration configuration = new FacilitatorController.Configuration();
         configuration.setListenerPort(7000);
         configuration.setPassword("12345");
         configuration.setName("TestFacilitator");
-        this.facilitatorController = FacilitatorController.start(configuration);
+        facilitatorController = FacilitatorController.start(configuration);
 
 
         final FacilitatorConnector.Configuration configuration1 = new FacilitatorConnector.Configuration();
@@ -37,7 +39,7 @@ public class PresenterControllerTest {
                     try {
                         connectionRequest.accept();
                     } catch (RequestAlreadyProcessedException e) {
-                        Assert.fail("Connection Request failed",e);
+                        Assert.fail("Connection Request failed");
                         e.printStackTrace();
                     }
                 }
@@ -67,7 +69,6 @@ public class PresenterControllerTest {
             public void onSuccess(FacilitatorConnector sender) {
                 try {
                     presenterController = sender.obtainController();
-                    System.out.println("Success");
                 } catch (FacilitatorConnectionNotReadyException e) {
                     e.printStackTrace();
                 } catch (FacilitatorConnectionException e) {
@@ -86,60 +87,58 @@ public class PresenterControllerTest {
 
             @Override
             public boolean onException(FacilitatorConnector sender, Exception e) {
-                Assert.fail("Error on Connection to Facilitator",e);
+                Assert.fail("Error on Connection to Facilitator");
                 return false;
             }
         });
-
-
     }
-    @org.testng.annotations.Test
-    public void testStart() throws Exception {
+    @org.junit.Test
+    public void start() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testDisconnect() throws Exception {
+    @org.junit.Test
+    public void disconnect() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testRequestScreenShare() throws Exception {
+    @org.junit.Test
+    public void requestScreenShare() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testRequestAudioShare() throws Exception {
+    @org.junit.Test
+    public void requestAudioShare() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testIsScreenShared() throws Exception {
+    @org.junit.Test
+    public void isScreenShared() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testIsAudioShared() throws Exception {
+    @org.junit.Test
+    public void isAudioShared() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testNotifyScreenSharedChanged() throws Exception {
+    @org.junit.Test
+    public void isAllowedScreenShare() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testNotifyAudioSharedChanged() throws Exception {
+    @org.junit.Test
+    public void isAllowedAudioShare() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testIsServerAcceptsScreenShare() throws Exception {
+    @org.junit.Test
+    public void isServerAcceptsScreenShare() throws Exception {
 
     }
 
-    @org.testng.annotations.Test
-    public void testIsServerAcceptsAudioShare() throws Exception {
+    @org.junit.Test
+    public void isServerAcceptsAudioShare() throws Exception {
 
     }
 
