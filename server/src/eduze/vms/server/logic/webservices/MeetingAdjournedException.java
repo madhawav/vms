@@ -1,7 +1,7 @@
 package eduze.vms.server.logic.webservices;
 
 /**
- * Created by Admin on 5/21/2016.
+ * Unable to process request since the meeting is in adjourned state
  */
 public class MeetingAdjournedException extends Exception {
     public MeetingAdjournedException()

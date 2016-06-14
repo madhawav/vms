@@ -1,7 +1,7 @@
 package eduze.vms.server.logic.webservices;
 
 /**
- * Created by Madhawa on 12/04/2016.
+ * The Facilitator is already paired to server
  */
 public class AlreadyPairedException extends Exception {
     public AlreadyPairedException()

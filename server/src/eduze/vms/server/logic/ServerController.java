@@ -74,7 +74,7 @@ public class ServerController {
     public void start()  {
         serverService = new ServerImpl(startConfig); //setup server service
 
-        //setup pair listeners to tunnel even from service to user
+        //setup pair listeners to tunnel events from service to user
         serverService.setPairListener(new PairListener() {
             @Override
             public void onPair(Facilitator pairedFacilitator) {
@@ -110,13 +110,14 @@ public class ServerController {
             }
         });
 
+        //Start the Service
         serverService.start();
-
-
-
         running = true;
     }
 
+    /**
+     * Notify listeners that meeting has been adjourned
+     */
     private void notifyMeetingAdjourned() {
         for(FacilitatorSessionListener l : facilitatorSessionListeners)
         {
@@ -124,21 +125,41 @@ public class ServerController {
         }
     }
 
+    /**
+     * Notify listeners that a Facilitator has changed their name
+     * @param pairKey Pairkey to identify the Facilitator
+     * @param oldName Previous name of Facilitator
+     * @param newName New name of Facilitator
+     */
     private void notifyPairNameChanged(String pairKey, String oldName, String newName) {
         for(PairListener p : pairListeners)
             p.onPairNameChanged(pairKey,oldName,newName);
     }
 
+    /**
+     * Notify listeners that a Facilitator has been connected
+     * @param facilitator Facilitator connected
+     * @param consoleId Facilitator console id
+     */
     private void notifyFacilitatorConnected(Facilitator facilitator ,String consoleId) {
         for(FacilitatorSessionListener fsp : facilitatorSessionListeners)
             fsp.onConnected(facilitator,consoleId);
     }
 
+    /**
+     * Notify listeners that a Facilitator has been disconnected
+     * @param facilitator Disconnected Facilitator
+     * @param console_id Facilitator console id
+     */
     private void notifyFacilitatorDisconnected(Facilitator facilitator, String console_id) {
         for(FacilitatorSessionListener fsp : facilitatorSessionListeners)
             fsp.onDisconnected(facilitator, console_id);
     }
 
+    /**
+     * Retrieve name of Server
+     * @return Server Name
+     */
     public String getName() {
         if(isRunning())
             return startConfig.getName();
@@ -146,62 +167,112 @@ public class ServerController {
             return serverService.getServerName();
     }
 
+    /**
+     * Set the name of Server
+     * @param name ServerName
+     * @throws ServerStartedException Server has been started already
+     */
     public void setName(String name) throws Exception {
         if(running)
-            throw new Exception("Already Started");
+            throw new ServerStartedException();
         this.startConfig.setName(name);
     }
 
-
+    /**
+     * Set the password of Server
+     * @param password new password
+     * @throws ServerStartedException Server has started already
+     */
     public void setPassword(String password) throws Exception {
         if(running)
-            throw new Exception("Already Started");
+            throw new ServerStartedException();
         this.startConfig.setPassword(password);
     }
 
+    /**
+     * Retrieve the list of paired facilitators
+     * @return Paired Facilitators
+     */
     public Collection<Facilitator> getPairedFacilitators()
     {
         return serverService.getFacilitatorManager().getFacilitators();
     }
 
+    /**
+     * Add a Facilitator information to list of paired facilitators
+     * @param facilitatorName Name of Facilitator
+     * @param facilitatorPairKey Pairkey provided to Facilitator
+     */
     public void addPairedFacilitator(String facilitatorName, String facilitatorPairKey)
     {
+        //Instantiate Facilitator Structure
         Facilitator facilitator = new Facilitator();
         facilitator.setName(facilitatorName);
         facilitator.setPairKey(facilitatorPairKey);
+        //Store new Facilitator
         serverService.getFacilitatorManager().addFacilitator(facilitator);
     }
-    public void addPairListener(PairListener p)
+
+    /**
+     * Add a PairListener
+     * @param pairListener Listener to be notified on pair events
+     */
+    public void addPairListener(PairListener pairListener)
     {
-        pairListeners.add(p);
+        pairListeners.add(pairListener);
     }
 
-    public void removePairListener(PairListener p)
+    /**
+     * Remove a pair listener
+     * @param pairListener listener to be not notified on pair events
+     */
+    public void removePairListener(PairListener pairListener)
     {
-        pairListeners.remove(p);
+        pairListeners.remove(pairListener);
     }
 
-    public void addFacilitatorSessionListener(FacilitatorSessionListener p)
+    /**
+     * Add a listener to be notified on facilitator connection events
+     * @param facilitatorSessionListener Listener to be notified
+     */
+    public void addFacilitatorSessionListener(FacilitatorSessionListener facilitatorSessionListener)
     {
-        facilitatorSessionListeners.add(p);
+        facilitatorSessionListeners.add(facilitatorSessionListener);
     }
 
-    public void removeFacilitatorSessionListener(FacilitatorSessionListener p)
+    /**
+     * Remove a Facilitator Session Listener
+     * @param facilitatorSessionListener Listener to be not notified
+     */
+    public void removeFacilitatorSessionListener(FacilitatorSessionListener facilitatorSessionListener)
     {
-        facilitatorSessionListeners.remove(p);
+        facilitatorSessionListeners.remove(facilitatorSessionListener);
     }
 
+    /**
+     * Notify listeners that a new pair is made
+     * @param pair
+     */
     void notifyPairAdded(Facilitator pair)
     {
         for(PairListener p : pairListeners)
             p.onPair(pair);
     }
+
+    /**
+     * Notify listeners that a pair is removed
+     * @param pair
+     */
     void notifyPairRemoved(Facilitator pair)
     {
         for(PairListener p : pairListeners)
             p.onUnPair(pair);
     }
 
+    /**
+     * Adjourn the meeting
+     * @throws ServerNotReadyException The server is not in a state to adjourn a meeting
+     */
     public void adjournMeeting() throws ServerNotReadyException {
        VMSessionManagerImpl sessionManager = serverService.getVmSessionManager();
         if(sessionManager != null)
@@ -210,10 +281,18 @@ public class ServerController {
         }
     }
 
+    /**
+     * Retrieve the timeout used to disconnect Facilitator connections automatically
+     * @return Timeout for Facilitator Connections
+     */
     public int getFacilitatorConnectivityTimeoutInterval() {
         return startConfig.getFacilitatorConnectivityTimeoutInterval();
     }
 
+    /**
+     * Set the timeout required to disconnect Facilitator connections automatically
+     * @param facilitatorConnectivityTimeoutInterval Timeout for Facilitator connections
+     */
     public void setFacilitatorConnectivityTimeoutInterval(int facilitatorConnectivityTimeoutInterval) {
         startConfig.setFacilitatorConnectivityTimeoutInterval(facilitatorConnectivityTimeoutInterval);
     }

@@ -1,7 +1,7 @@
 package eduze.vms.server.logic.webservices;
 
 /**
- * Created by Madhawa on 12/04/2016.
+ * Unable to honour request since the meeting has already started
  */
 public class MeetingAlreadyStartedException extends Exception {
     public MeetingAlreadyStartedException()

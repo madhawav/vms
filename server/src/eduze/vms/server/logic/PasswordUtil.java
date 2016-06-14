@@ -10,6 +10,7 @@ import java.util.Random;
  */
 public class PasswordUtil {
     //Random generator used to generate secure keys
+    //TODO: Introduce proper hash functions
     private static Random ran = new Random();
     private PasswordUtil()
     {
