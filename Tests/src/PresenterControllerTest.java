@@ -1,20 +1,21 @@
-import eduze.vms.facilitator.logic.ConnectionRequest;
-import eduze.vms.facilitator.logic.FacilitatorController;
-import eduze.vms.facilitator.logic.PresenterConnectionListener;
-import eduze.vms.facilitator.logic.RequestAlreadyProcessedException;
+import eduze.vms.facilitator.logic.*;
 import eduze.vms.presenter.logic.*;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 
 import java.net.MalformedURLException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Admin on 6/11/2016.
  */
 public class PresenterControllerTest {
 
+    private CountDownLatch countDownLatch = new CountDownLatch(1);
     private FacilitatorController facilitatorController;
     private PresenterController presenterController;
-    @org.testng.annotations.BeforeMethod
+    @org.testng.annotations.BeforeMethod(timeOut = 100000)
     public void setup() throws Exception
     {
         FacilitatorController.Configuration configuration = new FacilitatorController.Configuration();
@@ -54,13 +55,9 @@ public class PresenterControllerTest {
             }
         });
 
+
         final FacilitatorConnector connector = FacilitatorConnector.connect(configuration1);
 
-        FacilitatorConnector.ConnectionRequestState requestState = connector.checkConnectionRequestState();
-        if(requestState == FacilitatorConnector.ConnectionRequestState.Success)
-        {
-            presenterController = connector.obtainController();
-        }
 
         connector.setConnectionRequestStateListener(new FacilitatorConnector.ConnectionRequestStateListener() {
             @Override
@@ -68,6 +65,7 @@ public class PresenterControllerTest {
                 try {
                     presenterController = sender.obtainController();
                     System.out.println("Success");
+                    countDownLatch.countDown();
                 } catch (FacilitatorConnectionNotReadyException e) {
                     e.printStackTrace();
                 } catch (FacilitatorConnectionException e) {
@@ -91,26 +89,69 @@ public class PresenterControllerTest {
             }
         });
 
+        countDownLatch.await(5000, TimeUnit.MILLISECONDS);
+        FacilitatorConnector.ConnectionRequestState requestState = connector.checkConnectionRequestState();
+        if(requestState == FacilitatorConnector.ConnectionRequestState.Success)
+        {
+            presenterController = connector.obtainController();
+        }
 
     }
-    @org.testng.annotations.Test
+    @AfterMethod
+    public void shutdown() throws ServerConnectionException, FacilitatorConnectionException {
+
+        facilitatorController.finish();
+
+    }
+    @org.testng.annotations.Test(singleThreaded = true)
     public void testStart() throws Exception {
-
+        Assert.assertTrue(facilitatorController.isRunning());
+        Assert.assertNotNull(presenterController);
     }
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(singleThreaded = true)
     public void testDisconnect() throws Exception {
-
+        presenterController.disconnect();
     }
+
+    AbstractShareRequest shareRequest = null;
 
     @org.testng.annotations.Test
     public void testRequestScreenShare() throws Exception {
-
+        facilitatorController.setShareRequestListener(new ShareRequestListener() {
+            @Override
+            public boolean onShareRequest(AbstractShareRequest shareRequest) {
+                if(shareRequest instanceof ScreenShareRequest)
+                {
+                    PresenterControllerTest.this.shareRequest = shareRequest;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        });
+        Assert.assertTrue(presenterController.requestScreenShare(false));
     }
 
     @org.testng.annotations.Test
     public void testRequestAudioShare() throws Exception {
-
+        facilitatorController.setShareRequestListener(new ShareRequestListener() {
+            @Override
+            public boolean onShareRequest(AbstractShareRequest shareRequest) {
+                if(shareRequest instanceof ScreenShareRequest)
+                {
+                    PresenterControllerTest.this.shareRequest = shareRequest;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        });
+        Assert.assertTrue(presenterController.requestScreenShare(false));
     }
 
     @org.testng.annotations.Test
