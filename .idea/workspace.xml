@@ -8,7 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3e93ce13-f2bd-407b-a8d4-90a00101e239" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tests/src/PresenterControllerTest.java" afterPath="$PROJECT_DIR$/Tests/src/PresenterControllerTest.java" />
     </list>
     <ignored path="vms.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1028,7 +1027,7 @@
       <workItem from="1465558521291" duration="19712000" />
       <workItem from="1465661668750" duration="16478000" />
       <workItem from="1465788144607" duration="273000" />
-      <workItem from="1465825604931" duration="37531000" />
+      <workItem from="1465825604931" duration="37553000" />
     </task>
     <task id="LOCAL-00001" summary="Disconnection Logic being made">
       <created>1463830536127</created>
@@ -1072,7 +1071,14 @@
       <option name="project" value="LOCAL" />
       <updated>1465924569481</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adding Tests">
+      <created>1466008155881</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1466008155881</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1108,7 +1114,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="299258000" />
+    <option name="totallyTimeSpent" value="299280000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1171,7 +1177,8 @@
     <MESSAGE value="Adjourn Implementation" />
     <MESSAGE value="Adding JAVADOCS to Server" />
     <MESSAGE value="Introducing Log4J" />
-    <option name="LAST_COMMIT_MESSAGE" value="Introducing Log4J" />
+    <MESSAGE value="Adding Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
