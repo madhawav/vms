@@ -30,7 +30,7 @@ public class ServerApp {
 
     public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         //Setup Log4J
-        BasicConfigurator.configure();
+       // BasicConfigurator.configure();
 
         ServerApp serverApp = new ServerApp(args);
         serverApp.run();

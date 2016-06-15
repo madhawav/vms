@@ -1,6 +1,9 @@
 import eduze.vms.facilitator.logic.*;
 import eduze.vms.presenter.logic.*;
+import eduze.vms.presenter.logic.ControlLoop;
+import eduze.vms.presenter.logic.mpi.facilitator.InvalidFacilitatorPasskeyException;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 
 import java.net.MalformedURLException;
@@ -15,9 +18,9 @@ public class PresenterControllerTest {
     private CountDownLatch countDownLatch = new CountDownLatch(1);
     private FacilitatorController facilitatorController;
     private PresenterController presenterController;
-    @org.testng.annotations.BeforeMethod(timeOut = 100000)
-    public void setup() throws Exception
-    {
+
+    @org.testng.annotations.BeforeClass
+    public void wholeSetup() throws FacilitatorConnectionException, MalformedURLException, InvalidFacilitatorPasskeyException, InterruptedException, FacilitatorConnectionNotReadyException, FacilitatorDisconnectedException {
         FacilitatorController.Configuration configuration = new FacilitatorController.Configuration();
         configuration.setListenerPort(7000);
         configuration.setPassword("12345");
@@ -95,28 +98,28 @@ public class PresenterControllerTest {
         {
             presenterController = connector.obtainController();
         }
-
     }
-    @AfterMethod
+
+    @AfterClass
     public void shutdown() throws ServerConnectionException, FacilitatorConnectionException {
 
         facilitatorController.finish();
 
     }
-    @org.testng.annotations.Test(singleThreaded = true)
+    @org.testng.annotations.Test(singleThreaded = true, groups = "active")
     public void testStart() throws Exception {
         Assert.assertTrue(facilitatorController.isRunning());
         Assert.assertNotNull(presenterController);
     }
 
-    @org.testng.annotations.Test(singleThreaded = true)
+    @org.testng.annotations.Test(singleThreaded = true, dependsOnGroups = "active")
     public void testDisconnect() throws Exception {
         presenterController.disconnect();
     }
 
     AbstractShareRequest shareRequest = null;
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(groups = "active")
     public void testRequestScreenShare() throws Exception {
         facilitatorController.setShareRequestListener(new ShareRequestListener() {
             @Override
@@ -135,7 +138,7 @@ public class PresenterControllerTest {
         Assert.assertTrue(presenterController.requestScreenShare(false));
     }
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(groups = "active")
     public void testRequestAudioShare() throws Exception {
         facilitatorController.setShareRequestListener(new ShareRequestListener() {
             @Override
@@ -154,34 +157,5 @@ public class PresenterControllerTest {
         Assert.assertTrue(presenterController.requestScreenShare(false));
     }
 
-    @org.testng.annotations.Test
-    public void testIsScreenShared() throws Exception {
-
-    }
-
-    @org.testng.annotations.Test
-    public void testIsAudioShared() throws Exception {
-
-    }
-
-    @org.testng.annotations.Test
-    public void testNotifyScreenSharedChanged() throws Exception {
-
-    }
-
-    @org.testng.annotations.Test
-    public void testNotifyAudioSharedChanged() throws Exception {
-
-    }
-
-    @org.testng.annotations.Test
-    public void testIsServerAcceptsScreenShare() throws Exception {
-
-    }
-
-    @org.testng.annotations.Test
-    public void testIsServerAcceptsAudioShare() throws Exception {
-
-    }
 
 }

@@ -3,6 +3,12 @@
  */
 package eduze.vms.server.logic;
 
+import org.apache.axis.utils.ByteArray;
+
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
@@ -17,16 +23,6 @@ public class PasswordUtil {
 
     }
 
-    /**
-     * Hash server password using irreversible hash function
-     * @param password
-     * @return
-     */
-    // TODO: Write a proper hashPassword function here
-    public static String hashPassword(char[] password)
-    {
-        return String.valueOf(password);
-    }
 
     /**
      * generate a pair-key for newly paired facilitator

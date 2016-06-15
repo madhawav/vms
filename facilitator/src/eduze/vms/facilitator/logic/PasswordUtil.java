@@ -1,5 +1,9 @@
 package eduze.vms.facilitator.logic;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
@@ -28,25 +32,8 @@ public class PasswordUtil {
      */
     public static String generatePresenterConsoleId(){return "pc_" + String.valueOf(ran.nextInt());}
 
-    /**
-     * Hash Password
-     * @param password
-     * @return
-     */
-    public static String hashPasskey(char[] password)
-    {
-        return String.valueOf(password);
-    }
 
-    /**
-     * Hash server password
-     * @param password
-     * @return
-     */
-    public static String hashServerPassword(char[] password)
-    {
-        return String.valueOf(password);
-    }
+
 
     /**
      * Generate a Screen Share Console Id

@@ -1,4 +1,6 @@
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import javax.swing.*;
 
@@ -11,7 +13,10 @@ public class FacilitatorApp {
 
     }
     public void run() throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-        BasicConfigurator.configure();
+
+        //PropertyConfigurator.configure("log4j.properties");
+       // BasicConfigurator.configure();
+
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
         //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         FacilitatorConnection dialog = new FacilitatorConnection();

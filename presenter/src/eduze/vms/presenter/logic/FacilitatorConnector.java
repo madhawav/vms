@@ -435,7 +435,7 @@ public class FacilitatorConnector {
         }
 
         /**
-         * Retrieve Facilitator Passkey
+         * Retrieve RAW Facilitator Passkey
          * @return
          */
         public String getFacilitatorPasskey() {
@@ -443,11 +443,19 @@ public class FacilitatorConnector {
         }
 
         /**
+         * Set Raw Facilitator Passkey
+         * @param rawFacilitatorPasskey
+         */
+        public void setFacilitatorPasskey(String rawFacilitatorPasskey) {
+            this.facilitatorPasskey = facilitatorPasskey;
+        }
+
+        /**
          * Set Facilitator Passkey
          * @param facilitatorPasskey
          */
-        public void setFacilitatorPasskey(String facilitatorPasskey) {
-            this.facilitatorPasskey = facilitatorPasskey;
+        public void setFacilitatorPasskey(char[] facilitatorPasskey) {
+            this.facilitatorPasskey = eduze.vms.foundation.logic.PasswordUtil.hashFacilitatorPassword(facilitatorPasskey);
         }
     }
 }

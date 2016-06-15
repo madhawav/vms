@@ -701,7 +701,7 @@ public class FacilitatorController {
 
         /**
          * Return password of facilitator
-         * @return Password that presenters must provide to connect
+         * @return Hashed Password that presenters must provide to connect
          */
         public String getPassword() {
             return password;
@@ -760,7 +760,16 @@ public class FacilitatorController {
          * Set Password that presenters should provide to connect
          * @param password Password that presenters should provide to connect
          */
-        public void setPassword(String password) {
+        public void setPassword(char[] password) {
+
+            this.password = eduze.vms.foundation.logic.PasswordUtil.hashFacilitatorPassword(password);
+        }
+
+        /**
+         * Set Password that presenters should provide to connect
+         * @param RawPassword Hashed Password that presenters should provide to connect
+         */
+        public void setPassword(String RawPassword) {
             this.password = password;
         }
 

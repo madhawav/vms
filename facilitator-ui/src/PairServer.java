@@ -59,7 +59,7 @@ public class PairServer extends JDialog {
 
     private void onOK() {
         try {
-            serverManager.pair(txtServerURL.getText(),new String(txtServerPassword.getPassword()));
+            serverManager.pair(txtServerURL.getText(),txtServerPassword.getPassword());
         } catch (MalformedURLException e) {
             JOptionPane.showMessageDialog(this,"Invalid Server URL","Error",JOptionPane.OK_OPTION);
             e.printStackTrace();

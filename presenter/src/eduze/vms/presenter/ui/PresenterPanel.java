@@ -120,7 +120,7 @@ public class PresenterPanel {
     private void onRequestConnectionClicked() {
         FacilitatorConnector.Configuration configuration = new FacilitatorConnector.Configuration();
         configuration.setFacilitatorURL(txtFacilitatorURL.getText());
-        configuration.setFacilitatorPasskey(PasswordUtil.hashPasskey(txtFacilitatorPasskey.getPassword()));
+        configuration.setFacilitatorPasskey(txtFacilitatorPasskey.getPassword());
         configuration.setPresenterName(txtPresenterName.getText());
 
         try {

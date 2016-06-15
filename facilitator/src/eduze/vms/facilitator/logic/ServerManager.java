@@ -7,6 +7,7 @@ import eduze.vms.facilitator.logic.mpi.facilitatormanager.InvalidServerPasswordE
 import eduze.vms.facilitator.logic.mpi.server.Server;
 import eduze.vms.facilitator.logic.mpi.server.ServerImplServiceLocator;
 import eduze.vms.facilitator.logic.mpi.vmsessionmanager.*;
+import sun.security.util.Password;
 
 import javax.xml.rpc.ServiceException;
 import java.net.MalformedURLException;
@@ -109,7 +110,7 @@ public class ServerManager {
      * @throws AlreadyPairedException Already paired
      * @throws InvalidServerPasswordException Invalid Server Password
      */
-    public PairedServer pair(String serverURL, String serverPassword) throws MalformedURLException, ServerConnectionException, AlreadyPairedException, InvalidServerPasswordException {
+    public PairedServer pair(String serverURL, char[] serverPassword) throws MalformedURLException, ServerConnectionException, AlreadyPairedException, InvalidServerPasswordException {
         //Complete Server URL
         String url = UrlGenerator.extractURL(serverURL);
         ServerImplServiceLocator locator = new ServerImplServiceLocator();
@@ -121,7 +122,7 @@ public class ServerManager {
             //Obtain Facilitator Manager of Server
             FacilitatorManager facilitatorManager = facilitatorManagerImplServiceLocator.getFacilitatorManagerImplPort(new URL(UrlGenerator.generateFacilitatorManagerAccessURL(url)));
             //Request pair
-            String pairKey = facilitatorManager.pair(getFacilitatorController().getConfiguration().getName(),serverPassword);
+            String pairKey = facilitatorManager.pair(getFacilitatorController().getConfiguration().getName(), eduze.vms.foundation.logic.PasswordUtil.hashServerPassword(serverPassword));
             //Create a paired server with pair details
             PairedServer pairedServer = new PairedServer(server.getServerName(), url, pairKey);
             //store paired server

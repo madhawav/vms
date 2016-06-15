@@ -96,7 +96,6 @@ public class ServerImpl implements Server {
      */
     public boolean verifyPassword(String password)
     {
-        //TODO: Improve logic here
         if(config.getPassword().equals(password))
             return true;
         else

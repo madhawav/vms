@@ -183,10 +183,16 @@ public class ServerController {
      * @param password new password
      * @throws ServerStartedException Server has started already
      */
-    public void setPassword(String password) throws Exception {
+    public void setPassword(char[] password) throws Exception {
         if(running)
             throw new ServerStartedException();
-        this.startConfig.setPassword(password);
+        this.startConfig.setPassword(eduze.vms.foundation.logic.PasswordUtil.hashServerPassword(password));
+    }
+
+    public void setPassword(String rawPassword) throws Exception {
+        if(running)
+            throw new ServerStartedException();
+        this.startConfig.setPassword(rawPassword);
     }
 
     /**

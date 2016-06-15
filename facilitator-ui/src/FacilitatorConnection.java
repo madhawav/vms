@@ -85,6 +85,7 @@ public class FacilitatorConnection extends JDialog {
 
     private void onLoadConfigFile() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File(txtConfigPath.getText()));
         fileChooser.addChoosableFileFilter(getFileFilter());
         int returnVal = fileChooser.showOpenDialog(contentPane);
         if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -93,7 +94,7 @@ public class FacilitatorConnection extends JDialog {
             StorageManager storageManager =  StorageManager.getInstance();
             File yourFile = new File(txtConfigPath.getText());
             storageManager.init(yourFile);
-            storageManager.setEncryptionKey(new String(txtPassword.getPassword()));
+            storageManager.setEncryptionKey(eduze.vms.foundation.logic.PasswordUtil.hashFacilitatorPassword(txtPassword.getPassword()));
 
             try {
                 StorageManager.DataNode dataNode =  storageManager.readStorage();
@@ -112,6 +113,7 @@ public class FacilitatorConnection extends JDialog {
 
     private void onCreateConfigFile() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File(txtConfigPath.getText()));
         fileChooser.addChoosableFileFilter(getFileFilter());
         int returnVal = fileChooser.showSaveDialog(contentPane);
         if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -154,7 +156,8 @@ public class FacilitatorConnection extends JDialog {
                 }
             }
             storageManager.init(yourFile);
-            storageManager.setEncryptionKey(new String(txtPassword.getPassword()));
+
+            storageManager.setEncryptionKey(eduze.vms.foundation.logic.PasswordUtil.hashFacilitatorPassword(txtPassword.getPassword()));
             if(newMade)
             {
                 try {
@@ -173,7 +176,7 @@ public class FacilitatorConnection extends JDialog {
                 StorageManager.DataNode dataNode = storageManager.readStorage();
                 dataNode.getConfiguration().setListenerPort(Integer.parseInt(txtPort.getText()));
                 dataNode.getConfiguration().setName(txtFacilitatorName.getText());
-                dataNode.getConfiguration().setPassword(new String(txtPassword.getPassword()));
+                dataNode.getConfiguration().setPassword(txtPassword.getPassword());
                 storageManager.updateStorage(dataNode);
 
                 //Load the new window

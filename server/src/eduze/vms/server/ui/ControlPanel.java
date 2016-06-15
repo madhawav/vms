@@ -100,7 +100,7 @@ public class ControlPanel extends JFrame {
             }
         }
         storageManager.init(yourFile);
-        storageManager.setEncryptionKey(new String(txtPassword.getPassword()));
+        storageManager.setEncryptionKey(eduze.vms.foundation.logic.PasswordUtil.hashServerPassword(txtPassword.getPassword()));
         if(newMade)
         {
             try {
@@ -141,7 +141,7 @@ public class ControlPanel extends JFrame {
             controller = new ServerController();
             controller.setName(txtServerName.getText());
             controller.setPort(Integer.valueOf(txtPort.getText()));
-            controller.setPassword(PasswordUtil.hashPassword(txtPassword.getPassword()));
+            controller.setPassword(txtPassword.getPassword());
             try{
                 StorageManager.DataNode dataNode = storageManager.readStorage();
                 controller.setFacilitatorConnectivityTimeoutInterval(dataNode.getConfiguration().getFacilitatorConnectivityTimeoutInterval());
@@ -322,6 +322,7 @@ public class ControlPanel extends JFrame {
 
     private void onCreateConfigFile() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File(txtConfigFile.getText()));
         fileChooser.addChoosableFileFilter(getFileFilter());
         int returnVal = fileChooser.showSaveDialog(mainFrame);
         if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -333,6 +334,7 @@ public class ControlPanel extends JFrame {
 
     private void onLoadConfigFile() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File(txtConfigFile.getText()));
         fileChooser.addChoosableFileFilter(getFileFilter());
         int returnVal = fileChooser.showOpenDialog(mainFrame);
         if(returnVal == JFileChooser.APPROVE_OPTION)
@@ -341,7 +343,7 @@ public class ControlPanel extends JFrame {
             StorageManager storageManager =  StorageManager.getInstance();
             File yourFile = new File(txtConfigFile.getText());
             storageManager.init(yourFile);
-            storageManager.setEncryptionKey(new String(txtPassword.getPassword()));
+            storageManager.setEncryptionKey(eduze.vms.foundation.logic.PasswordUtil.hashServerPassword(txtPassword.getPassword()));
 
             try {
                 StorageManager.DataNode dataNode =  storageManager.readStorage();

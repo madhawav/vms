@@ -58,7 +58,7 @@ public class ConnectionWindow extends JDialog {
         {
             FacilitatorConnector.Configuration configuration = new FacilitatorConnector.Configuration();
             configuration.setPresenterName(txtPresenterName.getText());
-            configuration.setFacilitatorPasskey(new String(txtFacilitatorPassword.getPassword()));
+            configuration.setFacilitatorPasskey(txtFacilitatorPassword.getPassword());
             configuration.setFacilitatorURL(txtFacilitatorURL.getText());
             try {
                 connector = FacilitatorConnector.connect(configuration);

@@ -367,7 +367,7 @@ public class ConnectorPanel {
     private void onPairClicked() {
         try {
             ServerManager serverManager = facilitatorController.getServerManager();
-            ServerManager.PairedServer pairedServer = serverManager.pair(txtServerHost.getText(),PasswordUtil.hashServerPassword(txtServerPassword.getPassword()));
+            ServerManager.PairedServer pairedServer = serverManager.pair(txtServerHost.getText(),txtServerPassword.getPassword());
             JOptionPane.showMessageDialog(mainFrame,"Successfully Paired");
 
         } catch (ServiceNotStartedException e) {
@@ -389,7 +389,7 @@ public class ConnectorPanel {
     private void onStartListener() {
        FacilitatorController.Configuration configuration = new FacilitatorController.Configuration();
        configuration.setName(txtFacilitatorName.getText());
-       configuration.setPassword(PasswordUtil.hashPasskey(txtPassKey.getPassword()));
+       configuration.setPassword(txtPassKey.getPassword());
        configuration.setListenerPort(Integer.valueOf(txtPort.getText()));
        facilitatorController = FacilitatorController.start(configuration);
         facilitatorController.addConnectionListener(new PresenterConnectionListener() {
