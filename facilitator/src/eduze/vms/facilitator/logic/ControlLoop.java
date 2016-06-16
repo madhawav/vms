@@ -351,8 +351,8 @@ public class ControlLoop extends Thread {
                 //In UI Thread, release resources
                 screenReceiver.stopReceiving();
                 audioReceiver.stopReceiving();
-                audioSwitcher.Stop();
-                screenSwitcher.Stop();
+                audioSwitcher.stop();
+                screenSwitcher.stop();
 
                 //Stop incoming traffic
                 stopIncoming();
@@ -416,9 +416,9 @@ public class ControlLoop extends Thread {
 
         //Check whether the server is expecting audio frames from facilitator
         if (outputAudioRelayConsole.isEnabled() && !audioSwitcher.isRunning())
-            audioSwitcher.Start(); //Server expects audio frames from facilitator, therefore start switcher
+            audioSwitcher.start(); //Server expects audio frames from facilitator, therefore start switcher
         else if (!outputAudioRelayConsole.isEnabled() && audioSwitcher.isRunning())
-           audioSwitcher.Stop(); //Server doesn't expect audio frames from facilitator, therefore stop switcher
+           audioSwitcher.stop(); //Server doesn't expect audio frames from facilitator, therefore stop switcher
 
         //Check whether the server is sending audio frames to facilitator
         boolean inAudioRelayEnabled = inAudioRelayConsole.isEnabled();
@@ -477,9 +477,9 @@ public class ControlLoop extends Thread {
         //TODO: put update interval logic here
         //Check whether the server is expecting screen frames frames from facilitator
         if (outputScreenShareConsole.isEnabled() && !screenSwitcher.isRunning())
-            screenSwitcher.Start(); //Server expects screen frames from facilitator, therefore start switcher
+            screenSwitcher.start(); //Server expects screen frames from facilitator, therefore start switcher
         else if (!outputScreenShareConsole.isEnabled() && screenSwitcher.isRunning())
-            screenSwitcher.Stop(); //Server doesn't expect screen frames from facilitator, therefore start switcher
+            screenSwitcher.stop(); //Server doesn't expect screen frames from facilitator, therefore start switcher
 
         //Check whether the server is sending screen frames to facilitator
         boolean inScreenShareEnabled = inScreenShareConsole.isEnabled();

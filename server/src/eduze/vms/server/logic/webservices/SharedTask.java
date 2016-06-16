@@ -10,6 +10,10 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Created by Fujitsu on 4/16/2016.
  */
+
+/**
+ * A shared task between facilitators, that could be assigned to a presenter
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name="SharedTask")
 public class SharedTask {

@@ -8,6 +8,15 @@
 package eduze.vms.foundation.logic.mpi.audiorelayconsole;
 
 public interface AudioRelayConsole extends java.rmi.Remote {
+    /**
+     * Retrieve whether the Audio Relay Channel is active
+     * @return True if channel is active. Otherwise return false
+     */
     public boolean isEnabled() throws java.rmi.RemoteException;
+
+    /**
+     * Retrieve the Console Id
+     * @return Console Id
+     */
     public java.lang.String getConsoleId() throws java.rmi.RemoteException;
 }

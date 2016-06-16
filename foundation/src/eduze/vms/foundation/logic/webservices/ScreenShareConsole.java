@@ -25,7 +25,7 @@ public interface ScreenShareConsole {
      * @param interval
      */
    @WebMethod
-   public void setUpdateInterval(int interval);
+   public void setUpdateInterval(@WebParam(name = "interval") int interval);
 
     /**
      * Retrieve whether channel is enabled

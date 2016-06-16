@@ -8,8 +8,27 @@
 package eduze.vms.foundation.logic.mpi.screenshareconsole;
 
 public interface ScreenShareConsole extends java.rmi.Remote {
-    public java.lang.String getConsoleId() throws java.rmi.RemoteException;
-    public int getUpdateInterval() throws java.rmi.RemoteException;
-    public void setUpdateInterval(int arg0) throws java.rmi.RemoteException;
+
+    /**
+     * Retrieve whether channel is enabled
+     * @return True if channel is enabled. Otherwise return False
+     */
     public boolean isEnabled() throws java.rmi.RemoteException;
+    /**
+     * Retrieve interval between screen capture transmissions
+     * @return
+     */
+    public int getUpdateInterval() throws java.rmi.RemoteException;
+
+    /**
+     * Set the interval between screen capture transmissions
+     * @param interval
+     */
+    public void setUpdateInterval(int interval) throws java.rmi.RemoteException;
+
+    /**
+     * Retrieve Screen Share Console Id
+     * @return
+     */
+    public java.lang.String getConsoleId() throws java.rmi.RemoteException;
 }

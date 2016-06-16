@@ -25,10 +25,10 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("connect");
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg0"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "Name"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
-        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "arg1"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "PairKey"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         param.setOmittable(true);
         oper.addParameter(param);
         oper.setReturnType(new javax.xml.namespace.QName("http://webservices.logic.server.vms.eduze/", "ConnectionResult"));
@@ -223,7 +223,7 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
         }
     }
 
-    public eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult connect(java.lang.String arg0, java.lang.String arg1) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.UnknownFacilitatorException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException {
+    public eduze.vms.facilitator.logic.mpi.vmsessionmanager.ConnectionResult connect(java.lang.String name, java.lang.String pairKey) throws java.rmi.RemoteException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.UnknownFacilitatorException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.FacilitatorAlreadyConnectedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAdjournedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.MeetingAlreadyStartedException, eduze.vms.facilitator.logic.mpi.vmsessionmanager.ServerNotReadyException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -239,7 +239,7 @@ public class VMSessionManagerImplPortBindingStub extends org.apache.axis.client.
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {arg0, arg1});
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {name, pairKey});
 
         if (_resp instanceof java.rmi.RemoteException) {
             throw (java.rmi.RemoteException)_resp;

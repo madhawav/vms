@@ -91,7 +91,9 @@ public class CryptoUtil {
 
     }
 
-
+    /**
+     * Error in encrypting or decrypting
+     */
     public static class CryptoException extends Exception
     {
         public CryptoException(Exception e)
