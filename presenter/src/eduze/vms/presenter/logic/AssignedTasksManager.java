@@ -10,11 +10,24 @@ import java.util.HashMap;
 /**
  * Created by Fujitsu on 4/16/2016.
  */
+
+/**
+ * Assigned Task Manager to manage tasks assigned to presenter
+ */
 public class AssignedTasksManager {
+    //Presenter Controller
     private PresenterController controller;
+
+    //Map of assigned tasks
     private HashMap<String,AssignedTask> assignedTasks = null;
 
+    //listeners
     private ArrayList<AssignedTaskListener> assignedTaskListeners = new ArrayList<>();
+
+    /**
+     * Constructor of Assigned Task Manager
+     * @param controller Presenter Controller
+     */
     public AssignedTasksManager(PresenterController controller)
     {
         this.controller = controller;
@@ -78,6 +91,10 @@ public class AssignedTasksManager {
 
     }
 
+    /**
+     * Retrieve list of assigned tasks to presenter
+     * @return List of Assigned Tasks to Presenter
+     */
     public Collection<AssignedTaskInfo> getAssignedTasks()
     {
         if(assignedTasks == null)
@@ -91,16 +108,29 @@ public class AssignedTasksManager {
         return Arrays.asList(results);
     }
 
+    /**
+     * Add listener to be notified on addition/removal of assigned tasks
+     * @param listener listener to be notified on addition and removal of assigned tasks
+     */
     public void addAssignedTaskListener(AssignedTaskListener listener)
     {
         assignedTaskListeners.add(listener);
     }
+
+    /**
+     * Remove an assigned task listener
+     * @param listener
+     */
     public void removeAssignedTaskListener(AssignedTaskListener listener)
     {
         assignedTaskListeners.remove(listener);
     }
 
-    public void notifyTaskAssigned(AssignedTaskInfo task)
+    /**
+     * Notify listeners that a task has been assigned
+     * @param task
+     */
+    void notifyTaskAssigned(AssignedTaskInfo task)
     {
         for(AssignedTaskListener listener: assignedTaskListeners)
         {
@@ -108,6 +138,10 @@ public class AssignedTasksManager {
         }
     }
 
+    /**
+     * Notify listeners that a task has been unassigned
+     * @param task
+     */
     public void notifyTaskUnAssigned(AssignedTaskInfo task)
     {
         for(AssignedTaskListener listener: assignedTaskListeners)
@@ -116,6 +150,11 @@ public class AssignedTasksManager {
         }
     }
 
+    /**
+     * Notify listeners that a assigned task has been modified
+     * @param oldTask previous state of task
+     * @param newTask new state of task
+     */
     public void notifyTaskModified(AssignedTaskInfo oldTask, AssignedTaskInfo newTask)
     {
         for(AssignedTaskListener listener: assignedTaskListeners)
@@ -123,6 +162,10 @@ public class AssignedTasksManager {
             listener.onTaskModified(oldTask,newTask);
         }
     }
+
+    /**
+     * Notify presenter that assigned tasks system has been started
+     */
     public void notifyAssignedTasksInitiated()
     {
         for(AssignedTaskListener listener: assignedTaskListeners)
@@ -131,6 +174,11 @@ public class AssignedTasksManager {
         }
     }
 
+    /**
+     * Retrieve details of an assigned task from shared task id
+     * @param taskId shared task id
+     * @return
+     */
     public AssignedTaskInfo getAssignedTask(String taskId)
     {
         if(assignedTasks == null)
@@ -141,11 +189,33 @@ public class AssignedTasksManager {
         return new AssignedTaskInfo(item);
     }
 
+    /**
+     * Listener notified on events related to assigned tasks
+     */
     public interface AssignedTaskListener
     {
+        /**
+         * Notify that assigned tasks system has been initiated
+         */
         public void onInitiated();
+
+        /**
+         * Notify that a new task has been assigned
+         * @param task New Task assigned
+         */
         public void onTaskAssigned(AssignedTaskInfo task);
+
+        /**
+         * Notify that a task has been unassigned
+         * @param task task that has been unassigned
+         */
         public void onTaskUnAssigned(AssignedTaskInfo task);
+
+        /**
+         * Notify that a task has been modified
+         * @param oldTask previous form of task
+         * @param newTask new form of task
+         */
         public void onTaskModified(AssignedTaskInfo oldTask, AssignedTaskInfo newTask);
     }
 }

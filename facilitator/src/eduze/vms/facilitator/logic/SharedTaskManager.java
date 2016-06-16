@@ -293,8 +293,10 @@ public class SharedTaskManager {
      * @param oldTask
      * @param newTask
      */
-    private void notifySharedTaskModified(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
-        for(SharedTasksListener listener : sharedTasksListeners)
+    private synchronized void notifySharedTaskModified(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+        SharedTasksListener[] listeners = new SharedTasksListener[sharedTasksListeners.size()];
+        sharedTasksListeners.toArray(listeners);
+        for(SharedTasksListener listener : listeners)
             listener.onSharedTaskModified(oldTask,newTask);
     }
 
@@ -303,8 +305,10 @@ public class SharedTaskManager {
      * @param oldTask
      * @param newTask
      */
-    private void notifySharedTaskAssignmentChanged(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
-        for(SharedTasksListener listener : sharedTasksListeners)
+    private synchronized void notifySharedTaskAssignmentChanged(SharedTaskInfo oldTask, SharedTaskInfo newTask) {
+        SharedTasksListener[] listeners = new SharedTasksListener[sharedTasksListeners.size()];
+        sharedTasksListeners.toArray(listeners);
+        for(SharedTasksListener listener : listeners)
             listener.onSharedTaskAssignmentChanged(oldTask, newTask);
     }
 
@@ -312,8 +316,10 @@ public class SharedTaskManager {
      * Notify removal of shared task
      * @param sharedTaskInfo
      */
-    private void notifySharedTaskListenerRemoveSharedTask(SharedTaskInfo sharedTaskInfo) {
-        for(SharedTasksListener listener : sharedTasksListeners)
+    private synchronized void notifySharedTaskListenerRemoveSharedTask(SharedTaskInfo sharedTaskInfo) {
+        SharedTasksListener[] listeners = new SharedTasksListener[sharedTasksListeners.size()];
+        sharedTasksListeners.toArray(listeners);
+        for(SharedTasksListener listener : listeners)
             listener.onSharedTaskRemoved(sharedTaskInfo);
     }
 
@@ -321,16 +327,20 @@ public class SharedTaskManager {
      * Notify creation of new shared task
      * @param task
      */
-    private void notifySharedTaskListenerNewSharedTask(SharedTaskInfo task) {
-        for(SharedTasksListener listener : sharedTasksListeners)
+    private synchronized void notifySharedTaskListenerNewSharedTask(SharedTaskInfo task) {
+        SharedTasksListener[] listeners = new SharedTasksListener[sharedTasksListeners.size()];
+        sharedTasksListeners.toArray(listeners);
+        for(SharedTasksListener listener : listeners)
             listener.onNewSharedTask(task);
     }
 
     /**
      * Notify inception of shared task listener
      */
-    private void notifySharedTaskListenerInitiated() {
-        for(SharedTasksListener listener : sharedTasksListeners)
+    private synchronized void notifySharedTaskListenerInitiated() {
+        SharedTasksListener[] listeners = new SharedTasksListener[sharedTasksListeners.size()];
+        sharedTasksListeners.toArray(listeners);
+        for(SharedTasksListener listener : listeners)
             listener.onInitiated();
     }
 

@@ -1,48 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="4" />
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Logic" />
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="presenter-ui:jar" />
+      <artifact name="server:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e93ce13-f2bd-407b-a8d4-90a00101e239" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/ui/PresenterPanel.form" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/ui/PresenterPanel.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/facilitator-ui/resources/eduze/vms/facilitator/gui/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/presenter-ui/resources/eduze/vms/presenter/gui/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/resources/eduze/vms/server/ui/icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/Tests_jar.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tests/META-INF/MANIFEST.MF" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/AssignedTasksManagerTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UITest/src/Startup.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UITest/src/Startup.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorWindow.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config2.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/facilitator-ui/src/facilitatorWindow.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/ui/ConnectorPanel.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/ui/ConnectorPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/ui/ScreenShow.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/ui/ScreenShow.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Tests/src/PresenterControllerTest.java" afterPath="$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/PresenterControllerTest.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ConnectionRequestForm.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionRequestForm.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ConnectionRequestForm.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionRequestForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ConnectionStatusForm.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionStatusForm.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ConnectionStatusForm.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionStatusForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/FacilitatorApp.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorApp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/FacilitatorConnection.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorConnection.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/FacilitatorConnection.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorConnection.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/InputUtil.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/InputUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ModifySharedTask.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ModifySharedTask.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ModifySharedTask.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ModifySharedTask.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/NewSharedTask.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/NewSharedTask.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/NewSharedTask.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/NewSharedTask.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/PairServer.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/PairServer.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/PairServer.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/PairServer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ScreenFrame.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ScreenFrame.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ScreenFrame.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ScreenFrame.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ShareRequestForm.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ShareRequestForm.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/ShareRequestForm.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ShareRequestForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/SharedTaskForm.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/SharedTaskForm.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/SharedTaskForm.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/SharedTaskForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/StorageManager.java" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/StorageManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/facilitator-ui/src/facilitatorWindow.form" afterPath="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/facilitatorWindow.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/AssignedTaskListItemForm.form" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/AssignedTaskListItemForm.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/AssignedTaskListItemForm.java" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/AssignedTaskListItemForm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/ConnectionWindow.form" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/ConnectionWindow.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/ConnectionWindow.java" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/ConnectionWindow.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/InputUtil.java" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/InputUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/PresenterApp.java" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterApp.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/PresenterWindow.form" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterWindow.form" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/presenter-ui/src/PresenterWindow.java" afterPath="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin_config.bin" afterPath="$PROJECT_DIR$/admin_config.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.bin" afterPath="$PROJECT_DIR$/config.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/livestream.jar" afterPath="$PROJECT_DIR$/lib/livestream.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ControlLoop.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ControlLoop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatorconsole/FacilitatorConsole.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatorconsole/FacilitatorConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatormanager/FacilitatorManager.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatormanager/FacilitatorManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/server/Server.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/server/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeeting.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeetingImplPortBindingStub.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeetingImplPortBindingStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeetingImplServiceLocator.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeetingImplServiceLocator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManager.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManagerImplPortBindingStub.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManagerImplPortBindingStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/audiorelayconsole/AudioRelayConsole.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/audiorelayconsole/AudioRelayConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsole.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsoleImplPortBindingStub.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsoleImplPortBindingStub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsoleImplServiceLocator.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsoleImplServiceLocator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/ScreenShareConsole.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/ScreenShareConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/ui/CryptoUtil.java" afterPath="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/ui/CryptoUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/facilitator/Facilitator.java" afterPath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/facilitator/Facilitator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsole.java" afterPath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsole.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/ServerNotReadyException.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/ServerNotReadyException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTask.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTaskNotFoundException.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTaskNotFoundException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/UnknownFacilitatorException.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/UnknownFacilitatorException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManager.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManagerImpl.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManagerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeeting.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingImpl.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingSnapshot.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingSnapshot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tests/Tests.iml" afterPath="$PROJECT_DIR$/Tests/Tests.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator-ui/facilitator-ui.iml" afterPath="$PROJECT_DIR$/facilitator-ui/facilitator-ui.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator-ui/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/facilitator-ui/src/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java" afterPath="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presenter-ui/presenter-ui.iml" afterPath="$PROJECT_DIR$/presenter-ui/presenter-ui.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presenter-ui/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/presenter-ui/src/META-INF/MANIFEST.MF" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/AssignedTasksManager.java" afterPath="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/AssignedTasksManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.iml" afterPath="$PROJECT_DIR$/server/server.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManagerImpl.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManagerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.form" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java" afterPath="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java" />
     </list>
     <ignored path="vms.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,6 +90,12 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/vms$All_in_Tests.coverage" NAME="All in Tests Coverage Results" MODIFIED="1466011610711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/vms$AssignedTasksManagerTest.coverage" NAME="AssignedTasksManagerTest Coverage Results" MODIFIED="1466098253500" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>eduze.vms.presenter.logic.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/vms$PresenterControllerTest.coverage" NAME="PresenterControllerTest Coverage Results" MODIFIED="1466098278404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>eduze.vms.presenter.logic.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/vms$_default_.coverage" NAME="&lt;default&gt; Coverage Results" MODIFIED="1466011675805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/vms$FacilitatorWindow.coverage" NAME="FacilitatorWindow Coverage Results" MODIFIED="1463857032540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
@@ -69,41 +108,115 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VirtualMeeting.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeeting.java">
+      <file leaf-file-name="ControlPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="130" column="4" selection-start-line="130" selection-start-column="4" selection-end-line="133" selection-end-column="7" />
+            <state relative-caret-position="616">
+              <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VirtualMeetingImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingImpl.java">
+      <file leaf-file-name="ServerApp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ServerApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="527" column="31" selection-start-line="527" selection-start-column="31" selection-end-line="527" selection-end-column="31" />
+            <state relative-caret-position="550">
+              <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="89" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#667#668#0" expanded="false" />
+                <element signature="e#699#700#0" expanded="false" />
+                <element signature="e#3568#3569#0" expanded="false" />
+                <element signature="e#3647#3648#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestLauncher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1760">
+              <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="85" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VirtualMeetingSnapshot.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingSnapshot.java">
+      <file leaf-file-name="MANIFEST.MF" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tests/META-INF/MANIFEST.MF">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="557">
-              <caret line="190" column="26" selection-start-line="190" selection-start-column="26" selection-end-line="190" selection-end-column="26" />
+            <state relative-caret-position="22">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VMSessionManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManager.java">
+      <file leaf-file-name="ConnectionWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/ConnectionWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="3" />
+            <state relative-caret-position="1364">
+              <caret line="78" column="50" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1245#1246#0" expanded="false" />
+                <element signature="e#1283#1284#0" expanded="false" />
+                <element signature="e#1415#1416#0" expanded="false" />
+                <element signature="e#1457#1458#0" expanded="false" />
+                <element signature="e#1666#1667#0" expanded="false" />
+                <element signature="e#1708#1709#0" expanded="false" />
+                <element signature="e#1873#1874#0" expanded="false" />
+                <element signature="e#1915#1916#0" expanded="false" />
+                <element signature="e#5017#5018#0" expanded="false" />
+                <element signature="e#5076#5077#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PresenterApp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterApp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="924">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#589#590#0" expanded="false" />
+                <element signature="e#622#623#0" expanded="false" />
+                <element signature="e#687#688#0" expanded="false" />
+                <element signature="e#731#732#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PresenterWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1914">
+              <caret line="97" column="119" selection-start-line="97" selection-start-column="117" selection-end-line="97" selection-end-column="119" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestLauncher.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.form">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Startup.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/UITest/src/Startup.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,61 +224,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VMSessionManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManager.java">
+      <file leaf-file-name="Startup.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UITest/src/Startup.form">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="26" column="7" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VMSessionManagerImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManagerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VirtualMeeting.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeeting.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VMParticipant.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMParticipant.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnknownFacilitatorException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/UnknownFacilitatorException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="57" selection-start-line="7" selection-start-column="57" selection-end-line="7" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SharedTaskNotFoundException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTaskNotFoundException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -178,8 +241,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="TestNG Test Class" />
         <option value="JUnit4 Test Class" />
+        <option value="TestNG Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -196,40 +259,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/AudioRelayConsoleImpl.java" />
-        <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/ScreenShareConsoleImpl.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/FacilitatorImpl.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/PresenterConsoleImpl.java" />
-        <option value="$PROJECT_DIR$/presenter-ui/src/PresenterApp.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/Server.java" />
-        <option value="$PROJECT_DIR$/Tests/src/PresenterControllerTest.java" />
-        <option value="$PROJECT_DIR$/Tests/src/ServerControllerTest.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/ServerImpl.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/PasswordUtil.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ServerManager.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/ServerController.java" />
-        <option value="$PROJECT_DIR$/facilitator-ui/src/PairServer.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java" />
-        <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/PasswordUtil.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/PasswordUtil.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/ui/ConnectorPanel.java" />
-        <option value="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/FacilitatorConnector.java" />
-        <option value="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/ui/PresenterPanel.java" />
-        <option value="$PROJECT_DIR$/presenter-ui/src/ConnectionWindow.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java" />
-        <option value="$PROJECT_DIR$/facilitator-ui/src/FacilitatorConnection.java" />
-        <option value="$PROJECT_DIR$/facilitator-ui/log4j.properties" />
-        <option value="$PROJECT_DIR$/facilitator-ui/src/FacilitatorApp.java" />
-        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ServerApp.java" />
-        <option value="$PROJECT_DIR$/presenter-ui/src/log4j.properties" />
-        <option value="$PROJECT_DIR$/facilitator-ui/src/log4j.properties" />
-        <option value="$PROJECT_DIR$/server/src/log4j.properties" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ControlLoop.java" />
-        <option value="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/facilitator/Facilitator.java" />
-        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/PresenterConsole.java" />
-        <option value="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsole.java" />
-        <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/audiorelayconsole/AudioRelayConsole.java" />
         <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/ScreenShareConsole.java" />
         <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsole.java" />
         <option value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation/ui/CryptoUtil.java" />
@@ -247,6 +276,40 @@
         <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/vmsessionmanager/VMSessionManager.java" />
         <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManager.java" />
         <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VMSessionManagerImpl.java" />
+        <option value="$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/AssignedTasksManager.java" />
+        <option value="$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/PresenterControllerTest.java" />
+        <option value="$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/AssignedTasksManagerTest.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/facilitatorWindow.form" />
+        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java" />
+        <option value="$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java" />
+        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.form" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/FacilitatorWindow.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/FacilitatorConnection.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/ModifySharedTask.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/NewSharedTask.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/PairServer.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/ScreenFrame.java" />
+        <option value="$PROJECT_DIR$/presenter-ui/src/ConnectionWindow.java" />
+        <option value="$PROJECT_DIR$/presenter-ui/src/PresenterWindow.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionRequestForm.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorConnection.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ModifySharedTask.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/NewSharedTask.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/PairServer.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ScreenFrame.java" />
+        <option value="$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorWindow.java" />
+        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java" />
+        <option value="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterWindow.java" />
+        <option value="$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManagerImpl.java" />
+        <option value="$PROJECT_DIR$/Tests/src/TestLauncher.form" />
+        <option value="$PROJECT_DIR$/Tests/src/TestLauncher.java" />
+        <option value="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterApp.java" />
+        <option value="$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/ConnectionWindow.java" />
+        <option value="$PROJECT_DIR$/Tests/special_test/TestLauncher.java" />
+        <option value="$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.form" />
+        <option value="$PROJECT_DIR$/UITest/src/Startup.form" />
+        <option value="$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.java" />
+        <option value="$PROJECT_DIR$/UITest/src/Startup.java" />
       </list>
     </option>
   </component>
@@ -266,10 +329,13 @@
   <component name="MavenProjectNavigator">
     <treeState />
   </component>
+  <component name="NamedScopeManager">
+    <scope name="Logic" pattern="src[facilitator]:*..*||src[foundation]:*..*||src[presenter]:*..*||src[server]:*..*" />
+  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
+    <option name="width" value="1932" />
     <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -297,13 +363,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="vms" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UITest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UITest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -336,7 +426,293 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="special_test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webservices" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter-ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter-ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter-ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter-ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="presenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="audiorelayconsole" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="foundation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="facilitator-ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -367,7 +743,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -376,31 +752,19 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/log4j-1.2.17.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../livestream" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="364" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH" value="291" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/foundation/src/eduze/vms/foundation" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
       <recent name="eduze.vms.presenter.logic" />
       <recent name="eduze.vms.server.logic.test" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Admin\Desktop\VMS\vms\facilitator-ui\src" />
-      <recent name="C:\Users\Admin\Desktop\VMS\vms\Tests\src" />
-      <recent name="C:\Users\Admin\Desktop\VMS\vms\Tests" />
-      <recent name="C:\Users\Admin\Desktop\Eduze\SEP\vms\facilitator-ui\lib" />
-      <recent name="C:\Users\Madhawa\Desktop\SEP\vms\presenter\src\eduze\vms\presenter\logic\mpi\facilitator" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="eduze.vms.server.logic.webservices" />
-      <recent name="eduze.vms.foundation.logic.webservices" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="eduze.vms.facilitator.logic.webservices" />
@@ -409,16 +773,51 @@
       <recent name="eduze.vms.facilitator.logic" />
       <recent name="eduze.vms.presenter.logic" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="eduze.vms" />
+      <recent name="eduze.vms.server.logic.webservices" />
+      <recent name="eduze.vms.foundation.logic.webservices" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\VMS\vms\Tests\special_test\eduze\vms" />
+      <recent name="C:\Users\Admin\Desktop\VMS\vms\Tests\special_test" />
+      <recent name="C:\Users\Admin\Desktop\VMS\vms\presenter-ui\resources\eduze\vms\presenter\gui" />
+      <recent name="C:\Users\Admin\Desktop\VMS\vms\presenter-ui\src\eduze\vms\presenter\gui" />
+      <recent name="C:\Users\Admin\Desktop\VMS\vms\facilitator-ui\src" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Facilitator">
-    <configuration default="false" name="PresenterControllerTest (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Server">
+    <configuration default="false" name="TestLauncher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.TestLauncher" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Tests" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="AssignedTasksManagerTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eduze.vms.presenter.logic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PresenterControllerTest" />
+      <option name="PACKAGE_NAME" value="eduze.vms.presenter.logic" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.presenter.logic.AssignedTasksManagerTest" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
@@ -439,15 +838,20 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="ServerControllerTest.testAdjournMeeting" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <configuration default="false" name="AssignedTasksManagerTest.testNotifyTaskUnAssigned" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eduze.vms.presenter.logic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <module name="Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ServerControllerTest" />
-      <option name="METHOD_NAME" value="testAdjournMeeting" />
+      <option name="PACKAGE_NAME" value="eduze.vms.presenter.logic" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.presenter.logic.AssignedTasksManagerTest" />
+      <option name="METHOD_NAME" value="testNotifyTaskUnAssigned" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -467,50 +871,22 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="&lt;default&gt; (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="presenter" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="eduze.vms.presenter.logic" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="PresenterControllerTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="eduze.vms.presenter.logic.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="presenter" />
+      <module name="Tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="eduze.vms.presenter.logic" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.presenter.logic.PresenterControllerTest" />
       <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -528,32 +904,19 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="&lt;default&gt; (2)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Startup" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="presenter" />
+      <option name="MAIN_CLASS_NAME" value="Startup" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
+      <module name="UITest" />
       <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -957,34 +1320,6 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="&lt;default&gt;" type="TestNG" factoryName="TestNG" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
     <configuration default="false" name="Server" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="eduze.vms.server.ui.ServerApp" />
@@ -1017,7 +1352,7 @@
     </configuration>
     <configuration default="false" name="Presenter" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="PresenterApp" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.presenter.gui.PresenterApp" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -1032,7 +1367,7 @@
     </configuration>
     <configuration default="false" name="Facilitator" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="FacilitatorApp" />
+      <option name="MAIN_CLASS_NAME" value="eduze.vms.facilitator.gui.FacilitatorApp" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -1045,25 +1380,53 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="false" name="&lt;default&gt;" type="TestNG" factoryName="TestNG" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="Tests" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <list size="10">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.&lt;default&gt;" />
-      <item index="1" class="java.lang.String" itemvalue="Application.Server" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Server Headless" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Presenter" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Facilitator" />
-      <item index="5" class="java.lang.String" itemvalue="TestNG.PresenterControllerTest (1)" />
-      <item index="6" class="java.lang.String" itemvalue="TestNG.ServerControllerTest.testAdjournMeeting" />
-      <item index="7" class="java.lang.String" itemvalue="TestNG.&lt;default&gt; (1)" />
-      <item index="8" class="java.lang.String" itemvalue="TestNG.eduze.vms.presenter.logic" />
-      <item index="9" class="java.lang.String" itemvalue="TestNG.&lt;default&gt; (2)" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Server" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Server Headless" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Presenter" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Facilitator" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.&lt;default&gt;" />
+      <item index="5" class="java.lang.String" itemvalue="Application.TestLauncher" />
+      <item index="6" class="java.lang.String" itemvalue="TestNG.AssignedTasksManagerTest" />
+      <item index="7" class="java.lang.String" itemvalue="TestNG.AssignedTasksManagerTest.testNotifyTaskUnAssigned" />
+      <item index="8" class="java.lang.String" itemvalue="TestNG.PresenterControllerTest" />
+      <item index="9" class="java.lang.String" itemvalue="Application.Startup" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.&lt;default&gt; (2)" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.eduze.vms.presenter.logic" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.&lt;default&gt; (1)" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.PresenterControllerTest (1)" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.ServerControllerTest.testAdjournMeeting" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Startup" />
+        <item index="1" class="java.lang.String" itemvalue="Application.TestLauncher" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.PresenterControllerTest" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.AssignedTasksManagerTest" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.AssignedTasksManagerTest.testNotifyTaskUnAssigned" />
       </list>
     </recent_temporary>
   </component>
@@ -1095,7 +1458,8 @@
       <workItem from="1465661668750" duration="16478000" />
       <workItem from="1465788144607" duration="273000" />
       <workItem from="1465825604931" duration="45801000" />
-      <workItem from="1466076471193" duration="8239000" />
+      <workItem from="1466076471193" duration="22988000" />
+      <workItem from="1466101801711" duration="1712000" />
     </task>
     <task id="LOCAL-00001" summary="Disconnection Logic being made">
       <created>1463830536127</created>
@@ -1167,43 +1531,50 @@
       <option name="project" value="LOCAL" />
       <updated>1466018506920</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Commented All">
+      <created>1466086051862</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1466086051863</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ServerControllerTest_testAdjournMeeting - 2016.06.15 at 23h 03m 27s.xml">
-      <configuration name="ServerControllerTest.testAdjournMeeting" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 21h 19m 34s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ServerControllerTest_testAdjournMeeting - 2016.06.15 at 23h 04m 30s.xml">
-      <configuration name="ServerControllerTest.testAdjournMeeting" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 21h 20m 09s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ServerControllerTest_testAdjournMeeting - 2016.06.15 at 23h 05m 39s.xml">
-      <configuration name="ServerControllerTest.testAdjournMeeting" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 21h 20m 32s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2016.06.15 at 22h 57m 42s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 21h 20m 48s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2016.06.15 at 22h 57m 52s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 21h 45m 29s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2016.06.15 at 22h 57m 59s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 23h 00m 33s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2016.06.16 at 00h 14m 35s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest - 2016.06.16 at 23h 01m 03s.xml">
+      <configuration name="AssignedTasksManagerTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default__(1) - 2016.06.16 at 17h 59m 03s.xml">
-      <configuration name="&lt;default&gt; (1)" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest_testNotifyTaskUnAssigned - 2016.06.16 at 21h 18m 29s.xml">
+      <configuration name="AssignedTasksManagerTest.testNotifyTaskUnAssigned" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default__(2) - 2016.06.16 at 17h 59m 38s.xml">
-      <configuration name="&lt;default&gt; (2)" configurationId="TestNG" />
+    <history-entry file="AssignedTasksManagerTest_testNotifyTaskUnAssigned - 2016.06.16 at 21h 18m 51s.xml">
+      <configuration name="AssignedTasksManagerTest.testNotifyTaskUnAssigned" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="eduze_vms_presenter_logic - 2016.06.16 at 17h 59m 17s.xml">
-      <configuration name="eduze.vms.presenter.logic" configurationId="TestNG" />
+    <history-entry file="PresenterControllerTest - 2016.06.16 at 23h 01m 20s.xml">
+      <configuration name="PresenterControllerTest" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="315767000" />
+    <option name="totallyTimeSpent" value="332228000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1215,7 +1586,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1932" height="1048" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1227,14 +1598,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27088037" sideWeight="0.5112661" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23413567" sideWeight="0.48873392" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28446388" sideWeight="0.48873392" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3046875" sideWeight="0.7206704" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30407524" sideWeight="0.7206704" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27038628" sideWeight="0.2793296" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405892" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1246,6 +1616,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.00625" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405892" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1270,7 +1641,8 @@
     <MESSAGE value="Adding Tests" />
     <MESSAGE value="Configured Log4j" />
     <MESSAGE value="First EXE Build" />
-    <option name="LAST_COMMIT_MESSAGE" value="First EXE Build" />
+    <MESSAGE value="Commented All" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commented All" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1280,12 +1652,6 @@
           <line>57</line>
           <properties />
           <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTask.java</url>
-          <line>18</line>
-          <properties />
-          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/AudioRelayConsoleImpl.java</url>
@@ -1301,15 +1667,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java</url>
-          <line>192</line>
+          <line>194</line>
           <properties />
           <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java</url>
-          <line>39</line>
-          <properties />
-          <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskInfo.java</url>
@@ -1342,25 +1702,31 @@
           <option name="timeStamp" value="121" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/facilitator-ui/src/FacilitatorWindow.java</url>
-          <line>617</line>
+          <url>file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorWindow.java</url>
+          <line>631</line>
           <properties />
           <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/facilitator-ui/src/FacilitatorWindow.java</url>
-          <line>615</line>
+          <url>file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorWindow.java</url>
+          <line>629</line>
           <properties />
           <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ConnectivityManager.java</url>
-          <line>92</line>
+          <url>file://$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/AssignedTasksManagerTest.java</url>
+          <line>294</line>
           <properties />
-          <option name="timeStamp" value="171" />
+          <option name="timeStamp" value="262" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/AssignedTasksManagerTest.java</url>
+          <line>278</line>
+          <properties />
+          <option name="timeStamp" value="265" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="239" />
+      <option name="time" value="267" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1369,337 +1735,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="322" column="39" selection-start-line="322" selection-start-column="39" selection-end-line="322" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ControlLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="480" column="85" selection-start-line="480" selection-start-column="85" selection-end-line="480" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/ControlLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/ui/PresenterPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/AssignedTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/Facilitator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="31" column="7" selection-start-line="27" selection-start-column="4" selection-end-line="31" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/facilitator/Facilitator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/ConnectionRequestState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/facilitator/ConnectionRequestState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="623">
-          <caret line="241" column="27" selection-start-line="241" selection-start-column="27" selection-end-line="241" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/webservices/PresenterConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="93" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsoleImplService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsoleImplPortBindingStub.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/PresenterConsoleImplServiceLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/ServerConnectionException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/SessionStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/mpi/presenterconsole/VirtualMeetingSnapshot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5412">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/AudioRelayConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="25" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/audiorelayconsole/AudioRelayConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/1736705247.wsdl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/webservices/ScreenShareConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="39" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/ui/StreamHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/ui/CryptoUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="94" column="40" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/foundation/src/eduze/vms/foundation/logic/mpi/screenshareconsole/ScreenShareConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="106" column="4" selection-start-line="106" selection-start-column="4" selection-end-line="108" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatorconsole/FacilitatorConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="61" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatorconsole/VMParticipant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="23" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/facilitatormanager/FacilitatorManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="61" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/SessionStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/SharedTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/ServerController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/URLGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="20" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/ServerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="71" column="16" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
-          <folding>
-            <element signature="e#2208#2209#0" expanded="false" />
-            <element signature="e#2247#2248#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/ServerNotReadyException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTaskNotFoundException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/UnknownFacilitatorException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="57" selection-start-line="7" selection-start-column="57" selection-end-line="7" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeetingSnapshot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-997">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/VirtualMeetingImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="557">
@@ -1745,7 +1780,7 @@
         <state relative-caret-position="117">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="12" selection-end-column="3" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1762,7 +1797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="26" column="7" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1776,9 +1810,348 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/mpi/virtualmeeting/VirtualMeeting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="176">
+          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/FacilitatorDisconnectedException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/FacilitatorConnectionNotReadyException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/FacilitatorConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/PresenterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/AssignedTaskInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ServerManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="67" column="51" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/PasswordUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/URLGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/Facilitator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/SharedTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/ControlLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="145" column="0" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter/src/eduze/vms/presenter/logic/AssignedTasksManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ConnectivityManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/FacilitatorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/ControlLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="318" column="53" selection-start-line="318" selection-start-column="53" selection-end-line="318" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator/src/eduze/vms/facilitator/logic/SharedTaskManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="237" column="64" selection-start-line="237" selection-start-column="61" selection-end-line="237" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/facilitatorWindow.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ConnectionRequestForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ModifySharedTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/NewSharedTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/PairServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/ScreenFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/facilitator-ui/src/eduze/vms/facilitator/gui/FacilitatorWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#15724#15913#0" expanded="false" />
+            <element signature="e#15912#15913#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/logic/webservices/FacilitatorManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="69" column="58" selection-start-line="69" selection-start-column="58" selection-end-line="69" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/ServerControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/AssignedTasksManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="322" column="9" selection-start-line="322" selection-start-column="9" selection-end-line="322" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/src/eduze/vms/presenter/logic/PresenterControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ControlPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/eduze/vms/server/ui/ServerApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="89" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#667#668#0" expanded="false" />
+            <element signature="e#699#700#0" expanded="false" />
+            <element signature="e#3568#3569#0" expanded="false" />
+            <element signature="e#3647#3648#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="924">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#589#590#0" expanded="false" />
+            <element signature="e#622#623#0" expanded="false" />
+            <element signature="e#687#688#0" expanded="false" />
+            <element signature="e#731#732#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/PresenterWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1914">
+          <caret line="97" column="119" selection-start-line="97" selection-start-column="117" selection-end-line="97" selection-end-column="119" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/presenter-ui/src/eduze/vms/presenter/gui/ConnectionWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="78" column="50" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1245#1246#0" expanded="false" />
+            <element signature="e#1283#1284#0" expanded="false" />
+            <element signature="e#1415#1416#0" expanded="false" />
+            <element signature="e#1457#1458#0" expanded="false" />
+            <element signature="e#1666#1667#0" expanded="false" />
+            <element signature="e#1708#1709#0" expanded="false" />
+            <element signature="e#1873#1874#0" expanded="false" />
+            <element signature="e#1915#1916#0" expanded="false" />
+            <element signature="e#5017#5018#0" expanded="false" />
+            <element signature="e#5076#5077#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.form">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UITest/src/Startup.form">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/special_test/eduze/vms/TestLauncher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1760">
+          <caret line="86" column="8" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UITest/src/Startup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="67" column="18" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1788,7 +2161,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>presenter-ui:jar</last-edited>
+          <last-edited>server:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1836,7 +2209,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>facilitator</last-edited>
+          <last-edited>server</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1868,6 +2241,21 @@
               </list>
             </option>
           </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>Logic</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="Logic" />
+          </order>
         </settings>
       </state>
     </states>

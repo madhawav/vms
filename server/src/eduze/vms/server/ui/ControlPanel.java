@@ -14,6 +14,7 @@ import eduze.vms.server.logic.webservices.VirtualMeetingImpl;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.xml.ws.Endpoint;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -42,6 +43,8 @@ public class ControlPanel extends JFrame {
         mainFrame.setContentPane(this.jControlPanel);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.pack();
+        mainFrame.setIconImage(new ImageIcon(getClass().getResource("icon.png")).getImage());
+        mainFrame.setMinimumSize(new Dimension(500,300));
         mainFrame.setSize(800,600);
         mainFrame.setLocationRelativeTo(null);
 
@@ -281,22 +284,6 @@ public class ControlPanel extends JFrame {
 
         mainFrame.setVisible(true);
 
-    }
-    public static void main(String[] args) throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
-
-        UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-        ControlPanel cp = new ControlPanel();
-        cp.run();
-
-        /*VirtualMeetingImpl virtualMeeting = new VirtualMeetingImpl();
-        String url = URLGenerator.generateVMPublishURL(8000,"12");
-        System.out.println(url);
-        Endpoint.publish(url,virtualMeeting);
-
-        FacilitatorConsoleImpl consolePanel = new FacilitatorConsoleImpl();
-        url = URLGenerator.generateFacilitatorConsolePublishURL(8000,"13");
-        System.out.println(url);
-        Endpoint.publish(url,consolePanel);*/
     }
 
     public void writeLog(String message)

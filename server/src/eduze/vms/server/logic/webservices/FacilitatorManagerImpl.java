@@ -67,13 +67,21 @@ public class FacilitatorManagerImpl implements FacilitatorManager {
      */
     @Override
     public String pair(String name, String password) throws AlreadyPairedException, InvalidServerPasswordException {
-        //Check for already paired status
+        //Check for already paired status. if so, replace.
+        String foundKey = null;
         for(Facilitator fac:facilitators.values())
         {
             if(fac.getName().equals(name))
-                throw new AlreadyPairedException();
+            {
+                foundKey = fac.getPairKey();
+                break;
+            }
         }
 
+        if(foundKey != null)
+        {
+            facilitators.remove(foundKey);
+        }
         //Verify password
         if(!server.verifyPassword(password))
             throw new InvalidServerPasswordException();

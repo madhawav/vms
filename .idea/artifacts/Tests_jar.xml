@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tests:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tests_jar</output-path>
+    <root id="archive" name="Tests.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Tests/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="facilitator" />
+      <element id="module-output" name="foundation" />
+      <element id="module-output" name="presenter" />
+      <element id="module-output" name="server" />
+      <element id="module-output" name="facilitator-ui" />
+      <element id="module-output" name="presenter-ui" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../livestream/out/artifacts/livestream_jar/livestream.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/livestream.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/plugins/testng/lib/testng.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/plugins/testng/lib/jcommander.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/log4j-1.2.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator-ui/lib/darcula.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/commons-discovery-0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/commons-logging-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/jaxrpc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/log4j-1.2.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/axis.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/saaj.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/facilitator/lib/wsdl4j-1.5.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

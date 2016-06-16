@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * Main access-point to UI. Instantiate by calling FacilitatorController.start(). This also starts the Facilitator WebServices used by Presenter Subsystems.
  */
 public class FacilitatorController {
+    private boolean isMute = false; //should audio received be played?
     private FacilitatorImpl facilitatorService = null; //WebService to Presenter
     private FacilitatorController.Configuration configuration = null; //Startup Configuration of Facilitator
     private boolean running = false; //has it started?
@@ -178,6 +179,7 @@ public class FacilitatorController {
 
         //Setup Control Loop
         controlLoop = new ControlLoop(this.facilitatorService,url,getConfiguration().getListenerPort(),connectivityManager);
+        controlLoop.setMute(isMute);
         controlLoop.setControlLoopListener(new ControlLoopListener() {
             @Override
             public void updateReceived(VirtualMeetingSnapshot vm) {
@@ -220,7 +222,10 @@ public class FacilitatorController {
     }
 
 
-
+    /**
+     * Notify Server Disconnected
+     * @throws ServerConnectionException
+     */
     void notifyServerDisconnected() throws ServerConnectionException {
 
         connectivityManager.recordServerDisconnected();
@@ -520,6 +525,29 @@ public class FacilitatorController {
         {
             listener.onException(e);
         }
+    }
+
+    /**
+     * Retrieve whether Facilitator is in Mute
+     * @return True if facilitator is mute. Otherwise False.
+     */
+    public boolean isMute()
+    {
+        if(controlLoop == null)
+            return isMute;
+        return controlLoop.isMute();
+    }
+
+    /**
+     * Set whether facilitator is in Mute
+     * @param value True to Mute. Other false.
+     */
+    public void setMute(boolean value)
+    {
+        isMute = value;
+        if(controlLoop == null)
+            return;
+        controlLoop.setMute(value);
     }
 
     public void adjournMeeting() throws ServerConnectionException {
